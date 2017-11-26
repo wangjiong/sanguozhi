@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{365DDB38-8A64-21BC-C2E3-07BA23AB39F9}</ProjectGuid>
+    <ProjectGuid>{C0DCEB47-4A4E-BA45-6A9F-1EBB6ADDAD44}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,21 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\_Scripts\BackController.cs" />
-     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
-     <Compile Include="Assets\_Scripts\MenuModel.cs" />
-     <Compile Include="Assets\_Scripts\Wujiang.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\CameraTargeting.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\CompoundObjectController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\DelayedDestroyController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\FlashingController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\HighlightingController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\OccluderController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\RotationController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\SceneLoader.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
+     <Compile Include="Assets\Plugins\HighlightingSystem\Scripts\HighlightableObject.cs" />
+     <Compile Include="Assets\Plugins\HighlightingSystem\Scripts\HighlightingEffect.cs" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />
@@ -106,10 +93,6 @@
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>C:/Users/995204127/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{C0DCEB47-4A4E-BA45-6A9F-1EBB6ADDAD44}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
