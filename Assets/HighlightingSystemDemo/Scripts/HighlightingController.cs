@@ -8,15 +8,17 @@ public class HighlightingController : MonoBehaviour
 	void Awake()
 	{
 		ho = gameObject.AddComponent<HighlightableObject>();
-	}
+        //ho.ConstantOn(Color.red);
+    }
 	
 	void Update()
 	{
-		// Fade in/out constant highlighting with 'Tab' button
-		if (Input.GetKeyDown(KeyCode.Tab)) 
+        // Fade in/out constant highlighting with 'Tab' button
+        if (Input.GetKeyDown(KeyCode.Tab)) 
 		{
-			ho.ConstantSwitch();
-		}
+            //ho.ConstantSwitch();
+            ho.ConstantOn(Color.red);
+        }
 		// Turn on/off constant highlighting with 'Q' button
 		else if (Input.GetKeyDown(KeyCode.Q))
 		{
