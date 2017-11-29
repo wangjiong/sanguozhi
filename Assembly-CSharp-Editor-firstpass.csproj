@@ -52,13 +52,38 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\HighlightingSystemEditor.cs" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
+     <None Include="Assets\TerrainGridSystem\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo07_CellsByRowCol\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo08_Orthographic\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo05_CellsColoring\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
+     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo06b_CellsPositions2\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitHighlight.shader" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo10_TerrainPositioning\README.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo13_TerritoryByTexture\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo09_Mask\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo11_TerritoryConquer\README.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaque.shader" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritory.shader" />
+     <None Include="Assets\TerrainGridSystem\Demos\Demo02_2DGrids\README.txt" />
+     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
+     <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>E:/unity5.7/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
