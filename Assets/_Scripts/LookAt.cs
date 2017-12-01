@@ -13,5 +13,7 @@ public class LookAt : MonoBehaviour {
 	void Update () {
         transform.LookAt(Camera.main.transform);
         //transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y * 1, 0);
+        transform.rotation = Camera.main.transform.rotation;
+        transform.Rotate(new Vector3(0,180,0));
     }
 }

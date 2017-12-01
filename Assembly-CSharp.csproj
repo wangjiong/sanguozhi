@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Scripts\BackController.cs" />
+     <Compile Include="Assets\_Scripts\CameraController.cs" />
      <Compile Include="Assets\_Scripts\LookAt.cs" />
      <Compile Include="Assets\_Scripts\MainMenuController.cs" />
      <Compile Include="Assets\_Scripts\MenuModel.cs" />
