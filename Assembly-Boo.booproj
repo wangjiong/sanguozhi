@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{365DDB38-8A64-21BC-C2E3-07BA23AB39F9}</ProjectGuid>
+    <ProjectGuid>{256D0593-22A1-9C7B-9351-885A38939EDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-Boo</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,112 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\_Scripts\BackController.cs" />
-     <Compile Include="Assets\_Scripts\CameraController.cs" />
-     <Compile Include="Assets\_Scripts\LookAt.cs" />
-     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
-     <Compile Include="Assets\_Scripts\MenuModel.cs" />
-     <Compile Include="Assets\_Scripts\Wujiang.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\CameraTargeting.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\CompoundObjectController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\DelayedDestroyController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\FlashingController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\HighlightingController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\OccluderController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\RotationController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\SceneLoader.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
-     <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Common\GUIResizer.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\BallController.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\Demo1.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo02_2DGrids\Demo2.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\Demo3.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\Demo4a.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\Demo4b.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo05_CellsColoring\Demo5.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\Demo6.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo06b_CellsPositions2\Demo6b.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo07_CellsByRowCol\Demo7.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo08_Orthographic\DemoOrtho.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo10_TerrainPositioning\Demo10.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo11_TerritoryConquer\Demo11.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\Demo12.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Cell.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\IAdmin.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Region.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\SurfaceBlinker.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\SurfaceFader.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TerrainTrigger.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Territory.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TerritoryMesh.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TGSPrivate.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TGSPrivPathFinder.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Drawing\Drawing.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Point.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Connector.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Contour.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\EventQueue.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\PointChain.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Polygon.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\PolygonClipper.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Rectangle.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\SweepEvent.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\SweepEventSet.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Segment.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Triangulator.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\Arc.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\Event.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\VoronoiCell.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\VoronoiFortune.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\IPathFinder.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinder.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinderFast.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinderFastNonSQR.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFindingPoint.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PriorityQueueB.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\DelaunayTriangle.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\AdvancingFront.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\AdvancingFrontNode.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweep.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepBasin.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepConstraint.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepContext.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepDebugContext.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepEdgeEvent.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepPointComparator.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\PointOnEdgeException.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\ITriangulatable.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Orientation.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\Contour.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\Polygon.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonPoint.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonSet.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonUtil.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Sets\ConstrainedPointSet.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Sets\PointSet.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationAlgorithm.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationConstraint.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationContext.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationDebugContext.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationMode.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationPoint.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\PointGenerator.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\PolygonGenerator.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\TriangulationUtil.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\FixedArray3.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\FixedBitArray3.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\MathUtil.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Point2D.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Point2DList.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Rect2D.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\TerrainGridSystem.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\TGSCells.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\TGSConfig.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\TGSPathFinding.cs" />
-     <Compile Include="Assets\TerrainGridSystem\Scripts\TGSTerritories.cs" />
+     <Compile Include="Assets\HighlightingSystemDemo\Scripts\BooHighlightingController.boo" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
      <None Include="Assets\TerrainGridSystem\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
