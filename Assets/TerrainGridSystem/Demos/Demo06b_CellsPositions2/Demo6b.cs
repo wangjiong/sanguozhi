@@ -45,31 +45,62 @@ namespace TGS
 					transform.position = tgs.CellGetPosition (cellIndex);
 			
 			
-				timer = 2.0f;
+				timer = 2000.0f;
 			}
 		}
 
 		void OnMouseDown() {
 
-			// Gets the cell beneath the sphere
-			Cell sphereCell = tgs.CellGetAtPosition(transform.position, true);
-			Debug.Log ("Sphere Cell Row = " + sphereCell.row + ", Col = " + sphereCell.column);
+            //// Gets the cell beneath the sphere
+            //Cell sphereCell = tgs.CellGetAtPosition(transform.position, true);
+            //Debug.Log ("Sphere Cell Row = " + sphereCell.row + ", Col = " + sphereCell.column);
 
-			// Fade cells around sphere position by row and column
-			const int size = 3;
-			for (int j=sphereCell.row - size; j<=sphereCell.row + size;j++) {
-				for (int k=sphereCell.column - size; k<=sphereCell.column + size; k++) {
-					int cellIndex = tgs.CellGetIndex(j,k, true);
-					tgs.CellFadeOut(cellIndex, Color.blue, 1.0f);
-				}
-			}
+            //// Fade cells around sphere position by row and column
+            //const int size = 3;
+            //for (int j=sphereCell.row - size; j<=sphereCell.row + size;j++) {
+            //	for (int k=sphereCell.column - size; k<=sphereCell.column + size; k++) {
+            //		int cellIndex = tgs.CellGetIndex(j,k, true);
+            //		tgs.CellFadeOut(cellIndex, Color.blue, 1.0f);
+            //	}
+            //}
 
-			// Get cell neighbours
-			List<Cell>neighbours = tgs.CellGetNeighbours(sphereCell);
-			foreach(Cell cell in neighbours) {
-				tgs.CellFadeOut(cell, Color.red, 2.0f);
-			}
+            //// Get cell neighbours
+            //List<Cell>neighbours = tgs.CellGetNeighbours(sphereCell);
+            //foreach(Cell cell in neighbours) {
+            //	tgs.CellFadeOut(cell, Color.red, 2.0f);
+            //}
+            Cell sphereCell = tgs.CellGetAtPosition(transform.position, true);
+            sphereCell.mValue = 0;
+            Debug.Log("Sphere Cell Row = " + sphereCell.row + ", Col = " + sphereCell.column);
+            mQuene.Enqueue(sphereCell);
+            FindPath();
+            Debug.Log("mList:"+ mList.Count);
+            foreach (Cell cell in mList) {
+                tgs.CellFadeOut(cell, Color.red, 2.0f);
+            }
+        }
 
-		}
-	}
+        List<Cell> mList = new List<Cell>();
+        Queue<Cell> mQuene = new Queue<Cell>();
+
+        private void FindPath() {
+            while (mQuene.Count > 0) {
+                Cell parent = mQuene.Dequeue();
+                List<Cell> neighbours = tgs.CellGetNeighbours(parent);
+                foreach (Cell cell in neighbours) {
+                    if (cell.mValue > parent.mValue + 1) {
+                        cell.mValue = parent.mValue + 1;
+                        if (cell.mValue >= 3) { // 大于3的就不去查找了
+
+                        } else {
+                            if (!mList.Contains(cell)) {
+                                mList.Add(cell);
+                            }
+                            mQuene.Enqueue(cell);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
