@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     string TAG = "[CameraController]";
 
-    float mMoveSpeed = 0.2f;
+    float mMoveSpeed = 0.5f;
 
     float mRotateSpeed = 2f;
 
@@ -20,20 +20,23 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate() {
         if (Input.GetKey(KeyCode.W)) {
-            this.transform.Translate(Vector3.forward * mMoveSpeed, Space.World);
+			//this.transform.Translate(Vector3.forward * mMoveSpeed, Space.World);
+			Vector3 direction1 = transform.TransformDirection (Vector3.forward);
+			this.transform.Translate(new Vector3(direction1.x,0,direction1.z) * mMoveSpeed, Space.World);
         }
         if (Input.GetKey(KeyCode.S)) {
-            this.transform.Translate(Vector3.back * mMoveSpeed, Space.World);
+            //this.transform.Translate(Vector3.back * mMoveSpeed, Space.World);
+			Vector3 direction1 = transform.TransformDirection (Vector3.forward);
+			this.transform.Translate(new Vector3(direction1.x,0,direction1.z) * -mMoveSpeed, Space.World);
         }
         if (Input.GetKey(KeyCode.A)) {
-            this.transform.Translate(Vector3.left * mMoveSpeed, Space.World);
+			this.transform.Translate(Vector3.left * mMoveSpeed, Space.Self);
         }
         if (Input.GetKey(KeyCode.D)) {
-            this.transform.Translate(Vector3.right * mMoveSpeed, Space.World);
+			this.transform.Translate(Vector3.right * mMoveSpeed, Space.Self);
         }
 
         if (Input.GetMouseButton(1)) {
-            print(TAG + "GetMouseButton");
             //mOriginalPosition = Input.mousePosition;
             Ray ray = new Ray(Camera.main.transform.position, transform.TransformDirection(Vector3.forward));
             RaycastHit hitInfo;
@@ -51,6 +54,16 @@ public class CameraController : MonoBehaviour {
                 transform.RotateAround(mRotateAroundPoint, Vector3.up, -mRotateSpeed);
                 transform.LookAt(mHitInfoPoint);
             }
+
+			float tempY = Input.mousePosition.y - mOriginalPosition.y;
+			if (tempY > 0 && transform.position.y < 40) {
+				transform.Translate (Vector3.up * mMoveSpeed, Space.World);
+				transform.LookAt(mHitInfoPoint);
+			} else if (tempY < 0 && transform.position.y > 10) {
+				transform.Translate (Vector3.down * mMoveSpeed, Space.World);
+				transform.LookAt(mHitInfoPoint);
+			}
+
             mOriginalPosition = Input.mousePosition;
         }
 
@@ -60,6 +73,28 @@ public class CameraController : MonoBehaviour {
         }
         Vector3 direction = transform.TransformDirection(Vector3.forward) * 50;
         Debug.DrawRay(transform.position, direction, Color.green);
+
+		//Zoom out
+		if (Input.GetAxis("Mouse ScrollWheel") < 0){
+			if (Camera.main.fieldOfView < 60)
+				Camera.main.fieldOfView += 2;
+			if (Camera.main.orthographicSize <= 20)
+				Camera.main.orthographicSize += 0.5F;
+		}
+		//Zoom in
+		if (Input.GetAxis("Mouse ScrollWheel") > 0){
+			if (Camera.main.fieldOfView > 30)
+				Camera.main.fieldOfView -= 2;
+			if (Camera.main.orthographicSize >= 1)
+				Camera.main.orthographicSize -= 0.5F;
+		}
+
+
+
+
+
+
+
     }
 
 
