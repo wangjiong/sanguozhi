@@ -36,7 +36,7 @@ namespace TGS
 		Material coloredMat, texturizedMat;
 
 		// Cell mesh data
-		const string CELLS_LAYER_NAME = "Cells";
+		const string CELLS_LAYER_NAME = "Cells111";
 		Vector3[][] cellMeshBorders;
 		int[][] cellMeshIndices;
 		Dictionary<Segment,Region> cellNeighbourHit;
@@ -324,7 +324,7 @@ namespace TGS
 			if (t != null) {
 				DestroyImmediate (t.gameObject);
 			}
-			_surfacesLayer = new GameObject ("Surfaces");
+			_surfacesLayer = new GameObject ("Surfaces333");
 			_surfacesLayer.transform.SetParent (transform, false);
 			_surfacesLayer.transform.localPosition = Vector3.zero; // Vector3.back * 0.01f;
 			_surfacesLayer.layer = gameObject.layer;
@@ -1712,7 +1712,7 @@ namespace TGS
 
 		void DrawCellBorders ()
 		{
-
+            print("john DrawCellBorders");
 			if (cellLayer != null) {
 				DestroyImmediate (cellLayer);
 			} else {
@@ -1729,7 +1729,7 @@ namespace TGS
 			cellLayer.transform.localPosition = Vector3.back * 0.001f;
 		
 			for (int k = 0; k < cellMeshBorders.Length; k++) {
-				GameObject flayer = new GameObject ("flayer");
+				GameObject flayer = new GameObject ("flayer222");
 				flayer.hideFlags = HideFlags.DontSave;
 				flayer.transform.SetParent (cellLayer.transform, false);
 				flayer.transform.localPosition = Vector3.zero;

@@ -103,7 +103,7 @@ namespace TGS {
 					for (int a=0;a<360;a++) {
 						int c = (int)(x + Mathf.Cos (a * Mathf.Deg2Rad) * r);
 						int l = (int)(y + Mathf.Sin (a * Mathf.Deg2Rad) * r);
-						heights[c,l] = 1;
+						heights[c,l] = 0.5f;
 					}
 				}
 

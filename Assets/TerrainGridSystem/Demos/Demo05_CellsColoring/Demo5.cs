@@ -33,7 +33,7 @@ namespace TGS {
 
 		void TriggerRandomCell(Color color) {
 			// We get a random vector from -0.5..0.5 on both X and Y (z is ignored)
-			Vector2 localPosition = Random.onUnitSphere * 0.5f;
+			Vector2 localPosition = Random.onUnitSphere * 0.1f;
 			Cell cell = tgs.CellGetAtPosition(localPosition);
 			if (cell!=null) {
 				int cellIndex = tgs.CellGetIndex(cell);

@@ -13,6 +13,9 @@ public class Wujiang : MonoBehaviour {
 
     float timer = 0.2f;
 
+    bool isSelectingStart;
+    int cellStartIndex;
+
     void Start() {
         tgs = TerrainGridSystem.instance;
         location.x = tgs.columnCount / 2;
@@ -33,6 +36,8 @@ public class Wujiang : MonoBehaviour {
             transform.position = new Vector3(temp.x, transform.position.y, temp.z);
         }
         timer = 2.0f;
+
+        tgs.OnCellClick += (cellIndex1, buttonIndex) => BuildPath(cellIndex1);
     }
 
     void Update() {
@@ -54,7 +59,7 @@ public class Wujiang : MonoBehaviour {
                 transform.position = tgs.CellGetPosition(cellIndex);
 
 
-            timer = 2.0f;
+            timer = 200.0f;
         }
     }
 
@@ -68,5 +73,80 @@ public class Wujiang : MonoBehaviour {
         } else {
             mHighlightableObjecto.Off();
         }
+
+        // 寻路
+        Cell sphereCell = tgs.CellGetAtPosition(transform.position, true);
+        
+        cellStartIndex = tgs.CellGetIndex(sphereCell);
+        tgs.CellToggleRegionSurface(cellStartIndex, true, Color.yellow);
+
+        isSelectingStart = false;
+        print("OnMouseDown cellStartIndex:" + cellStartIndex);
+
+        //sphereCell.mValue = 0;
+        //Debug.Log("Sphere Cell Row = " + sphereCell.row + ", Col = " + sphereCell.column);
+        //mQuene.Enqueue(sphereCell);
+        //FindPath();
+        //Debug.Log("mList:" + mList.Count);
+        //foreach (Cell cell in mList) {
+        //    if (cell.mValue < 3) {
+        //        tgs.CellFadeOut(cell, Color.red, 2.0f);
+        //    }
+        //}
+        //sphereCell.mValue = int.MaxValue;
+        //foreach (Cell cell in mList) {
+        //    cell.mValue = int.MaxValue;
+        //}
+        //mList.Clear();
     }
+
+    //List<Cell> mList = new List<Cell>();
+    //Queue<Cell> mQuene = new Queue<Cell>();
+
+    //private void FindPath() {
+
+    //    while (mQuene.Count > 0) {
+    //        Cell parent = mQuene.Dequeue();
+    //        List<Cell> neighbours = tgs.CellGetNeighbours(parent);
+    //        foreach (Cell cell in neighbours) {
+    //            if (cell.mValue > parent.mValue + 1) {
+    //                cell.mValue = parent.mValue + 1;
+    //                if (!mList.Contains(cell)) {
+    //                    mList.Add(cell);
+    //                }
+    //                if (cell.mValue < 3) { // 大于3的就不去查找了
+    //                    mQuene.Enqueue(cell);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+
+
+
+    void BuildPath(int clickedCellIndex) {
+        print("BuildPath:" + clickedCellIndex);
+        if (isSelectingStart) {
+            // Selects start cell
+            cellStartIndex = clickedCellIndex;
+            tgs.CellToggleRegionSurface(cellStartIndex, true, Color.yellow);
+            isSelectingStart = false;
+        } else {
+            // Clicked on the end cell, then show the path
+            // First clear color of start cell
+            tgs.CellToggleRegionSurface(cellStartIndex, false, Color.white);
+            // Get Path
+            List<int> path = tgs.FindPath(cellStartIndex, clickedCellIndex);
+            // Color the path
+            if (path != null) {
+                for (int k = 0; k < path.Count; k++) {
+                    tgs.CellFadeOut(path[k], Color.green, 1f);
+                }
+            }
+            isSelectingStart = true;
+        }
+        
+    }
+
+
 }

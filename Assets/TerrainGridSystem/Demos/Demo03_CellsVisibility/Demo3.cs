@@ -15,7 +15,7 @@ namespace TGS {
 
 			// hide all cells
 			tgs = TerrainGridSystem.instance;
-			tgs.cells.ForEach( (cell) => cell.visible = false );
+			tgs.cells.ForEach( (cell) => cell.visible = true );
 			tgs.Redraw();
 			
 			// listen to events

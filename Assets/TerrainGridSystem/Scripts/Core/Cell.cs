@@ -45,7 +45,6 @@ namespace TGS {
 		}
 
         public int mValue = int.MaxValue;
-        public bool mChecked = false;
 	}
 }
 

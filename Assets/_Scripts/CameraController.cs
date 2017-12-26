@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     string TAG = "[CameraController]";
 
-    float mMoveSpeed = 0.5f;
+    float mMoveSpeed = 1f;
 
     float mRotateSpeed = 2f;
 
@@ -76,14 +76,14 @@ public class CameraController : MonoBehaviour {
 
 		//Zoom out
 		if (Input.GetAxis("Mouse ScrollWheel") < 0){
-			if (Camera.main.fieldOfView < 60)
+			if (Camera.main.fieldOfView < 45)
 				Camera.main.fieldOfView += 2;
 			if (Camera.main.orthographicSize <= 20)
 				Camera.main.orthographicSize += 0.5F;
 		}
 		//Zoom in
 		if (Input.GetAxis("Mouse ScrollWheel") > 0){
-			if (Camera.main.fieldOfView > 30)
+			if (Camera.main.fieldOfView > 20)
 				Camera.main.fieldOfView -= 2;
 			if (Camera.main.orthographicSize >= 1)
 				Camera.main.orthographicSize -= 0.5F;
