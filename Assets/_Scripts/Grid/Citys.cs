@@ -142,7 +142,7 @@ public class Citys : MonoBehaviour {
             print(city);
             GameObject o = Instantiate(mCity);
             o.transform.SetParent(this.transform);
-            o.transform.localPosition = new Vector3(city.x, 0, -city.y);
+            o.transform.localPosition = new Vector3(city.x+1.5f, 0, -city.y - 1f);
             o.GetComponentInChildren<TextMesh>().text = city.name;
         }
         // 关口

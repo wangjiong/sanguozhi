@@ -55,6 +55,7 @@
      <Compile Include="Assets\_Scripts\CameraController.cs" />
      <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
      <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
+     <Compile Include="Assets\_Scripts\Grid\GridTrigger.cs" />
      <Compile Include="Assets\_Scripts\LookAt.cs" />
      <Compile Include="Assets\_Scripts\MainMenuController.cs" />
      <Compile Include="Assets\_Scripts\MenuModel.cs" />

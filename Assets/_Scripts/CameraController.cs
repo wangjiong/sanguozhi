@@ -18,6 +18,10 @@ public class CameraController : MonoBehaviour {
 
     }
 
+    void Update() {
+
+    }
+
     void LateUpdate() {
         if (Input.GetKey(KeyCode.W)) {
 			//this.transform.Translate(Vector3.forward * mMoveSpeed, Space.World);
