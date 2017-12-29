@@ -23,18 +23,18 @@ public class GridTrigger : MonoBehaviour {
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
-            print(hit.transform.name + " point:" + hit.point);
+            //print(hit.transform.name + " point:" + hit.point);
             float x = Mathf.Ceil(hit.point.x);
             float z = 0;
             if (x % 2 == 0) {
-                z = Mathf.Ceil(hit.point.z - 0.5f);
-                mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
-            } else {
                 z = Mathf.Ceil(hit.point.z);
                 mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z - 0.5f);
+            } else {
+                z = Mathf.Ceil(hit.point.z - 0.5f);
+                mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
             }
 
-            print("x:" + x + " z:" + z);
+            print("x:" + (x-1) + " z:" +  (200 - z));
         }
     }
     void OnMouseExit() {

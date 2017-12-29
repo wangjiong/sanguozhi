@@ -130,7 +130,7 @@ public class Citys : MonoBehaviour {
 
 
     void Start() {
-        // 城市
+        // 1.城市
         for (int i = 0; i < CITYS.Length;) {
             City city = new City();
             city.name = CITYS[i++];
@@ -142,10 +142,14 @@ public class Citys : MonoBehaviour {
             print(city);
             GameObject o = Instantiate(mCity);
             o.transform.SetParent(this.transform);
-            o.transform.localPosition = new Vector3(city.x+1.5f, 0, -city.y - 1f);
+            if (city.x % 2 == 0) {
+                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1.5f);
+            }else {
+                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 2f);
+            }
             o.GetComponentInChildren<TextMesh>().text = city.name;
         }
-        // 关口
+        // 2.关口
         for (int i = 0; i < PASSES.Length;) {
             City city = new City();
             city.name = PASSES[i++];
@@ -158,13 +162,26 @@ public class Citys : MonoBehaviour {
             print(city);
             GameObject o = Instantiate(mPasse);
             o.transform.SetParent(this.transform);
-            o.transform.localPosition = new Vector3(city.x, 0, -city.y);
+            o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
             if (city.passType == 1) {
+                // 竖
+                if (city.x % 2 == 0) {
+                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 0.5f);
+                } else {
+                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1f);
+                }
                 o.transform.Find("Model").localRotation = Quaternion.Euler(0, 90, 0);
+            } else {
+                // 横
+                if (city.x % 2 == 0) {
+                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+                } else {
+                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+                }
             }
             o.GetComponentInChildren<TextMesh>().text = city.name;
         }
-        // 港口
+        // 3.港口
         for (int i = 0; i < PORTS.Length;) {
             City city = new City();
             city.name = PORTS[i++];
@@ -176,7 +193,12 @@ public class Citys : MonoBehaviour {
             print(city);
             GameObject o = Instantiate(mPort);
             o.transform.SetParent(this.transform);
-            o.transform.localPosition = new Vector3(city.x, 0, -city.y);
+            if (city.x % 2 == 0) {
+                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+            } else {
+                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+            }
+                
             o.GetComponentInChildren<TextMesh>().text = city.name;
         }
     }

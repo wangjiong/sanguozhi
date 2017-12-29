@@ -17,9 +17,9 @@ public class GenerateGrid : MonoBehaviour {
             grid.transform.localScale = new Vector3(1, 200 , 1);
             mFlag = !mFlag;
             if (mFlag) {
-                grid.transform.position = new Vector3(0.5f + i, 0, 100f);
-            } else {
                 grid.transform.position = new Vector3(0.5f + i, 0, 100.5f);
+            } else {
+                grid.transform.position = new Vector3(0.5f + i, 0, 100f);
             }
             grid.transform.transform.SetParent(mGrids.transform);
         }
