@@ -51,6 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\mobile_touch_camera\editor\CustomInspector.cs" />
+     <Compile Include="Assets\mobile_touch_camera\editor\MobilePickingControllerEditor.cs" />
+     <Compile Include="Assets\mobile_touch_camera\editor\MobileTouchCameraEditor.cs" />
+     <Compile Include="Assets\mobile_touch_camera\editor\TouchInputControllerEditor.cs" />
      <Compile Include="Assets\TerrainGridSystem\Editor\TGSInspector.cs" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
      <None Include="Assets\TerrainGridSystem\README.txt" />

@@ -52,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Scripts\BackController.cs" />
+     <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
      <Compile Include="Assets\_Scripts\CameraController.cs" />
+     <Compile Include="Assets\_Scripts\EventTrigger.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\MsunFirst.cs" />
      <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
      <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
-     <Compile Include="Assets\_Scripts\Grid\GridTrigger.cs" />
      <Compile Include="Assets\_Scripts\LookAt.cs" />
      <Compile Include="Assets\_Scripts\MainMenuController.cs" />
      <Compile Include="Assets\_Scripts\MenuModel.cs" />
@@ -71,6 +73,28 @@
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\AutoScrollDampMode.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\CameraPlaneAxes.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\demo\DemoController.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\MobilePickingController.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\MobileTouchCamera.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\MobileTouchPickable.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\MonoBehaviourWrapped.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\PerspectiveZoomMode.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\PickableSelectedData.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\PinchUpdateData.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\SnapAngle.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\tools\FocusCameraOnItem.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\tools\SetBoundaryFromCollider.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\TouchInputController.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\TouchWrapper.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPickableSelected.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPosition.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPositionAndTransform.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithRaycastHit.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithRaycastHit2D.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithTransform.cs" />
+     <Compile Include="Assets\mobile_touch_camera\scripts\WrappedTouch.cs" />
      <Compile Include="Assets\TerrainGridSystem\Demos\Common\GUIResizer.cs" />
      <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\BallController.cs" />
      <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\Demo1.cs" />

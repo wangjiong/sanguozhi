@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23308105656222126}
   m_Layer: 0
   m_Name: Port
-  m_TagString: Untagged
+  m_TagString: City
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
