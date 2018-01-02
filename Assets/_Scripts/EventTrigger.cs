@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BitBenderGames;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,14 +11,23 @@ public class EventTrigger : MonoBehaviour {
 
     Vector3 mOriginalPosition;
 
+    MobileTouchCamera mMobileTouchCamera;
+
     void Start () {
         mPointCube = GameObject.Find("Point");
         mOriginalPosition = mPointCube.transform.position;
+        mMobileTouchCamera = GetComponent<MobileTouchCamera>();
     }
 	
 	void Update () {
-        if (IsPointerOverGameObject(Input.mousePosition)) { 
+        if (IsPointerOverGameObject(Input.mousePosition)) {
+            if (mMobileTouchCamera.enabled) {
+                mMobileTouchCamera.enabled = false;
+            }
             return;
+        }
+        if (!mMobileTouchCamera.enabled) {
+            mMobileTouchCamera.enabled = true;
         }
         RaycastHit hit;
         // 从鼠标所在的位置发射
