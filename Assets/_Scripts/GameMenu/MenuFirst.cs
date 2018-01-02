@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MsunFirst : MonoBehaviour {
+public class MenuFirst : MonoBehaviour {
 
     public GameObject mSecondMeun;
 
