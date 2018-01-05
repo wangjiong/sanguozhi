@@ -139,7 +139,7 @@ public class Citys : MonoBehaviour {
             mCitys.Add(city);
         }
         foreach (City city in mCitys) {
-            print(city);
+            //print(city);
             GameObject o = Instantiate(mCity);
             o.transform.SetParent(this.transform);
             if (city.x % 2 == 0) {
@@ -159,7 +159,7 @@ public class Citys : MonoBehaviour {
             mPasses.Add(city);
         }
         foreach (City city in mPasses) {
-            print(city);
+            //print(city);
             GameObject o = Instantiate(mPasse);
             o.transform.SetParent(this.transform);
             o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
@@ -190,7 +190,7 @@ public class Citys : MonoBehaviour {
             mPorts.Add(city);
         }
         foreach (City city in mPorts) {
-            print(city);
+            //print(city);
             GameObject o = Instantiate(mPort);
             o.transform.SetParent(this.transform);
             if (city.x % 2 == 0) {

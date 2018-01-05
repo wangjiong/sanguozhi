@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class EventTrigger : MonoBehaviour {
     string TAG = "EventTrigger==";
     GameObject mPointCube;
-    public GameObject mMenu;
+
+    public CanvasGameMenu mCanvasGameMenu;
 
     Vector3 mOriginalPosition;
 
@@ -36,10 +37,8 @@ public class EventTrigger : MonoBehaviour {
             if (hit.collider.CompareTag("City")){
                 // 城市
                 if (Input.GetMouseButtonUp(0)) {
-                    print(screenPosition);
-                    mMenu.SetActive(true);
-                    //mMenu.GetComponent<RectTransform>().anchoredPosition = screenPosition;
-                    mMenu.transform.position = screenPosition;
+                    mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
+                    
                 }
                 return;
             }
@@ -57,7 +56,7 @@ public class EventTrigger : MonoBehaviour {
             //print("x:" + (x - 1) + " z:" + (200 - z));
         }
         if (Input.GetMouseButtonDown(0)) {
-            mMenu.SetActive(false);
+            mCanvasGameMenu.gameObject.SetActive(false);
         }
     }
 

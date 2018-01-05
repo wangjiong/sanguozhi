@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuSecond : MonoBehaviour {
+public class CanvasExpedition : MonoBehaviour {
 
     public GameObject mExpeditionMeun;
 

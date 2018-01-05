@@ -55,8 +55,10 @@
      <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
      <Compile Include="Assets\_Scripts\CameraController.cs" />
      <Compile Include="Assets\_Scripts\EventTrigger.cs" />
-     <Compile Include="Assets\_Scripts\GameMenu\MenuFirst.cs" />
-     <Compile Include="Assets\_Scripts\GameMenu\MenuSecond.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\CanvasDevelop.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\CanvasExpedition.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
      <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
      <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
      <Compile Include="Assets\_Scripts\LookAt.cs" />
