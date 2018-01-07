@@ -7,11 +7,11 @@ public class CanvasSearch : MonoBehaviour {
     public GameObject mExecutiveBtn;
     public GameObject mEnableBtn;
     public GameObject mCloseBtn;
-
+    public GameObject mCanvasExecutive;
 
     void Start() {
         mExecutiveBtn.GetComponent<Button>().onClick.AddListener(delegate () {
-
+            mCanvasExecutive.gameObject.SetActive(true);
         });
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             this.gameObject.SetActive(false);
@@ -21,7 +21,4 @@ public class CanvasSearch : MonoBehaviour {
         });
     }
 
-    void Update() {
-
-    }
 }

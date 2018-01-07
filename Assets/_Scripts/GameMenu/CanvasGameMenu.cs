@@ -22,7 +22,6 @@ public class CanvasGameMenu : MonoBehaviour {
     bool mPositionFlag = true; // 第一次ShowPosition有问题
 
     public void ShowCanvasGameMenu(Vector2 screenPosition) {
-        print("screenPosition:" + screenPosition);
         this.gameObject.SetActive(true);
         if (mPositionFlag) {
             StartCoroutine(SetPosition(screenPosition));
@@ -42,7 +41,6 @@ public class CanvasGameMenu : MonoBehaviour {
         // 第一级菜单监听，显示第二级菜单位置
         for (int i = 0; i < mMenuFirstBtns.Length; i++) {
             int index = i;
-            print(mMenuFirstBtns[index].transform.position);
             mMenuFirstBtns[index].GetComponent<Button>().onClick.AddListener(delegate () {
                 Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                 Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;

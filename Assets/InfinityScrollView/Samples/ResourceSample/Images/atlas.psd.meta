@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 964f74a78f6db49d19cc67054360fb78
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Button
+    21300002: Grow
+    21300004: Title
+    21300006: panel
+    21300008: Scrollbar2
+    21300010: ScrollBar1
+    21300012: empty
+    21300014: scrollbar_horizon
+    21300016: BG2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Button
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 207
+        width: 56
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 15, y: 27, z: 17, w: 28}
+    - name: Grow
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 237
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 11, y: 10, z: 11, w: 11}
+    - name: Title
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 206
+        width: 249
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 119, y: 36, z: 122, w: 16}
+    - name: panel
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 85
+        width: 280
+        height: 112
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 139, y: 40, z: 138, w: 41}
+    - name: Scrollbar2
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 153
+        width: 23
+        height: 63
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 25, z: 0, w: 21}
+    - name: ScrollBar1
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 167
+        width: 25
+        height: 99
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 41, z: 0, w: 38}
+    - name: empty
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 224
+        width: 24
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 2, z: 2, w: 2}
+    - name: scrollbar_horizon
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 124
+        width: 61
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 27, y: 0, z: 24, w: 0}
+    - name: BG2
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 94
+        width: 41
+        height: 99
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 17, y: 36, z: 17, w: 31}
+  spritePackingTag: 
+  userData: 

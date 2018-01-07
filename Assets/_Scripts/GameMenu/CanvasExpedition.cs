@@ -1,17 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasExpedition : MonoBehaviour {
 
-    public GameObject mExpeditionMeun;
+    public GameObject mExecutiveBtn;
+    public GameObject mEnableBtn;
+    public GameObject mCloseBtn;
+    public GameObject mCanvasExecutive;
 
-    public void ShowEcpedition() {
-        mExpeditionMeun.SetActive(true);
-    }
-
-    public void HideEcpedition() {
-        mExpeditionMeun.SetActive(false);
+    void Start() {
+        mExecutiveBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            mCanvasExecutive.gameObject.SetActive(true);
+        });
+        mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            this.gameObject.SetActive(false);
+        });
+        mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            this.gameObject.SetActive(false);
+        });
     }
 
 }

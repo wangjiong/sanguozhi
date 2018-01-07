@@ -55,10 +55,14 @@
      <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
      <Compile Include="Assets\_Scripts\CameraController.cs" />
      <Compile Include="Assets\_Scripts\EventTrigger.cs" />
+     <Compile Include="Assets\_Scripts\GameManager\GameManager.cs" />
+     <Compile Include="Assets\_Scripts\GameManager\Loom.cs" />
      <Compile Include="Assets\_Scripts\GameMenu\CanvasDevelop.cs" />
+     <Compile Include="Assets\_Scripts\GameMenu\CanvasExecutive.cs" />
      <Compile Include="Assets\_Scripts\GameMenu\CanvasExpedition.cs" />
      <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
      <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
+     <Compile Include="Assets\_Scripts\General\GenerateGeneralRow.cs" />
      <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
      <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
      <Compile Include="Assets\_Scripts\LookAt.cs" />
@@ -76,6 +80,22 @@
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\CheckFPS.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\InfinityItemColor.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\Sample1.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\SampleGlobalValue.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\ItemHorizontal1.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\ItemHorizontal2.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\Sample2.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\ItemSkip.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\ItemUser.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\Sample3.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\Utils.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample4\ItemSample.cs" />
+     <Compile Include="Assets\InfinityScrollView\Samples\Sample4\ListSample.cs" />
+     <Compile Include="Assets\InfinityScrollView\Script\InfinityBaseItem.cs" />
+     <Compile Include="Assets\InfinityScrollView\Script\InfinityScrollView.cs" />
+     <Compile Include="Assets\InfinityScrollView\Script\RectTranformUtils.cs" />
      <Compile Include="Assets\mobile_touch_camera\scripts\AutoScrollDampMode.cs" />
      <Compile Include="Assets\mobile_touch_camera\scripts\CameraPlaneAxes.cs" />
      <Compile Include="Assets\mobile_touch_camera\scripts\demo\DemoController.cs" />
@@ -196,6 +216,7 @@
      <None Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
      <None Include="Assets\_Shaders\Cus.shader" />
+     <None Include="Assets\_Resources\data.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
@@ -211,6 +232,7 @@
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
+     <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
@@ -227,6 +249,7 @@
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
+     <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/unity5.7/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

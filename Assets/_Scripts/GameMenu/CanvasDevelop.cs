@@ -4,13 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasDevelop : MonoBehaviour {
-    public GameObject mCanvasDevelop;
+    public GameObject mExecutiveBtn;
+    public GameObject mEnableBtn;
+    public GameObject mCloseBtn;
+    public GameObject mCanvasExecutive;
 
-    public void ShowDevelop() {
-        mCanvasDevelop.SetActive(true);
-    }
-
-    public void HideDevelop() {
-        mCanvasDevelop.SetActive(false);
+    void Start() {
+        mExecutiveBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            mCanvasExecutive.gameObject.SetActive(true);
+        });
+        mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            this.gameObject.SetActive(false);
+        });
+        mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            this.gameObject.SetActive(false);
+        });
     }
 }
