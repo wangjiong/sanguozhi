@@ -4,13 +4,13 @@ using UnityEngine.UI;
 using OneP.InfinityScrollView;
 
 public class ItemHorizontal3 : InfinityBaseItem {
-
+    static string TAG = "ItemHorizontal3==";
 	public override void Reload(InfinityScrollView _infinity,int _index){
 		base.Reload(_infinity, _index);
-        print("_index" + _index);
+        print(TAG + "_index:" + _index);
 
         GameObject row = this.gameObject;
-        General general = GameManager.sGenerals[_index];
+        General general = GameManager.sCurrentGenerals[_index];
         row.transform.Find("Button01").Find("Text").GetComponent<Text>().text = general.name;
         row.transform.Find("Button02").Find("Text").GetComponent<Text>().text = general.tongshuai;
         row.transform.Find("Button03").Find("Text").GetComponent<Text>().text = general.wuli;

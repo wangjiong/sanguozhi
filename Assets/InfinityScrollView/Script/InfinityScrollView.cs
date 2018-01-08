@@ -29,6 +29,8 @@ namespace OneP.InfinityScrollView
 	}
 
 	public class InfinityScrollView : MonoBehaviour {
+        static string TAG = "InfinityScrollView==";
+
 		[Header("Setting Reference object")]
 		public GameObject prefab; // link object item
 		public ScrollRect scrollRect;// link to UGUI scrollRect
@@ -88,11 +90,11 @@ namespace OneP.InfinityScrollView
 			}
 			//reset Array
 			arrayCurrent = new GameObject[totalNumberItem];
-
-			for (int i = 0; i < itemGenerate; i++) {
+            print(TAG + "Setup totalNumberItem:" + totalNumberItem + " itemGenerate:" + itemGenerate);
+            for (int i = 0; i < itemGenerate; i++) {
 				GameObject obj = null;
 				if (!isInit) {
-					if (i < totalNumberItem) {
+					
 						obj = GameObject.Instantiate (prefab) as GameObject;
 						obj.name = "item_" + (i);
 						obj.transform.SetParent (content.transform, false);
@@ -134,9 +136,13 @@ namespace OneP.InfinityScrollView
 								}
 							}
 						}
-						Reload (obj, i);
-						arrayCurrent [i] = obj;
-					}
+
+                    if (i < totalNumberItem) {
+                        Reload(obj, i);
+                        arrayCurrent[i] = obj;
+                    } else {
+                        obj.SetActive(false);
+                    }
 				}
 				else
 				{
@@ -253,6 +259,7 @@ namespace OneP.InfinityScrollView
 
 
 		void Awake(){
+            print(TAG + "Awake setupOnAwake:"+ setupOnAwake);
 			scrollRect = GetComponent<ScrollRect> ();
 			scrollRect.onValueChanged.AddListener (OnScrollChange);
 			if (setupOnAwake) {

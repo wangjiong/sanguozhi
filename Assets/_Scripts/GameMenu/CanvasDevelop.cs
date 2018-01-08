@@ -11,7 +11,7 @@ public class CanvasDevelop : MonoBehaviour {
 
     void Start() {
         mExecutiveBtn.GetComponent<Button>().onClick.AddListener(delegate () {
-            mCanvasExecutive.gameObject.SetActive(true);
+            mCanvasExecutive.GetComponent<CanvasExecutive>().Show();
         });
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             this.gameObject.SetActive(false);

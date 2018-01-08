@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasGameMenu : MonoBehaviour {
+    string TAG = "CanvasGameMenu==";
 
     public GameObject mFirstMenu;
 
@@ -21,6 +22,8 @@ public class CanvasGameMenu : MonoBehaviour {
 
     bool mPositionFlag = true; // 第一次ShowPosition有问题
 
+    
+
     public void ShowCanvasGameMenu(Vector2 screenPosition) {
         this.gameObject.SetActive(true);
         if (mPositionFlag) {
@@ -30,6 +33,11 @@ public class CanvasGameMenu : MonoBehaviour {
             mFirstMenu.transform.position = screenPosition;
             mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
         }
+    }
+
+    public void SetCityName(string cityName) {
+        print(TAG + "SetCityName cityName:" + cityName);
+        GameManager.sCityName = cityName;
     }
 
     IEnumerator SetPosition(Vector2 screenPosition) {
@@ -44,7 +52,7 @@ public class CanvasGameMenu : MonoBehaviour {
             mMenuFirstBtns[index].GetComponent<Button>().onClick.AddListener(delegate () {
                 Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                 Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
-                mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2 , sizeDelta.y * scale.y / 2, 0);
+                mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2, sizeDelta.y * scale.y / 2, 0);
             });
         }
         // 第二级菜单监听

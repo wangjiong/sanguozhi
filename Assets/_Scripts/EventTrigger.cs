@@ -38,7 +38,7 @@ public class EventTrigger : MonoBehaviour {
                 // 城市
                 if (Input.GetMouseButtonUp(0)) {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
-                    
+                    mCanvasGameMenu.SetCityName(hit.collider.GetComponentInChildren<TextMesh>().text);
                 }
                 return;
             }

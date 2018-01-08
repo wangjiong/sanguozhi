@@ -39,6 +39,10 @@ public class Response<T> {
 public class GameManager : MonoBehaviour {
     public static List<General> sGenerals = new List<General>();
 
+    public static List<General> sCurrentGenerals = new List<General>();
+
+    public static string sCityName;
+
     public TextAsset mData;
 
     void Start() {
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour {
         //Debug.Log(milliseconds);
 
         foreach (General g in sGenerals) {
-            Debug.Log(g.name);
+            //Debug.Log(g.place);
         }
     }
 }
