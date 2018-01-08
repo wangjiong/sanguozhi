@@ -170,7 +170,7 @@ public class Citys : MonoBehaviour {
                 } else {
                     o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1f);
                 }
-                o.transform.Find("Model").localRotation = Quaternion.Euler(0, 90, 0);
+                o.transform.Find("Model").localRotation = Quaternion.Euler(0, -90, 0);
             } else {
                 // 横
                 if (city.x % 2 == 0) {
