@@ -8801,8 +8801,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00001812, y: 0.5}
-  m_SizeDelta: {x: -0.000030518, y: 1}
+  m_AnchoredPosition: {x: -0.00001812, y: -7.5}
+  m_SizeDelta: {x: -0.000030518, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477448227
 MonoBehaviour:
@@ -42771,7 +42771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 255, y: -429}
+  m_AnchoredPosition: {x: 255, y: -425}
   m_SizeDelta: {x: 406.4, y: 525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143237989
@@ -42823,8 +42823,8 @@ MonoBehaviour:
   overrideY: 0
   extraContentLength: 0
   itemSize: 28
-  itemGenerate: 18
-  totalNumberItem: 733
+  itemGenerate: 19
+  totalNumberItem: 732
   list_skip_Index: 
   list_skip_Object: []
   isAutoLinking: 1
