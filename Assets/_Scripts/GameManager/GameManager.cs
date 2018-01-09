@@ -37,9 +37,19 @@ public class Response<T> {
 
 
 public class GameManager : MonoBehaviour {
+    static string TAG = "GameManager=="; 
     public static List<General> sGenerals = new List<General>();
 
     public static List<General> sCurrentGenerals = new List<General>();
+    public static void SetCurrentGenerals() {
+        print(TAG + "SetCurrentGenerals sCityName:" + sCityName);
+        GameManager.sCurrentGenerals.Clear();
+        foreach (General g in GameManager.sGenerals) {
+            if (g.place.Equals(GameManager.sCityName)) {
+                GameManager.sCurrentGenerals.Add(g);
+            }
+        }
+    }
 
     public static string sCityName;
 

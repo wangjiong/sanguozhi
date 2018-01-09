@@ -10,17 +10,23 @@ public class CanvasExecutive : MonoBehaviour {
     public GameObject mCloseBtn;
     public InfinityScrollView mInfinityScrollView;
 
+    public CanvasExpedition mCanvasExpedition;
+
     public Button[] mButtons;
 
     int mIndexClick = 0;
 
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            // 出征武将
+            List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
+            mCanvasExpedition.SetGeneral(temp[0], temp[1], temp[2]);
             this.gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             this.gameObject.SetActive(false);
         });
+        // 武将表格
         for (int i = 1; i < mButtons.Length; i++) {
             int index = i;
             mButtons[i].onClick.AddListener(delegate () {
@@ -78,13 +84,6 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void Show() {
-        print(TAG + "Show");
-        GameManager.sCurrentGenerals.Clear();
-        foreach (General g in GameManager.sGenerals) {
-            if (g.place.Equals(GameManager.sCityName)) {
-                GameManager.sCurrentGenerals.Add(g);
-            }
-        }
         print(TAG + "Show:" + GameManager.sCurrentGenerals.Count);
         if (GameManager.sCurrentGenerals.Count > 0) {
             mInfinityScrollView.Setup(GameManager.sCurrentGenerals.Count);

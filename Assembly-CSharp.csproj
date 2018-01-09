@@ -69,6 +69,7 @@
      <Compile Include="Assets\_Scripts\LookAt.cs" />
      <Compile Include="Assets\_Scripts\MainMenuController.cs" />
      <Compile Include="Assets\_Scripts\MenuModel.cs" />
+     <Compile Include="Assets\_Scripts\Strategy\Strategy.cs" />
      <Compile Include="Assets\_Scripts\Wujiang.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\CameraTargeting.cs" />
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\CompoundObjectController.cs" />
