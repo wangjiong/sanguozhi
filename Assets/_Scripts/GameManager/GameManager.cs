@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 // 武将
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour {
     public TextAsset mData;
 
     void Start() {
+        Debug.Log("GameManager Start");
         string text = mData.text;
         Loom.RunAsync(() => {
             ReadData(text);
@@ -74,8 +76,9 @@ public class GameManager : MonoBehaviour {
         double milliseconds = timespan.TotalSeconds;  //  总毫秒数
         //Debug.Log(milliseconds);
 
+        Debug.Log("ReadData sGenerals:"+ sGenerals.Count);
         foreach (General g in sGenerals) {
-            //Debug.Log(g.place);
+            Debug.Log(g.place);
         }
     }
 }

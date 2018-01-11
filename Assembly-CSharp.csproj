@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Scripts\Ability\AbilityMesh.cs" />
      <Compile Include="Assets\_Scripts\BackController.cs" />
      <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
      <Compile Include="Assets\_Scripts\CameraController.cs" />
