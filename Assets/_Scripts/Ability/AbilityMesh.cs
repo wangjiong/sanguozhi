@@ -30,4 +30,13 @@ public class AbilityMesh : MaskableGraphic {
         vh.AddTriangle(0, 4, 5);
         vh.AddTriangle(0, 5, 1);
     }
+
+    public void SetPointOffset(float v1, float v2, float v3, float v4, float v5) {
+        this.v1 = v1;
+        this.v2 = v2;
+        this.v3 = v3;
+        this.v4 = v4;
+        this.v5 = v5;
+        SetAllDirty();
+    }
 }

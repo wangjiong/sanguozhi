@@ -40,8 +40,15 @@ public class CanvasExpedition : MonoBehaviour {
     public Text[] mAbilityText;
     public Text mArmText;
     public Text mArmAbilityText;
+    int mAttack; // 攻击力
+    int mDefence; // 防御力
+    int mIntelligence; // 智力
+    int mBuild; // 建设力
+    int mMove; // 移动能力
     // 战法
     public Text[] mSkillText;
+    // 能力5变形
+    public AbilityMesh mAbilityMesh;
 
     void OnEnable() {
         mChiefImg.color = new Color(1, 1, 1, 0);
@@ -85,6 +92,18 @@ public class CanvasExpedition : MonoBehaviour {
             text.text = "";
         }
         mChief = null;
+        // 设置能力五边形
+        // 攻击力
+        mAttack =0;
+        // 防御力
+        mDefence = 0;
+        // 智力
+        mIntelligence = 0;
+        // 建设力
+        mBuild = 0;
+        // 移动能力
+        mMove = 0;
+        mAbilityMesh.SetPointOffset(mAttack / 120f, mDefence / 120f, mIntelligence / 120f, mBuild / 120f, mMove / 120f);
     }
 
     void Start() {
@@ -202,11 +221,26 @@ public class CanvasExpedition : MonoBehaviour {
             mArmText.text = "骑兵";
         }
         float c1 = 0.8f; // 偏移值
-        mAbilityText[0].text = (int)(GetMaxAbility(chief.tongshuai, junior01.tongshuai, junior02.tongshuai) * a1 * b1 * c1) + "";
-        mAbilityText[1].text = (int)(GetMaxAbility(chief.tongshuai, junior01.tongshuai, junior02.tongshuai) * a2 * b1 * c1) + "";
-        mAbilityText[2].text = GetMaxAbility(chief.zhili, junior01.zhili, junior02.zhili) + "";
-        mAbilityText[3].text = GetMaxAbility(chief.zhengzhi, junior01.zhengzhi, junior02.zhengzhi) + "";
-        mAbilityText[4].text = a5 + "";
+
+        // 攻击力
+        mAttack = (int)(GetMaxAbility(chief.tongshuai, junior01.tongshuai, junior02.tongshuai) * a1 * b1 * c1);
+        // 防御力
+        mDefence = (int)(GetMaxAbility(chief.tongshuai, junior01.tongshuai, junior02.tongshuai) * a2 * b1 * c1);
+        // 智力
+        mIntelligence = GetMaxAbility(chief.zhili, junior01.zhili, junior02.zhili);
+        // 建设力
+        mBuild = GetMaxAbility(chief.zhengzhi, junior01.zhengzhi, junior02.zhengzhi);
+        // 移动能力
+        mMove = (int)a5;
+
+        mAbilityText[0].text = mAttack + "";
+        mAbilityText[1].text = mDefence + "";
+        mAbilityText[2].text = mIntelligence + "";
+        mAbilityText[3].text = mBuild + "";
+        mAbilityText[4].text = mMove + "";
+
+        // 设置能力五边形
+        mAbilityMesh.SetPointOffset(mAttack / 120f, mDefence / 120f, mIntelligence / 120f, mBuild / 120f, mMove / 120f);
     }
 
     private int GetMaxAbility(string m, string n, string k) {
