@@ -94,7 +94,7 @@ public class CanvasExpedition : MonoBehaviour {
         mChief = null;
         // 设置能力五边形
         // 攻击力
-        mAttack =0;
+        mAttack = 0;
         // 防御力
         mDefence = 0;
         // 智力
@@ -175,6 +175,10 @@ public class CanvasExpedition : MonoBehaviour {
                 print("02");
             });
         }
+        // Test
+        string PATH = Application.streamingAssetsPath + "/img/img";
+        string url = PATH + GameManager.sGenerals[0].id + ".jpg";
+        StartCoroutine(LoadImage(url, null));
     }
 
     // 设置武将信息
@@ -398,18 +402,20 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     IEnumerator LoadImage(string url, Image image) {
-        //print(TAG + "url:" + url);
+        print(TAG + "url:" + url);
         WWW www = new WWW(url);
         yield return www;
         if (!string.IsNullOrEmpty(www.error) || !www.isDone) {
             // 1 www下载失败
             Debug.Log(TAG + "DownloadImage www.error:" + www.error + " www.isDone:" + www.isDone);
         } else {
-            Texture2D texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);
-            www.LoadImageIntoTexture(texture);
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 100f, 0, SpriteMeshType.FullRect);
-            image.sprite = sprite;
-            image.color = new Color(1, 1, 1, 1);
+            if (image != null) {
+                Texture2D texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);
+                www.LoadImageIntoTexture(texture);
+                Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 100f, 0, SpriteMeshType.FullRect);
+                image.sprite = sprite;
+                image.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 }
