@@ -60,6 +60,8 @@
      <None Include="Assets\TerrainGridSystem\Demos\Demo05_CellsColoring\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
+     <None Include="Assets\_Shaders\Cus.shader" />
+     <None Include="Assets\_Resources\data.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
@@ -69,11 +71,13 @@
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitHighlight.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo10_TerrainPositioning\README.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />
+     <None Include="Assets\_Shaders\Checkerboard.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo13_TerritoryByTexture\README.txt" />
      <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\README.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
+     <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
@@ -86,9 +90,11 @@
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritory.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo02_2DGrids\README.txt" />
      <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
+     <None Include="Assets\_Shaders\Gird.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
+     <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
