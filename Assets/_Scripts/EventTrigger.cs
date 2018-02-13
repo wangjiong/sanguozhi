@@ -34,11 +34,11 @@ public class EventTrigger : MonoBehaviour {
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
-            if (hit.collider.CompareTag("City")){
+            if (hit.collider.CompareTag("City")) {
                 // 城市
                 if (Input.GetMouseButtonUp(0)) {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
-                    mCanvasGameMenu.SetCityName(hit.collider.GetComponentInChildren<TextMesh>().text);
+                    mCanvasGameMenu.SetCityName(hit.collider.GetComponentInChildren<TextMesh>().text, hit.collider.gameObject);
                 }
                 return;
             }
@@ -52,9 +52,12 @@ public class EventTrigger : MonoBehaviour {
                 z = Mathf.Ceil(hit.point.z - 0.5f);
                 mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
             }
-
-            //print("x:" + (x - 1) + " z:" + (200 - z));
+            if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang!=null) {
+                Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
+                //Wujiang.sCurrentWujiang.OnMouseDown();
+            }
         }
+
         if (Input.GetMouseButtonDown(0)) {
             mCanvasGameMenu.gameObject.SetActive(false);
         }

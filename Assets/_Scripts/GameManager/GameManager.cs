@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public static string sCityName;
+    public static GameObject sCity;
 
     public TextAsset mData;
 

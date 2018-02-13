@@ -14,6 +14,11 @@ public class CanvasExpedition : MonoBehaviour {
     // Arms 兵种
     public Button[] mArms;
 
+    // 设置武将信息
+    General mChief, mJunior01, mJunior02;
+
+    public GameObject mWujiangPrefab;
+
     // Image
     public Image mChiefImg;
     public Image mJunior01Img;
@@ -128,6 +133,18 @@ public class CanvasExpedition : MonoBehaviour {
         // 确定、返回
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             this.gameObject.SetActive(false);
+            GameObject canvasGameMenu = GameObject.Find("Canvas GameMenu");
+            if (canvasGameMenu!=null) {
+                canvasGameMenu.SetActive(false);
+            }
+            if (mChief != null) {
+                GameObject mWujiang = Instantiate(mWujiangPrefab);
+                mWujiang.transform.position = GameManager.sCity.transform.position;
+                mWujiang.transform.position = new Vector3(GameManager.sCity.transform.position.x, 0.05f , GameManager.sCity.transform.position.z);
+                mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
+                mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
+                mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
+            }
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             this.gameObject.SetActive(false);
@@ -181,8 +198,7 @@ public class CanvasExpedition : MonoBehaviour {
         StartCoroutine(LoadImage(url, null));
     }
 
-    // 设置武将信息
-    General mChief, mJunior01, mJunior02;
+    
     public void SetGeneral(General chief, General junior01, General junior02) {
         mChief = chief;
         mJunior01 = junior01;
