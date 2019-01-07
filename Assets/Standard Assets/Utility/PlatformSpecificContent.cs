@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Utility
 #endif
     public class PlatformSpecificContent : MonoBehaviour
 #if UNITY_EDITOR
-        , UnityEditor.Build.IActiveBuildTargetChanged
+        //, UnityEditor.Build.IActiveBuildTargetChanged
 #endif
     {
         private enum BuildTargetGroup
