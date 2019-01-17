@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -39708,6 +39708,22 @@ Prefab:
     - target: {fileID: 1730054657707616, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114704606281057112, guid: da9af021be6a9884d948c166f0454c44,
+        type: 2}
+      propertyPath: mPathGrid
+      value: 
+      objectReference: {fileID: 1299802756867558, guid: f4d740bba76054843ab120478c2b83e7,
+        type: 2}
+    - target: {fileID: 114704606281057112, guid: da9af021be6a9884d948c166f0454c44,
+        type: 2}
+      propertyPath: mPrefabPathGrid
+      value: 
+      objectReference: {fileID: 1299802756867558, guid: f4d740bba76054843ab120478c2b83e7,
+        type: 2}
+    - target: {fileID: 1850228246875380, guid: da9af021be6a9884d948c166f0454c44, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da9af021be6a9884d948c166f0454c44, type: 2}

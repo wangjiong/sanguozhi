@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02627EC6-FE7D-0A08-CE37-0E1456F2F45D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>5.6.1f1</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;MOBILE_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT;MOBILE_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>E:/unity5.6.1/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VR">
+      <HintPath>E:/unity5.6.1/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>E:/unity5.6.1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="sanguozhi.Plugins.csproj">
+      <Project>{46F36375-8A2E-4ADE-DF1B-37CA67474E07}</Project>
+      <Name>sanguozhi.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\CameraTargeting.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\CompoundObjectController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\DelayedDestroyController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\FlashingController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\HighlightingController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\OccluderController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\RotationController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\SceneLoader.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\CheckFPS.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\InfinityItemColor.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\Sample1.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample1_Infinity_Vertical\SampleGlobalValue.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\ItemHorizontal1.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\ItemHorizontal2.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample2_Infinity_horizontal\Sample2.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\ItemSkip.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\ItemUser.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\Sample3.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample3_Infinity_custom\Utils.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample4\ItemSample.cs" />
+    <Compile Include="Assets\InfinityScrollView\Samples\Sample4\ListSample.cs" />
+    <Compile Include="Assets\InfinityScrollView\Script\InfinityBaseItem.cs" />
+    <Compile Include="Assets\InfinityScrollView\Script\InfinityScrollView.cs" />
+    <Compile Include="Assets\InfinityScrollView\Script\RectTranformUtils.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Common\GUIResizer.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\BallController.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\Demo1.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo02_2DGrids\Demo2.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\Demo3.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\Demo4a.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\Demo4b.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo05_CellsColoring\Demo5.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\Demo6.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo06b_CellsPositions2\Demo6b.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo07_CellsByRowCol\Demo7.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo08_Orthographic\DemoOrtho.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo10_TerrainPositioning\Demo10.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo11_TerritoryConquer\Demo11.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\Demo12.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Cell.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\IAdmin.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Region.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\SurfaceBlinker.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\SurfaceFader.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TGSPrivPathFinder.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TGSPrivate.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TerrainTrigger.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\Territory.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Core\TerritoryMesh.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Drawing\Drawing.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Point.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Connector.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Contour.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\EventQueue.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\PointChain.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Polygon.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\PolygonClipper.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\Rectangle.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\SweepEvent.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\PolygonClipping\SweepEventSet.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Segment.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Triangulator.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\Arc.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\Event.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\VoronoiCell.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\Geom\Voronoi\VoronoiFortune.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\IPathFinder.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinder.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinderFast.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFinderFastNonSQR.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PathFindingPoint.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PathFinding\PriorityQueueB.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\DelaunayTriangle.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\AdvancingFront.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\AdvancingFrontNode.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweep.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepBasin.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepConstraint.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepContext.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepDebugContext.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepEdgeEvent.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\DTSweepPointComparator.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Delaunay\Sweep\PointOnEdgeException.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\ITriangulatable.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Orientation.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\Contour.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\Polygon.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonPoint.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonSet.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Polygon\PolygonUtil.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Sets\ConstrainedPointSet.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Sets\PointSet.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationAlgorithm.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationConstraint.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationContext.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationDebugContext.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationMode.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\TriangulationPoint.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\PointGenerator.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\PolygonGenerator.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Triangulation\Util\TriangulationUtil.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\FixedArray3.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\FixedBitArray3.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\MathUtil.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Point2D.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Point2DList.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\PolyTri\Utility\Rect2D.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\TGSCells.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\TGSConfig.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\TGSPathFinding.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\TGSTerritories.cs" />
+    <Compile Include="Assets\TerrainGridSystem\Scripts\TerrainGridSystem.cs" />
+    <Compile Include="Assets\_Scripts\Ability\AbilityMesh.cs" />
+    <Compile Include="Assets\_Scripts\BackController.cs" />
+    <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
+    <Compile Include="Assets\_Scripts\CameraController.cs" />
+    <Compile Include="Assets\_Scripts\EventTrigger.cs" />
+    <Compile Include="Assets\_Scripts\GameManager\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\GameManager\Loom.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasDevelop.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasExecutive.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasExpedition.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
+    <Compile Include="Assets\_Scripts\General\GenerateGeneralRow.cs" />
+    <Compile Include="Assets\_Scripts\General\ItemHorizontal3.cs" />
+    <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
+    <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
+    <Compile Include="Assets\_Scripts\LookAt.cs" />
+    <Compile Include="Assets\_Scripts\MainMenuController.cs" />
+    <Compile Include="Assets\_Scripts\MenuModel.cs" />
+    <Compile Include="Assets\_Scripts\Strategy\Strategy.cs" />
+    <Compile Include="Assets\_Scripts\Wujiang.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\AutoScrollDampMode.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\CameraPlaneAxes.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\MobilePickingController.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\MobileTouchCamera.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\MobileTouchPickable.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\MonoBehaviourWrapped.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\PerspectiveZoomMode.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\PickableSelectedData.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\PinchUpdateData.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\SnapAngle.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\TouchInputController.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\TouchWrapper.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPickableSelected.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPosition.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithPositionAndTransform.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithRaycastHit.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithRaycastHit2D.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\UnityEventWithTransform.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\WrappedTouch.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\demo\DemoController.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\tools\FocusCameraOnItem.cs" />
+    <Compile Include="Assets\mobile_touch_camera\scripts\tools\SetBoundaryFromCollider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
+    <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaque.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo02_2DGrids\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo05_CellsColoring\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo06b_CellsPositions2\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo07_CellsByRowCol\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo08_Orthographic\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo09_Mask\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo10_TerrainPositioning\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo11_TerritoryConquer\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Demos\Demo13_TerritoryByTexture\README.txt" />
+    <None Include="Assets\TerrainGridSystem\README.txt" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitHighlight.shader" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritory.shader" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
+    <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
+    <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
+    <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
+    <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\README.txt" />
+    <None Include="Assets\_Resources\data.txt" />
+    <None Include="Assets\_Shaders\Checkerboard.shader" />
+    <None Include="Assets\_Shaders\Cus.shader" />
+    <None Include="Assets\_Shaders\Gird.shader" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+</Project>

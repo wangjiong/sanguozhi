@@ -44,7 +44,7 @@
 
 			fixed4 frag(v2f v) : SV_Target{
 				fixed4 texColor = tex2D(_MainTex, v.uv);
-				return fixed4(texColor.rgb, texColor.a * _Color.a);
+				return fixed4(_Color.rgb, texColor.a * _Color.a);
 			}
 
 			ENDCG
