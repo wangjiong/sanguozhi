@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="Assets\InfinityScrollView\Editor\InfinityScrollViewEditor.cs" />
     <Compile Include="Assets\InfinityScrollView\Editor\InfinityScrollViewInspector.cs" />
+    <Compile Include="Assets\Scripts\Editor\HexCoordinatesDrawer.cs" />
     <Compile Include="Assets\TerrainGridSystem\Editor\TGSInspector.cs" />
     <Compile Include="Assets\mobile_touch_camera\editor\CustomInspector.cs" />
     <Compile Include="Assets\mobile_touch_camera\editor\MobilePickingControllerEditor.cs" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
     <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
+    <None Include="Assets\Materials\VertexColors.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />

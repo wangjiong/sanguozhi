@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EventTrigger : MonoBehaviour {
     string TAG = "EventTrigger==";
@@ -40,22 +41,22 @@ public class EventTrigger : MonoBehaviour {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
                     mCanvasGameMenu.SetCityName(hit.collider.GetComponentInChildren<TextMesh>().text, hit.collider.gameObject);
                 }
-                return;
             }
             // 格子
-            float x = Mathf.Ceil(hit.point.x);
-            float z = 0;
-            if (x % 2 == 0) {
-                z = Mathf.Ceil(hit.point.z);
-                mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z - 0.5f);
-            } else {
-                z = Mathf.Ceil(hit.point.z - 0.5f);
-                mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
-            }
+            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCorrdinatePosition(hit.point);
+            pointCubePosition.y = mOriginalPosition.y;
+            mPointCube.transform.position = pointCubePosition;
+
             if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang!=null) {
                 Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
                 //Wujiang.sCurrentWujiang.OnMouseDown();
             }
+
+            // Debug
+            Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
+            Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
+            p.y = mOriginalPosition.y;
+            GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " " + p;
         }
 
         if (Input.GetMouseButtonDown(0)) {

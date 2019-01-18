@@ -129,6 +129,7 @@
   <ItemGroup>
     <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
     <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
+    <None Include="Assets\Materials\VertexColors.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />

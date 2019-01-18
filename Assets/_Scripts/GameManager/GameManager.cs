@@ -82,4 +82,29 @@ public class GameManager : MonoBehaviour {
             Debug.Log(g.place);
         }
     }
+
+    void Update() {
+        //RaycastHit hit;
+        //// 从鼠标所在的位置发射
+        //Vector2 screenPosition = Input.mousePosition;
+
+        //if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
+        //    // 格子
+        //    float x = Mathf.Ceil(hit.point.x);
+        //    float z = 0;
+        //    if (x % 2 == 0) {
+        //        z = Mathf.Ceil(hit.point.z);
+        //        mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z - 0.5f);
+        //    } else {
+        //        z = Mathf.Ceil(hit.point.z - 0.5f);
+        //        mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
+        //    }
+        //    if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang != null) {
+        //        Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
+        //        //Wujiang.sCurrentWujiang.OnMouseDown();
+        //    }
+        //}
+
+
+    }
 }

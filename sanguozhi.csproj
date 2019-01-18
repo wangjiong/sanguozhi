@@ -112,6 +112,12 @@
     <Compile Include="Assets\InfinityScrollView\Script\InfinityBaseItem.cs" />
     <Compile Include="Assets\InfinityScrollView\Script\InfinityScrollView.cs" />
     <Compile Include="Assets\InfinityScrollView\Script\RectTranformUtils.cs" />
+    <Compile Include="Assets\Scripts\HexCell.cs" />
+    <Compile Include="Assets\Scripts\HexDirection.cs" />
+    <Compile Include="Assets\Scripts\HexGrid.cs" />
+    <Compile Include="Assets\Scripts\HexMapEditor.cs" />
+    <Compile Include="Assets\Scripts\HexMesh.cs" />
+    <Compile Include="Assets\Scripts\HexMetrics.cs" />
     <Compile Include="Assets\TerrainGridSystem\Demos\Common\GUIResizer.cs" />
     <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\BallController.cs" />
     <Compile Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\Demo1.cs" />
@@ -219,6 +225,8 @@
     <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
     <Compile Include="Assets\_Scripts\LookAt.cs" />
     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
+    <Compile Include="Assets\_Scripts\Map\HexCoordinates.cs" />
+    <Compile Include="Assets\_Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\_Scripts\MenuModel.cs" />
     <Compile Include="Assets\_Scripts\Strategy\Strategy.cs" />
     <Compile Include="Assets\_Scripts\Wujiang.cs" />
@@ -248,6 +256,7 @@
   <ItemGroup>
     <None Include="Assets\InfinityScrollView\Editor\BaseObject\readme.txt" />
     <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
+    <None Include="Assets\Materials\VertexColors.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
     <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />

@@ -53,31 +53,13 @@ public class Wujiang : MonoBehaviour {
 
             Debug.Log("x:" + x + " y:" + y);
 
-            List<Vector2> list = GetNeighbour(x, y);
-            foreach (Vector2 v in list) {
+            List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(transform.position);
+
+            foreach (Coordinates c in neighbours) {
                 GameObject g = Instantiate(mPrefabPathGrid);
-                g.transform.position = new Vector3(v.x - 0.5f, 0, v.y);
+                g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(c);
             }
         }
     }
 
-    List<Vector2> GetNeighbour(int x, int y) {
-        List<Vector2> list = new List<Vector2>();
-        if (x % 2 == 1) {
-            list.Add(new Vector2(x, y + 1));
-            list.Add(new Vector2(x + 1, y));
-            list.Add(new Vector2(x + 1, y - 1));
-            list.Add(new Vector2(x, y - 1));
-            list.Add(new Vector2(x - 1, y - 1));
-            list.Add(new Vector2(x - 1, y));
-        }else {
-            list.Add(new Vector2(x, y + 1));
-            list.Add(new Vector2(x + 1, y +1));
-            list.Add(new Vector2(x + 1, y ));
-            list.Add(new Vector2(x, y ));
-            list.Add(new Vector2(x - 1, y));
-            list.Add(new Vector2(x - 1, y+1));
-        }
-        return list;
-    }
 }
