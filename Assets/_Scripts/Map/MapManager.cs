@@ -3,6 +3,7 @@ using UnityEngine;
 
 
 public class Coordinates {
+
     public int x;
     public int y;
 
@@ -13,8 +14,21 @@ public class Coordinates {
         x = _x;
         y = _y;
     }
+
+    public int HexX {
+        get { return y - x/2 ; }
+    }
+
+    public int HexY {
+        get { return x; }
+    }
+
+    public int HexZ {
+        get { return -HexX - HexY; }
+    }
+
     public override string ToString() {
-        return "(" + x + ", " + y + ")";
+        return "Coord(" + x + ", " + y + ")" + " Hex(" + HexX + ", " + HexY + ", " + HexZ + ")";
     }
 }
 

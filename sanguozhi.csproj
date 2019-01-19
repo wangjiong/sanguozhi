@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -113,6 +115,7 @@
     <Compile Include="Assets\InfinityScrollView\Script\InfinityScrollView.cs" />
     <Compile Include="Assets\InfinityScrollView\Script\RectTranformUtils.cs" />
     <Compile Include="Assets\Scripts\HexCell.cs" />
+    <Compile Include="Assets\_Scripts\Map\HexCoordinates.cs" />
     <Compile Include="Assets\Scripts\HexDirection.cs" />
     <Compile Include="Assets\Scripts\HexGrid.cs" />
     <Compile Include="Assets\Scripts\HexMapEditor.cs" />
@@ -225,7 +228,6 @@
     <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
     <Compile Include="Assets\_Scripts\LookAt.cs" />
     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
-    <Compile Include="Assets\_Scripts\Map\HexCoordinates.cs" />
     <Compile Include="Assets\_Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\_Scripts\MenuModel.cs" />
     <Compile Include="Assets\_Scripts\Strategy\Strategy.cs" />
