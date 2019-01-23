@@ -50,6 +50,7 @@ public class EventTrigger : MonoBehaviour {
             if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang!=null) {
                 Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
                 //Wujiang.sCurrentWujiang.OnMouseDown();
+                Wujiang.sCurrentWujiang.ShowPath();
             }
 
             // Debug

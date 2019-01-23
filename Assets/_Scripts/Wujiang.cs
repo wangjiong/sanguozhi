@@ -4,6 +4,14 @@ using TGS;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class Node {
+    public Coordinates mCoordinates;
+    public float mCost = Random.Range(1 ,  4);
+    public float mCurrentCosted = float.MaxValue;
+    public Node(Coordinates coordinates) {
+        mCoordinates = coordinates;
+    }
+}
 public class Wujiang : MonoBehaviour {
     public static Wujiang sCurrentWujiang;
 
@@ -36,7 +44,7 @@ public class Wujiang : MonoBehaviour {
             sCurrentWujiang = this;
             mHighlightableObjecto.ConstantOnImmediate(Color.red);
             // 显示移动的范围
-            ShowPath();
+            //ShowPath();
         } else {
             // 2.不选中
             sCurrentWujiang = null;
@@ -44,22 +52,66 @@ public class Wujiang : MonoBehaviour {
         }
     }
 
-
-    void ShowPath() {
+    Dictionary<Coordinates, Node> mNodesCache = new Dictionary<Coordinates, Node>();
+    List<GameObject> mPathGridsCache = new List<GameObject>();
+    int mPathGridsCacheIndex = 0;
+    float mWujiangAllCost = 8;
+    public void ShowPath() {
         if (mPrefabPathGrid) {
-            Debug.Log(transform.position);
-            int x = (int)(transform.position.x + 0.5f);
-            int y = (int)(transform.position.z);
-
-            Debug.Log("x:" + x + " y:" + y);
-
-            List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(transform.position);
-
-            foreach (Coordinates c in neighbours) {
-                GameObject g = Instantiate(mPrefabPathGrid);
-                g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(c);
+            Clear();
+            Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
+            Queue<Node> queue = new Queue<Node>();
+            Node n = GetNode(current);
+            n.mCurrentCosted = 1;
+            queue.Enqueue(n);
+            while (queue.Count > 0) {
+                Node currentNode = queue.Dequeue();
+                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(currentNode.mCoordinates);
+                foreach (Coordinates c in neighbours) {
+                    // 检查是否越界
+                    if (MapManager.GetInstance().CheckBoundary(c)) {
+                        Node node = GetNode(c);
+                        float newCost = currentNode.mCurrentCosted + node.mCost;
+                        if (newCost < node.mCurrentCosted) {
+                            node.mCurrentCosted = newCost;
+                            if (node.mCurrentCosted <= mWujiangAllCost) {
+                                queue.Enqueue(node);
+                            }
+                        }
+                    }
+                }
             }
+            foreach (KeyValuePair<Coordinates, Node> node in mNodesCache) {
+                if (node.Value.mCurrentCosted <= mWujiangAllCost) {
+                    GameObject g = GetGridNode();
+                    g.SetActive(true);
+                    g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
+                }
+            }
+            Debug.Log("mPathGridsCacheIndex:"+ mPathGridsCacheIndex);
         }
     }
 
+    private void Clear() {
+        mNodesCache.Clear();
+        mPathGridsCacheIndex = 0;
+        foreach (GameObject g in mPathGridsCache) {
+            g.SetActive(false);
+        }
+    }
+
+    private Node GetNode(Coordinates c) {
+        if (!mNodesCache.ContainsKey(c)) {
+            mNodesCache.Add(c, new Node(c));
+        }
+        return mNodesCache[c];
+    }
+
+    private GameObject GetGridNode() {
+        if (mPathGridsCacheIndex >= mPathGridsCache.Count) {
+            GameObject g = Instantiate(mPrefabPathGrid);
+            mPathGridsCache.Add(g);
+        }
+        return mPathGridsCache[mPathGridsCacheIndex++];
+    }
 }

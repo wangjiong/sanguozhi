@@ -16,7 +16,7 @@ public class Coordinates {
     }
 
     public int HexX {
-        get { return y - x/2 ; }
+        get { return y - x / 2; }
     }
 
     public int HexY {
@@ -25,6 +25,17 @@ public class Coordinates {
 
     public int HexZ {
         get { return -HexX - HexY; }
+    }
+
+    public override bool Equals(object obj) {
+        var your_class = (Coordinates)obj;
+        return your_class.x == this.x && your_class.y == this.y;
+    }
+
+    public override int GetHashCode() {
+        int id_hashcode = x.GetHashCode();
+        int name_hashcode = y.GetHashCode();
+        return id_hashcode + name_hashcode;
     }
 
     public override string ToString() {
@@ -40,6 +51,8 @@ public class MapManager {
 
     public int mSideLength = 1;
 
+    public int[,] mMapDatas = null;
+
     public static MapManager GetInstance() {
         if (msMapManager == null) {
             msMapManager = new MapManager();
@@ -47,10 +60,25 @@ public class MapManager {
         return msMapManager;
     }
 
+    private MapManager() {
+        Init();
+    }
     public void Init() {
-
+        mMapDatas = new int[mMapCorrdinateWidth, mMapCorrdinateHeight];
     }
 
+    public bool CheckBoundary(Coordinates c) {
+        return CheckBoundary(c.x, c.y);
+    }
+
+    bool CheckBoundary(int x, int y) {
+        if (x >= 0 && x < mMapCorrdinateWidth && y >= 0 && y < mMapCorrdinateHeight) {
+            return true;
+        }
+        return false;
+    }
+
+    // 坐标转换函数
     public Coordinates TerrainPositionToCorrdinate(Vector3 position) {
         Coordinates c = new Coordinates();
         c.x = (int)position.x;
