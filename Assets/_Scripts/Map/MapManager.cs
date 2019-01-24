@@ -44,6 +44,32 @@ public class Coordinates {
 }
 
 public class MapManager {
+
+    public enum TerrainType {
+        TerrainType_Caodi = 0, // 草地
+        TerrainType_Tu,// 土
+        TerrainType_Shadi,// 沙地
+        TerrainType_Shidi,// 湿地
+        TerrainType_Duquan,// 毒泉
+        TerrainType_Sen,// 森
+        TerrainType_Chuan,// 川
+        TerrainType_He,// 河
+        TerrainType_Hai,// 海
+        TerrainType_Huangdi,// 荒地
+        TerrainType_Zhujing = 10,// 主径
+        TerrainType_Zhandao,//栈道
+        TerrainType_Dusuo,// 渡所
+        TerrainType_Qiantan,// 浅滩
+        TerrainType_An,// 岸
+        TerrainType_Ya = 15,// 涯
+        TerrainType_Dushi,// 都市
+        TerrainType_Guansuo,// 关所
+        TerrainType_Gang,// 港
+        TerrainType_Xiaojing = 19, //小径
+    }
+
+
+
     static MapManager msMapManager = null;
 
     public int mMapCorrdinateWidth = 200;

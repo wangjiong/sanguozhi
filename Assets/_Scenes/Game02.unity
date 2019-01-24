@@ -7860,7 +7860,7 @@ MonoBehaviour:
   render: 1
   startRect:
     serializedVersion: 2
-    x: 80
+    x: 800
     y: 40
     width: 75
     height: 50
@@ -39843,7 +39843,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4860181617260864, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 21.5
       objectReference: {fileID: 0}
     - target: {fileID: 4860181617260864, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_LocalPosition.y
@@ -39851,7 +39851,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4860181617260864, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 66.5
       objectReference: {fileID: 0}
     - target: {fileID: 4860181617260864, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_LocalRotation.x

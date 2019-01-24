@@ -53,9 +53,9 @@ public class Wujiang : MonoBehaviour {
     }
 
     Dictionary<Coordinates, Node> mNodesCache = new Dictionary<Coordinates, Node>();
-    List<GameObject> mPathGridsCache = new List<GameObject>();
+    List<GameObject> mPathGameObjectCache = new List<GameObject>();
     int mPathGridsCacheIndex = 0;
-    float mWujiangAllCost = 8;
+    float mWujiangAllCost = 5;
     public void ShowPath() {
         if (mPrefabPathGrid) {
             Clear();
@@ -88,14 +88,14 @@ public class Wujiang : MonoBehaviour {
                     g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
                 }
             }
-            Debug.Log("mPathGridsCacheIndex:"+ mPathGridsCacheIndex);
+            Debug.Log( "mPathGridsCacheIndex:"+ mPathGridsCacheIndex + "mNodesCache:" + mPathGameObjectCache.Count);
         }
     }
 
     private void Clear() {
         mNodesCache.Clear();
         mPathGridsCacheIndex = 0;
-        foreach (GameObject g in mPathGridsCache) {
+        foreach (GameObject g in mPathGameObjectCache) {
             g.SetActive(false);
         }
     }
@@ -108,10 +108,10 @@ public class Wujiang : MonoBehaviour {
     }
 
     private GameObject GetGridNode() {
-        if (mPathGridsCacheIndex >= mPathGridsCache.Count) {
+        if (mPathGridsCacheIndex >= mPathGameObjectCache.Count) {
             GameObject g = Instantiate(mPrefabPathGrid);
-            mPathGridsCache.Add(g);
+            mPathGameObjectCache.Add(g);
         }
-        return mPathGridsCache[mPathGridsCacheIndex++];
+        return mPathGameObjectCache[mPathGridsCacheIndex++];
     }
 }

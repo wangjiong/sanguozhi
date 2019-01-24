@@ -2,6 +2,7 @@
 {
 	Properties{
 		_Color("Color Tint" , Color) = (1,1,1,1)
+		_Alpha("Alpha" , Float ) = 0.8
 		_MainTex("Main Tex" , 2D) = "white"{}
 	}
 
@@ -22,6 +23,7 @@
 			#pragma fragment frag
 
 			fixed4 _Color;
+			fixed _Alpha;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 
@@ -44,7 +46,7 @@
 
 			fixed4 frag(v2f v) : SV_Target{
 				fixed4 texColor = tex2D(_MainTex, v.uv);
-				return fixed4(_Color.rgb, texColor.a * _Color.a * 1.2);
+				return fixed4(_Color.rgb, texColor.a * _Color.a * _Alpha);
 			}
 
 			ENDCG
