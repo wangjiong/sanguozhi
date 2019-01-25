@@ -195,6 +195,7 @@
     <None Include="Assets\_Shaders\Checkerboard.shader" />
     <None Include="Assets\_Shaders\Cus.shader" />
     <None Include="Assets\_Shaders\Gird.shader" />
+    <None Include="Assets\mapdata.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
