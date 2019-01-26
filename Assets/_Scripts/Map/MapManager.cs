@@ -14,6 +14,12 @@ public class Coordinates {
         y = _y;
     }
 
+    public Coordinates SetHexXY(int hexX, int hexY) {
+        x = hexY;
+        y = x / 2 + hexX;
+        return this;
+    }
+
     public int HexX {
         get { return y - x / 2; }
     }
@@ -136,23 +142,62 @@ public class MapManager {
     }
 
     public List<Coordinates> GetNeighbours(Coordinates c) {
-        List<Coordinates> neightbors = new List<Coordinates>();
-        neightbors.Add(new Coordinates(c.x, c.y - 1));
-        neightbors.Add(new Coordinates(c.x, c.y + 1));
-        if (c.x % 2 == 0) {
-            neightbors.Add(new Coordinates(c.x - 1, c.y - 1));
-            neightbors.Add(new Coordinates(c.x - 1, c.y));
-            neightbors.Add(new Coordinates(c.x + 1, c.y - 1));
-            neightbors.Add(new Coordinates(c.x + 1, c.y));
-        } else {
-            neightbors.Add(new Coordinates(c.x - 1, c.y));
-            neightbors.Add(new Coordinates(c.x - 1, c.y + 1));
-            neightbors.Add(new Coordinates(c.x + 1, c.y));
-            neightbors.Add(new Coordinates(c.x + 1, c.y + 1));
-        }
-        return neightbors;
+        List<Coordinates> neighbours = new List<Coordinates>();
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX - 1, c.HexY));
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX + 1, c.HexY));
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX, c.HexY - 1));
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX, c.HexY + 1));
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX - 1, c.HexY + 1));
+        neighbours.Add(new Coordinates().SetHexXY(c.HexX + 1, c.HexY - 1));
+        return neighbours;
     }
 
+    public List<Coordinates> GetAllAroundN(Coordinates c, int n) {
+        List<Coordinates> neighbours = new List<Coordinates>();
+        // 所有的圈
+        for (int i = 0; i <= n; i++) {
+            GetAroundN(neighbours, c, i);
+        }
+        return neighbours;
+    }
 
+    public void GetAroundN(List<Coordinates> neighbours, Coordinates c, int n) {
+        if (n == 0) {
+            neighbours.Add(c);
+            return;
+        }
+        int hexX = c.HexX;
+        int hexY = c.HexY;
+        AddHexNode(hexX - n, hexY, neighbours);        // N
+        AddHexNode(hexX + n, hexY, neighbours);// S
+        AddHexNode(hexX, hexY - n, neighbours);    // NW
+        AddHexNode(hexX, hexY + n, neighbours);// SE
+        AddHexNode(hexX - n, hexY + n, neighbours);    // NE
+        AddHexNode(hexX + n, hexY - n, neighbours);    // SW
+        for (int i = 1; i < n; i++) {
+            // W
+            AddHexNode(hexX + i, hexY - n, neighbours);
+            // E
+            AddHexNode(hexX - n + i, hexY + n, neighbours);
+            // NW
+            AddHexNode(hexX - n + i, hexY - i, neighbours);
+            // SE
+            AddHexNode(hexX + i, hexY + n - i, neighbours);
+            // NE
+            AddHexNode(hexX - n, hexY + i, neighbours);
+            // SW
+            AddHexNode(hexX + n, hexY - n + i, neighbours);
+        }
+    }
 
+    public void AddHexNode(int hexX, int hexY, List<Coordinates> neighbours, bool shouldCheckBoundary = true) {
+        Coordinates c = new Coordinates().SetHexXY(hexX, hexY);
+        if (shouldCheckBoundary) {
+            if (CheckBoundary(c)) {
+                neighbours.Add(c);
+            }
+        } else {
+            neighbours.Add(c);
+        }
+    }
 }

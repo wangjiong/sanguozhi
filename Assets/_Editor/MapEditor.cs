@@ -1,31 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using BitBenderGames;
 
 public class MapEditor : MonoBehaviour {
     public GameObject mTerrainTypePrefab;
 
     // 鼠标指示点
-    GameObject mPointCube;
+    GameObject mPointerIndicator;
     Vector3 mOriginalPosition;
+    List<GameObject> mPointerIndicators = new List<GameObject>();
 
+    // 地形类型
     string[] mTerrainTypeNames = { "草地", "土", "沙地", "湿地", "毒泉", "森", "川", "河",
         "海", "荒地", "主径", "栈道", "渡所", "浅滩", "岸", "涯", "都市", "关所", "港", "小径"};
-
     List<Toggle> mTerrainTypeToggles = new List<Toggle>();
-    int mIndex = 0;
+    int mTerrainTypeIndex = 0;
+    // 地形大小
+    Slider mSlider;
+    int mSliderValue = 0;
 
     // 地图
     int[,] mMapDatas = new int[200, 200];
+    // 相机
+    MobileTouchCamera mMobileTouchCamera;
 
     void Start() {
         // 鼠标指示点
-        mPointCube = GameObject.Find("Point");
-        mOriginalPosition = mPointCube.transform.position;
-        // 初始化地形类型按钮
+        mPointerIndicator = GameObject.Find("Point");
+        mOriginalPosition = mPointerIndicator.transform.position;
+        mPointerIndicators.Add(mPointerIndicator);
+        // 地形类型
         GameObject terrainTypes = GameObject.Find("TerrainTypes");
         for (int i = 0; i < mTerrainTypeNames.Length; i++) {
             GameObject g = Instantiate(mTerrainTypePrefab);
@@ -37,14 +45,30 @@ public class MapEditor : MonoBehaviour {
             toggle.onValueChanged.AddListener(delegate (bool isOn) { ToggleEvent(isOn, index); });
             mTerrainTypeToggles.Add(toggle);
         }
-        mTerrainTypeToggles[mIndex].isOn = true;
-
+        mTerrainTypeToggles[mTerrainTypeIndex].isOn = true;
+        // 地形大小
+        mSlider = GameObject.Find("Slider").GetComponent<Slider>();
+        mSlider.onValueChanged.AddListener(delegate (float value) { SliderEvent(value); });
+        // 加载地图文件
         Load();
+        // 相机
+        mMobileTouchCamera = GameObject.Find("Main Camera").GetComponent<MobileTouchCamera>();
+
+        // Test
+        //List<Coordinates> list = MapManager.GetInstance().GetAllAroundN(new Coordinates(15, 130), 12);
+        List<Coordinates> list = MapManager.GetInstance().GetNeighbours(new Coordinates(15, 130));
+        for (int i = 0; i < list.Count; i++) {
+            GameObject pointer = Instantiate(mPointerIndicator);
+            pointer.transform.SetParent(mPointerIndicator.transform.parent);
+            Vector3 position = MapManager.GetInstance().CorrdinateToTerrainPosition(list[i]);
+            position.y = mPointerIndicator.transform.position.y;
+            pointer.transform.position = position;
+        }
     }
 
     void ToggleEvent(bool isOn, int index) {
         if (isOn) {
-            mIndex = index;
+            mTerrainTypeIndex = index;
             for (int i = 0; i < mTerrainTypeToggles.Count; i++) {
                 if (i != index) {
                     mTerrainTypeToggles[i].isOn = false;
@@ -53,8 +77,47 @@ public class MapEditor : MonoBehaviour {
         }
     }
 
+    void SliderEvent(float value) {
+        if (mSliderValue == (int)value) {
+            return;
+        }
+        mSliderValue = (int)value;
+
+        List<Coordinates> list = new List<Coordinates>();
+        MapManager.GetInstance().GetAroundN(list , new Coordinates(15,130) , 1);
+        for (int i=0;i< list.Count;i++) {
+            GameObject pointer = Instantiate(mPointerIndicator);
+            pointer.transform.SetParent(mPointerIndicator.transform.parent);
+            Vector3 position = MapManager.GetInstance().CorrdinateToTerrainPosition(list[i]);
+            position.y = mPointerIndicator.transform.position.y;
+            pointer.transform.position = position;
+        }
+        //if ( value == 0 ) {
+        //    for (int i=0;i< mPointerIndicators.Count;i++) {
+        //        if (i<=0) {
+        //            mPointerIndicators[i].SetActive(true);
+        //        } else {
+        //            mPointerIndicators[i].SetActive(false);
+        //        }
+        //    }
+        //} else if (value==1) {
+        //    GameObject pointer = Instantiate(mPointerIndicator);
+        //    pointer.transform.SetParent(mPointerIndicator.transform.parent);
+        //}
+    }
 
     void Update() {
+        // 如果点击UI，那么不移动相机
+        if(IsPointerOverGameObject(Input.mousePosition)) {
+            if (mMobileTouchCamera.enabled) {
+                mMobileTouchCamera.enabled = false;
+            }
+            return;
+        }
+        if (!mMobileTouchCamera.enabled) {
+            mMobileTouchCamera.enabled = true;
+        }
+
         RaycastHit hit;
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
@@ -62,7 +125,7 @@ public class MapEditor : MonoBehaviour {
             // 格子
             Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCorrdinatePosition(hit.point);
             pointCubePosition.y = mOriginalPosition.y;
-            mPointCube.transform.position = pointCubePosition;
+            mPointerIndicator.transform.position = pointCubePosition;
 
             // Debug
             Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
@@ -72,7 +135,7 @@ public class MapEditor : MonoBehaviour {
             if (coordinates.x >= 0 && coordinates.x < 200 && coordinates.y >= 0 && coordinates.y < 200) {
                 // 按住鼠标刷地图
                 if (Input.GetMouseButton(1)) {
-                    mMapDatas[coordinates.x, coordinates.y] = mIndex;
+                    mMapDatas[coordinates.x, coordinates.y] = mTerrainTypeIndex;
                 }
 
                 // 放开地图自动保存地图
@@ -124,5 +187,18 @@ public class MapEditor : MonoBehaviour {
         fs.Write(bytes, 0, bytes.Length);
         //每次读取文件后都要记得关闭文件
         fs.Close();
+    }
+
+    public bool IsPointerOverGameObject(Vector2 screenPosition) {
+        //实例化点击事件  
+        PointerEventData eventDataCurrentPosition = new PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+        //将点击位置的屏幕坐标赋值给点击事件  
+        eventDataCurrentPosition.position = new Vector2(screenPosition.x, screenPosition.y);
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        //向点击处发射射线  
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        return results.Count > 0;
     }
 }
