@@ -133,7 +133,7 @@ public class MapManager {
         return position;
     }
 
-    public Vector3 TerrainPositionToCorrdinatePosition(Vector3 terrainPosition) {
+    public Vector3 TerrainPositionToCenterPosition(Vector3 terrainPosition) {
         return CorrdinateToTerrainPosition(TerrainPositionToCorrdinate(terrainPosition));
     }
 
@@ -190,14 +190,8 @@ public class MapManager {
         }
     }
 
-    public void AddHexNode(int hexX, int hexY, List<Coordinates> neighbours, bool shouldCheckBoundary = true) {
+    public void AddHexNode(int hexX, int hexY, List<Coordinates> neighbours) {
         Coordinates c = new Coordinates().SetHexXY(hexX, hexY);
-        if (shouldCheckBoundary) {
-            if (CheckBoundary(c)) {
-                neighbours.Add(c);
-            }
-        } else {
-            neighbours.Add(c);
-        }
+        neighbours.Add(c);
     }
 }

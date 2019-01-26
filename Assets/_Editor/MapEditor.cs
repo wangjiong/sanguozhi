@@ -12,7 +12,7 @@ public class MapEditor : MonoBehaviour {
     // 鼠标指示点
     GameObject mPointerIndicator;
     Vector3 mOriginalPosition;
-    List<GameObject> mPointerIndicators = new List<GameObject>();
+    List<GameObject> mPointerIndicatorList = new List<GameObject>();
 
     // 地形类型
     string[] mTerrainTypeNames = { "草地", "土", "沙地", "湿地", "毒泉", "森", "川", "河",
@@ -32,7 +32,6 @@ public class MapEditor : MonoBehaviour {
         // 鼠标指示点
         mPointerIndicator = GameObject.Find("Point");
         mOriginalPosition = mPointerIndicator.transform.position;
-        mPointerIndicators.Add(mPointerIndicator);
         // 地形类型
         GameObject terrainTypes = GameObject.Find("TerrainTypes");
         for (int i = 0; i < mTerrainTypeNames.Length; i++) {
@@ -54,16 +53,6 @@ public class MapEditor : MonoBehaviour {
         // 相机
         mMobileTouchCamera = GameObject.Find("Main Camera").GetComponent<MobileTouchCamera>();
 
-        // Test
-        //List<Coordinates> list = MapManager.GetInstance().GetAllAroundN(new Coordinates(15, 130), 12);
-        List<Coordinates> list = MapManager.GetInstance().GetNeighbours(new Coordinates(15, 130));
-        for (int i = 0; i < list.Count; i++) {
-            GameObject pointer = Instantiate(mPointerIndicator);
-            pointer.transform.SetParent(mPointerIndicator.transform.parent);
-            Vector3 position = MapManager.GetInstance().CorrdinateToTerrainPosition(list[i]);
-            position.y = mPointerIndicator.transform.position.y;
-            pointer.transform.position = position;
-        }
     }
 
     void ToggleEvent(bool isOn, int index) {
@@ -82,33 +71,24 @@ public class MapEditor : MonoBehaviour {
             return;
         }
         mSliderValue = (int)value;
-
-        List<Coordinates> list = new List<Coordinates>();
-        MapManager.GetInstance().GetAroundN(list , new Coordinates(15,130) , 1);
-        for (int i=0;i< list.Count;i++) {
+        // 1.先销毁之前的Pointer
+        foreach (GameObject g in mPointerIndicatorList) {
+            Destroy(g);
+        }
+        mPointerIndicatorList.Clear();
+        // 2.再创建现在的Pointer
+        List<Coordinates> list = MapManager.GetInstance().GetAllAroundN(MapManager.GetInstance().TerrainPositionToCorrdinate(mPointerIndicator.transform.position), mSliderValue);
+        for (int i = 0; i < list.Count; i++) {
             GameObject pointer = Instantiate(mPointerIndicator);
             pointer.transform.SetParent(mPointerIndicator.transform.parent);
-            Vector3 position = MapManager.GetInstance().CorrdinateToTerrainPosition(list[i]);
-            position.y = mPointerIndicator.transform.position.y;
-            pointer.transform.position = position;
+            mPointerIndicatorList.Add(pointer);
         }
-        //if ( value == 0 ) {
-        //    for (int i=0;i< mPointerIndicators.Count;i++) {
-        //        if (i<=0) {
-        //            mPointerIndicators[i].SetActive(true);
-        //        } else {
-        //            mPointerIndicators[i].SetActive(false);
-        //        }
-        //    }
-        //} else if (value==1) {
-        //    GameObject pointer = Instantiate(mPointerIndicator);
-        //    pointer.transform.SetParent(mPointerIndicator.transform.parent);
-        //}
+        RefreshPointers();
     }
 
     void Update() {
         // 如果点击UI，那么不移动相机
-        if(IsPointerOverGameObject(Input.mousePosition)) {
+        if (IsPointerOverGameObject(Input.mousePosition)) {
             if (mMobileTouchCamera.enabled) {
                 mMobileTouchCamera.enabled = false;
             }
@@ -122,11 +102,12 @@ public class MapEditor : MonoBehaviour {
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
-            // 格子
-            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCorrdinatePosition(hit.point);
+            // 鼠标的位置
+            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCenterPosition(hit.point);
             pointCubePosition.y = mOriginalPosition.y;
             mPointerIndicator.transform.position = pointCubePosition;
-
+            // 刷子中的所有格子的位置
+            RefreshPointers();
             // Debug
             Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
             Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
@@ -149,6 +130,21 @@ public class MapEditor : MonoBehaviour {
         }
     }
 
+    void RefreshPointers() {
+        // 刷子中的所有格子的位置
+        List<Coordinates> list = MapManager.GetInstance().GetAllAroundN(MapManager.GetInstance().TerrainPositionToCorrdinate(mPointerIndicator.transform.position), mSliderValue);
+        for (int i=0;i < mPointerIndicatorList.Count;i++) {
+            if (MapManager.GetInstance().CheckBoundary(list[i])) {
+                Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(list[i]);
+                p.y = mPointerIndicator.transform.position.y;
+                mPointerIndicatorList[i].SetActive(true);
+                mPointerIndicatorList[i].transform.position = p;
+            }else {
+                mPointerIndicatorList[i].SetActive(false);
+            }
+        }
+    }
+
     void Load() {
         Debug.Log("Load");
         FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Open);
@@ -160,7 +156,7 @@ public class MapEditor : MonoBehaviour {
         //将字符串按照'|'进行分割得到字符串数组
         string[] itemIds = s.Split(';');
         Debug.Log(itemIds.Length);
-        Debug.Log(itemIds[itemIds.Length-1]);
+        Debug.Log(itemIds[itemIds.Length - 1]);
         // 初始化地图
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {

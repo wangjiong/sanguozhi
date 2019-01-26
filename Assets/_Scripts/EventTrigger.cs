@@ -43,7 +43,7 @@ public class EventTrigger : MonoBehaviour {
                 }
             }
             // 格子
-            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCorrdinatePosition(hit.point);
+            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCenterPosition(hit.point);
             pointCubePosition.y = mOriginalPosition.y;
             mPointCube.transform.position = pointCubePosition;
 
