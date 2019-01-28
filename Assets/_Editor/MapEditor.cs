@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using BitBenderGames;
+using System;
 
 public class MapEditor : MonoBehaviour {
     public GameObject mTerrainTypePrefab;
@@ -14,14 +15,18 @@ public class MapEditor : MonoBehaviour {
     Vector3 mOriginalPosition;
     List<GameObject> mPointerIndicatorList = new List<GameObject>();
 
-    // 地形类型
+    // 1.地形类型
     string[] mTerrainTypeNames = { "草地", "土", "沙地", "湿地", "毒泉", "森", "川", "河",
         "海", "荒地", "主径", "栈道", "渡所", "浅滩", "岸", "涯", "都市", "关所", "港", "小径"};
     List<Toggle> mTerrainTypeToggles = new List<Toggle>();
     int mTerrainTypeIndex = 0;
-    // 地形大小
+    List<string> mTerrainTypeName = new List<string>();
+    GameObject mTerrain;
+    // 2.地形大小
     Slider mSlider;
     int mSliderValue = 0;
+    // 3.显示地形
+    List<Toggle> mShowTerrainTypeToggles = new List<Toggle>();
 
     // 地图
     int[,] mMapDatas = new int[200, 200];
@@ -32,10 +37,16 @@ public class MapEditor : MonoBehaviour {
         // 鼠标指示点
         mPointerIndicator = GameObject.Find("Point");
         mOriginalPosition = mPointerIndicator.transform.position;
-        // 地形类型
+        mTerrain = GameObject.Find("Terrain");
+        // 1.地形类型
+        foreach (MapManager.TerrainType item in Enum.GetValues(typeof(MapManager.TerrainType))) {
+            mTerrainTypeName.Add(item.ToString());
+        }
+
         GameObject terrainTypes = GameObject.Find("TerrainTypes");
         for (int i = 0; i < mTerrainTypeNames.Length; i++) {
             GameObject g = Instantiate(mTerrainTypePrefab);
+            g.name = mTerrainTypeName[i];
             g.GetComponentInChildren<Text>().text = mTerrainTypeNames[i];
             g.transform.SetParent(terrainTypes.transform);
 
@@ -45,9 +56,22 @@ public class MapEditor : MonoBehaviour {
             mTerrainTypeToggles.Add(toggle);
         }
         mTerrainTypeToggles[mTerrainTypeIndex].isOn = true;
-        // 地形大小
+        // 2.地形大小
         mSlider = GameObject.Find("Slider").GetComponent<Slider>();
         mSlider.onValueChanged.AddListener(delegate (float value) { SliderEvent(value); });
+        // 3.显示地形
+        GameObject showTerrainTypes = GameObject.Find("ShowTerrainTypes");
+        for (int i = 0; i < mTerrainTypeNames.Length; i++) {
+            GameObject g = Instantiate(mTerrainTypePrefab);
+            g.name = mTerrainTypeName[i];
+            g.GetComponentInChildren<Text>().text = mTerrainTypeNames[i];
+            g.transform.SetParent(showTerrainTypes.transform);
+
+            Toggle toggle = g.GetComponent<Toggle>();
+            int index = i;
+            toggle.onValueChanged.AddListener(delegate (bool isOn) { ToggleShowTerrainType(isOn, index); });
+            mShowTerrainTypeToggles.Add(toggle);
+        }
         // 加载地图文件
         Load();
         // 相机
@@ -55,12 +79,40 @@ public class MapEditor : MonoBehaviour {
 
     }
 
+    // 改变地形
     void ToggleEvent(bool isOn, int index) {
         if (isOn) {
             mTerrainTypeIndex = index;
             for (int i = 0; i < mTerrainTypeToggles.Count; i++) {
                 if (i != index) {
                     mTerrainTypeToggles[i].isOn = false;
+                }
+            }
+        }
+    }
+
+    // 显示地形
+    void ToggleShowTerrainType(bool isOn, int index) {
+        if (isOn) {
+            // 创建特定地形
+            for (int i = 0; i < 200; i++) {
+                for (int j = 0; j < 200; j++) {
+                    if (mMapDatas[i, j] == index && index != 0) {
+                        GameObject showTerrainType = Instantiate(mPointerIndicator);
+                        Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(new Coordinates(i, j));
+                        p.y = mOriginalPosition.y - 0.00001f;
+                        showTerrainType.transform.position = p;
+                        showTerrainType.name = mTerrainTypeName[index];
+                        showTerrainType.GetComponent<Renderer>().material.color = Color.red;
+                        showTerrainType.transform.SetParent(mTerrain.transform);
+                    }
+                }
+            }
+        } else {
+            // 销毁特定地形
+            foreach (Transform child in mTerrain.transform) {
+                if (child.name.Equals(mTerrainTypeName[index])) {
+                    Destroy(child.gameObject);
                 }
             }
         }
@@ -116,6 +168,7 @@ public class MapEditor : MonoBehaviour {
             if (coordinates.x >= 0 && coordinates.x < 200 && coordinates.y >= 0 && coordinates.y < 200) {
                 // 按住鼠标刷地图
                 if (Input.GetMouseButton(1)) {
+                    mMapDatas[coordinates.x, coordinates.y] = mTerrainTypeIndex;
                     for (int i = 0; i < mPointerIndicatorList.Count; i++) { // 改变所有的地形
                         GameObject g = mPointerIndicatorList[i];
                         Coordinates c = MapManager.GetInstance().TerrainPositionToCorrdinate(g.transform.position);
@@ -165,7 +218,6 @@ public class MapEditor : MonoBehaviour {
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
                 mMapDatas[i, j] = int.Parse(itemIds[i * 200 + j]);
-                //mMapDatas[i, j] = 0;
             }
         }
         Save();
