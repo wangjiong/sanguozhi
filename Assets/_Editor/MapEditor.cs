@@ -116,7 +116,11 @@ public class MapEditor : MonoBehaviour {
             if (coordinates.x >= 0 && coordinates.x < 200 && coordinates.y >= 0 && coordinates.y < 200) {
                 // 按住鼠标刷地图
                 if (Input.GetMouseButton(1)) {
-                    mMapDatas[coordinates.x, coordinates.y] = mTerrainTypeIndex;
+                    for (int i = 0; i < mPointerIndicatorList.Count; i++) { // 改变所有的地形
+                        GameObject g = mPointerIndicatorList[i];
+                        Coordinates c = MapManager.GetInstance().TerrainPositionToCorrdinate(g.transform.position);
+                        mMapDatas[c.x, c.y] = mTerrainTypeIndex;
+                    }
                 }
 
                 // 放开地图自动保存地图
