@@ -224,9 +224,10 @@ public class MapEditor : MonoBehaviour {
                 if (Input.GetMouseButtonUp(1)) {
                     Save();
                 }
-
-                int terrainType = mMapDatas[coordinates.x, coordinates.y];
-                GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + mTerrainTypeNames[terrainType];
+                if (mMapDatas!=null) {
+                    int terrainType = mMapDatas[coordinates.x, coordinates.y];
+                    GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + mTerrainTypeNames[terrainType];
+                }
             }
         }
     }

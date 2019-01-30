@@ -15,7 +15,7 @@ public class Node {
     }
 }
 public class Wujiang : MonoBehaviour {
-    public static Wujiang sCurrentWujiang;
+    public static Wujiang msCurrentWujiang;
 
     static string TAG = "Wujiang==";
     public Image mAvatar;
@@ -45,17 +45,9 @@ public class Wujiang : MonoBehaviour {
             mHighlightableObjecto = gameObject.AddComponent<HighlightableObject>();
         }
         mSelected = !mSelected;
-        if (mSelected) {
-            // 1.选中
-            sCurrentWujiang = this;
-            mHighlightableObjecto.ConstantOnImmediate(Color.red);
-            // 显示移动的范围
-            //ShowPath();
-        } else {
-            // 2.不选中
-            sCurrentWujiang = null;
-            mHighlightableObjecto.Off();
-            Clear();
+        Seclet(mSelected);
+        if (!mSelected) {
+            HidePath();
         }
     }
 
@@ -63,9 +55,39 @@ public class Wujiang : MonoBehaviour {
     List<GameObject> mPathGameObjectCache = new List<GameObject>();
     int mPathGridsCacheIndex = 0;
     float mWujiangAllCost = 6;
+
+    public void SetPosition(Vector3 position) {
+        Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(position);
+        foreach (KeyValuePair<Coordinates, Node> node in mNodesCache) {
+            if (node.Value.nodeCurrentCosted <= mWujiangAllCost) {
+                if (coordinates.Equals(node.Key)) {
+                    // 只有在可行走的区域内才可以移动
+                    transform.position = position;
+                    HidePath();
+                    Seclet(false);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void Seclet(bool seclet) {
+        mSelected = seclet;
+        if (mSelected) {
+            // 1.选中
+            msCurrentWujiang = this;
+            mHighlightableObjecto.ConstantOnImmediate(Color.red);
+        } else {
+            // 2.不选中
+            msCurrentWujiang = null;
+            mHighlightableObjecto.Off();
+        }
+    }
+
+    // 显示路径
     public void ShowPath() {
         if (mPrefabPathGrid) {
-            Clear();
+            ClearNode();
             Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
             Queue<Node> queue = new Queue<Node>();
             Node n = GetNode(current);
@@ -100,7 +122,17 @@ public class Wujiang : MonoBehaviour {
         }
     }
 
-    private void Clear() {
+    // 隐藏路径
+    public void HidePath() {
+        ClearNode();
+    }
+
+    // 是否显示路径
+    public bool IsShowPath() {
+        return mPathGridsCacheIndex > 0;
+    }
+
+    private void ClearNode() {
         mNodesCache.Clear();
         mPathGridsCacheIndex = 0;
         foreach (GameObject g in mPathGameObjectCache) {

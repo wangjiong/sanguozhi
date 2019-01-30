@@ -47,10 +47,17 @@ public class EventTrigger : MonoBehaviour {
             pointCubePosition.y = mOriginalPosition.y;
             mPointCube.transform.position = pointCubePosition;
 
-            if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang!=null) {
-                Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
-                //Wujiang.sCurrentWujiang.OnMouseDown();
-                Wujiang.sCurrentWujiang.ShowPath();
+            if (Input.GetMouseButtonUp(0)) {
+                if (Wujiang.msCurrentWujiang != null) {
+                    if (!Wujiang.msCurrentWujiang.IsShowPath()) {
+                        // 如果没有显示路径
+                        Wujiang.msCurrentWujiang.ShowPath();
+                    }else {
+                        // 如果显示路径
+                        Wujiang.msCurrentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, Wujiang.msCurrentWujiang.transform.position.y, mPointCube.transform.position.z));
+              
+                    }
+                }
             }
 
             // Debug
