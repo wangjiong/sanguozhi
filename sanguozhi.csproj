@@ -227,6 +227,7 @@
     <Compile Include="Assets\_Scripts\LookAt.cs" />
     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
     <Compile Include="Assets\_Scripts\Map\HexCoordinates.cs" />
+    <Compile Include="Assets\_Scripts\Map\MapConfig.cs" />
     <Compile Include="Assets\_Scripts\Map\MapManager.cs" />
     <Compile Include="Assets\_Scripts\MenuModel.cs" />
     <Compile Include="Assets\_Scripts\Strategy\Strategy.cs" />

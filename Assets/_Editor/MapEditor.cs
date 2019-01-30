@@ -33,7 +33,7 @@ public class MapEditor : MonoBehaviour {
     int mSliderValue = 0;
 
     // 地图
-    int[,] mMapDatas = new int[200, 200];
+    int[,] mMapDatas;
     // 相机
     MobileTouchCamera mMobileTouchCamera;
 
@@ -176,6 +176,7 @@ public class MapEditor : MonoBehaviour {
         }
     }
 
+    // 处理点击事件
     void Update() {
         // 如果点击UI，那么不移动相机
         if (IsPointerOverGameObject(Input.mousePosition)) {
@@ -266,6 +267,7 @@ public class MapEditor : MonoBehaviour {
     }
 
     void Load() {
+        mMapDatas = MapManager.GetInstance().mMapDatas;
         Debug.Log("Load");
         FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Open);
         byte[] bytes = new byte[fs.Length];

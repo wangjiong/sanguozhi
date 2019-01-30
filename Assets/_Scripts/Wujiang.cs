@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Node {
-    public Coordinates mCoordinates;
-    public float mCost = Random.Range(1 ,  4);
-    public float mCurrentCosted = float.MaxValue;
+    public Coordinates nodeCoordinates;
+    public float nodeCost = 1;
+    public float nodeCurrentCosted = float.MaxValue;
     public Node(Coordinates coordinates) {
-        mCoordinates = coordinates;
+        nodeCoordinates = coordinates;
+        int terrainType = MapManager.GetInstance().mMapDatas[coordinates.x, coordinates.y];
+        nodeCost = MapConfig.msTerrainWight[terrainType];
     }
 }
 public class Wujiang : MonoBehaviour {
@@ -24,9 +26,13 @@ public class Wujiang : MonoBehaviour {
 
     // Path
     public GameObject mPrefabPathGrid;
-    int N = 3;
+    GameObject mPathNodesParent;
 
     void OnEnable() {
+    }
+
+    void Start() {
+        mPathNodesParent = GameObject.Find("PathNodes");
     }
 
     public void HideLight() {
@@ -49,40 +55,42 @@ public class Wujiang : MonoBehaviour {
             // 2.不选中
             sCurrentWujiang = null;
             mHighlightableObjecto.Off();
+            Clear();
         }
     }
 
     Dictionary<Coordinates, Node> mNodesCache = new Dictionary<Coordinates, Node>();
     List<GameObject> mPathGameObjectCache = new List<GameObject>();
     int mPathGridsCacheIndex = 0;
-    float mWujiangAllCost = 5;
+    float mWujiangAllCost = 6;
     public void ShowPath() {
         if (mPrefabPathGrid) {
             Clear();
             Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
             Queue<Node> queue = new Queue<Node>();
             Node n = GetNode(current);
-            n.mCurrentCosted = 1;
+            n.nodeCurrentCosted = 1;
             queue.Enqueue(n);
             while (queue.Count > 0) {
                 Node currentNode = queue.Dequeue();
-                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(currentNode.mCoordinates);
+                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(currentNode.nodeCoordinates);
                 foreach (Coordinates c in neighbours) {
                     // 检查是否越界
                     if (MapManager.GetInstance().CheckBoundary(c)) {
                         Node node = GetNode(c);
-                        float newCost = currentNode.mCurrentCosted + node.mCost;
-                        if (newCost < node.mCurrentCosted) {
-                            node.mCurrentCosted = newCost;
-                            if (node.mCurrentCosted <= mWujiangAllCost) {
+                        float newCost = currentNode.nodeCurrentCosted + node.nodeCost;
+                        if (newCost < node.nodeCurrentCosted) {
+                            node.nodeCurrentCosted = newCost;
+                            if (node.nodeCurrentCosted <= mWujiangAllCost) {
                                 queue.Enqueue(node);
                             }
                         }
                     }
                 }
             }
+            // 显示可走路径的网格
             foreach (KeyValuePair<Coordinates, Node> node in mNodesCache) {
-                if (node.Value.mCurrentCosted <= mWujiangAllCost) {
+                if (node.Value.nodeCurrentCosted <= mWujiangAllCost) {
                     GameObject g = GetGridNode();
                     g.SetActive(true);
                     g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
@@ -110,6 +118,7 @@ public class Wujiang : MonoBehaviour {
     private GameObject GetGridNode() {
         if (mPathGridsCacheIndex >= mPathGameObjectCache.Count) {
             GameObject g = Instantiate(mPrefabPathGrid);
+            g.transform.SetParent(mPathNodesParent.transform);
             mPathGameObjectCache.Add(g);
         }
         return mPathGameObjectCache[mPathGridsCacheIndex++];
