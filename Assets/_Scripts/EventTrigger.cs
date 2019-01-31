@@ -61,10 +61,10 @@ public class EventTrigger : MonoBehaviour {
             }
 
             // Debug
-            Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
-            Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
-            p.y = mOriginalPosition.y;
-            GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " " + p;
+            //Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
+            //Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
+            //p.y = mOriginalPosition.y;
+            //GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " " + p;
         }
 
         if (Input.GetMouseButtonDown(0)) {
