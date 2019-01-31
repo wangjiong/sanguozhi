@@ -90,7 +90,7 @@ namespace OneP.InfinityScrollView
 			}
 			//reset Array
 			arrayCurrent = new GameObject[totalNumberItem];
-            print(TAG + "Setup totalNumberItem:" + totalNumberItem + " itemGenerate:" + itemGenerate);
+            //print(TAG + "Setup totalNumberItem:" + totalNumberItem + " itemGenerate:" + itemGenerate);
             for (int i = 0; i < itemGenerate; i++) {
 				GameObject obj = null;
 				if (!isInit) {
@@ -259,7 +259,7 @@ namespace OneP.InfinityScrollView
 
 
 		void Awake(){
-            print(TAG + "Awake setupOnAwake:"+ setupOnAwake);
+            //print(TAG + "Awake setupOnAwake:"+ setupOnAwake);
 			scrollRect = GetComponent<ScrollRect> ();
 			scrollRect.onValueChanged.AddListener (OnScrollChange);
 			if (setupOnAwake) {

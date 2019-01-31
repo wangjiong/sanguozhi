@@ -16,15 +16,19 @@ public class CanvasExecutive : MonoBehaviour {
 
     int mIndexClick = 0;
 
+    int mSelectTotalCount = 3;
+    int mCurrentSelectCount = 0;
+    HashSet<int> mSelectItems = new HashSet<int>();
+
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
             List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
             mCanvasExpedition.SetGeneral(temp[0], temp[1], temp[2]);
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         });
         // 武将表格
         for (int i = 1; i < mButtons.Length; i++) {
@@ -84,11 +88,35 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void Show() {
-        print(TAG + "Show:" + GameManager.sCurrentGenerals.Count);
         if (GameManager.sCurrentGenerals.Count > 0) {
+            gameObject.SetActive(true);
+
             mInfinityScrollView.Setup(GameManager.sCurrentGenerals.Count);
             mInfinityScrollView.InternalReload();
-            gameObject.SetActive(true);
+        }
+    }
+
+    public bool CanSelect() {
+        if (mCurrentSelectCount >= mSelectTotalCount) {
+            return false;
+        }
+        return true;
+    }
+
+    public bool CantainIndex(int index) {
+        if (mSelectItems.Contains(index)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void SelectItem(bool isOn, int index) {
+        if (isOn) {
+            mCurrentSelectCount++;
+            mSelectItems.Add(index);
+        } else {
+            mCurrentSelectCount--;
+            mSelectItems.Remove(index);
         }
     }
 }

@@ -220,7 +220,6 @@
     <Compile Include="Assets\_Scripts\GameMenu\CanvasExpedition.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
-    <Compile Include="Assets\_Scripts\General\GenerateGeneralRow.cs" />
     <Compile Include="Assets\_Scripts\General\ItemHorizontal3.cs" />
     <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
     <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />

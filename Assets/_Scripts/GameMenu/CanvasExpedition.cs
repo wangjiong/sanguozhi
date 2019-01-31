@@ -425,7 +425,7 @@ public class CanvasExpedition : MonoBehaviour {
         url = "file:://" + url;
 #endif
 
-        Debug.Log(TAG + "url:" + url);
+        //Debug.Log(TAG + "url:" + url);
         WWW www = new WWW(url);
         yield return www;
         if (!string.IsNullOrEmpty(www.error) || !www.isDone) {

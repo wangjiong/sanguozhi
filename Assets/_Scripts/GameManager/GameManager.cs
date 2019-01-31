@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 
     public static List<General> sCurrentGenerals = new List<General>();
     public static void SetCurrentGenerals() {
-        print(TAG + "SetCurrentGenerals sCityName:" + sCityName);
+        //print(TAG + "SetCurrentGenerals sCityName:" + sCityName);
         GameManager.sCurrentGenerals.Clear();
         foreach (General g in GameManager.sGenerals) {
             if (g.place.Equals(GameManager.sCityName)) {

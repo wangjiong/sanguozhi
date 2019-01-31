@@ -276,8 +276,8 @@ public class MapEditor : MonoBehaviour {
         fs.Close();
         string s = new UTF8Encoding().GetString(bytes);
         string[] itemIds = s.Split(';');
-        Debug.Log(itemIds.Length);
-        Debug.Log(itemIds[itemIds.Length - 1]);
+        //Debug.Log(itemIds.Length);
+        //Debug.Log(itemIds[itemIds.Length - 1]);
         // 初始化地图
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
