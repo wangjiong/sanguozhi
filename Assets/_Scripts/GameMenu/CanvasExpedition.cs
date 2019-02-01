@@ -187,9 +187,7 @@ public class CanvasExpedition : MonoBehaviour {
                 }
                 current = (int)(max * value);
                 mSliderText[index].text = current + "/" + max;
-                print("01");
                 mTotalText[index].text = 1000000 - current + "";
-                print("02");
             });
         }
         // Test
@@ -213,6 +211,8 @@ public class CanvasExpedition : MonoBehaviour {
         if (chief == null) {
             return;
         }
+        junior01 = chief;
+        junior02 = chief;
         float a1 = 0; // 兵种
         float a2 = 0;
         float a5 = 100;
@@ -279,13 +279,12 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     private float GetMaxAdaptability(string m, string n, string k) {
-        print("GetMaxAdaptability " + m + " " + n + " " + k);
-        print("GetMaxAdaptability " + m + " " + n.Length + " " + k.Length);
+        //print("GetMaxAdaptability " + m + " " + n + " " + k);
+        //print("GetMaxAdaptability " + m + " " + n.Length + " " + k.Length);
         float max = 0;
         string S2 = "S2";
         if (m.Equals(S2) || n.Equals(S2) || k.Equals(S2)) {
             max = 1.3f;
-            print("S2");
             mArmAbilityText.text = "圣";
             SetWeaponSkill(4);
             return max;
@@ -293,7 +292,6 @@ public class CanvasExpedition : MonoBehaviour {
         string S1 = "S1";
         if (m.Equals(S1) || n.Equals(S1) || k.Equals(S1)) {
             max = 1.2f;
-            print("S1");
             mArmAbilityText.text = "神";
             SetWeaponSkill(4);
             return max;
@@ -301,7 +299,6 @@ public class CanvasExpedition : MonoBehaviour {
         string S = "S";
         if (m.Equals(S) || n.Equals(S) || k.Equals(S)) {
             max = 1.1f;
-            print("S");
             mArmAbilityText.text = "极";
             SetWeaponSkill(4);
             return max;
@@ -309,7 +306,6 @@ public class CanvasExpedition : MonoBehaviour {
         string A = "A";
         if (m.Equals(A) || n.Equals(A) || k.Equals(A)) {
             max = 1.0f;
-            print("A");
             mArmAbilityText.text = "精";
             SetWeaponSkill(3);
             return max;
@@ -317,7 +313,6 @@ public class CanvasExpedition : MonoBehaviour {
         string B = "B";
         if (m.Equals(B) || n.Equals(B) || k.Equals(B)) {
             max = 0.9f;
-            print("B");
             mArmAbilityText.text = "熟";
             SetWeaponSkill(2);
             return max;
@@ -325,7 +320,6 @@ public class CanvasExpedition : MonoBehaviour {
         string C = "C";
         if (m.Equals(C) || n.Equals(C) || k.Equals(C)) {
             max = 0.8f;
-            print("C");
             mArmAbilityText.text = "初";
             SetWeaponSkill(1);
             return max;

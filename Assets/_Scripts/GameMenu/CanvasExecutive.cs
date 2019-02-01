@@ -17,17 +17,26 @@ public class CanvasExecutive : MonoBehaviour {
     int mIndexClick = 0;
 
     int mSelectTotalCount = 3;
-    int mCurrentSelectCount = 0;
     HashSet<int> mSelectItems = new HashSet<int>();
 
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
-            List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
-            mCanvasExpedition.SetGeneral(temp[0], temp[1], temp[2]);
+            //List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
+            //mCanvasExpedition.SetGeneral(temp[0], temp[1], temp[2]);
+            General[] wujiangs = new General[3];
+            int i = 0;
+            foreach (int index in mSelectItems) {
+                if (i < 3) {
+                    wujiangs[i++] = GameManager.sCurrentGenerals[index];
+                }
+            }
+            mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
+            mSelectItems.Clear();
             gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+            mSelectItems.Clear();
             gameObject.SetActive(false);
         });
         // 武将表格
@@ -69,19 +78,19 @@ public class CanvasExecutive : MonoBehaviour {
         } else {
             switch (index) {
                 case 1:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
+                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
                     break;
                 case 2:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
+                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
                     break;
                 case 3:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
+                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
                     break;
                 case 4:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
+                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
                     break;
                 case 5:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
+                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
                     break;
             }
         }
@@ -97,7 +106,7 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public bool CanSelect() {
-        if (mCurrentSelectCount >= mSelectTotalCount) {
+        if (mSelectItems.Count >= mSelectTotalCount) {
             return false;
         }
         return true;
@@ -112,10 +121,8 @@ public class CanvasExecutive : MonoBehaviour {
 
     public void SelectItem(bool isOn, int index) {
         if (isOn) {
-            mCurrentSelectCount++;
             mSelectItems.Add(index);
         } else {
-            mCurrentSelectCount--;
             mSelectItems.Remove(index);
         }
     }

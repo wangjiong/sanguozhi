@@ -22,8 +22,6 @@ public class ItemHorizontal3 : InfinityBaseItem {
     bool mIsSeclet = false;
 
     void OnEnable() {
-        Debug.Log("OnEnable");
-
         if (!mCanvasExecutive) {
             mCanvasExecutive = GameObject.Find("Canvas General").GetComponent<CanvasExecutive>();
 

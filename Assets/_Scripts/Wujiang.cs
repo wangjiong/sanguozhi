@@ -118,7 +118,7 @@ public class Wujiang : MonoBehaviour {
                     g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
                 }
             }
-            Debug.Log( "mPathGridsCacheIndex:"+ mPathGridsCacheIndex + "mNodesCache:" + mPathGameObjectCache.Count);
+            //Debug.Log( "mPathGridsCacheIndex:"+ mPathGridsCacheIndex + "mNodesCache:" + mPathGameObjectCache.Count);
         }
     }
 

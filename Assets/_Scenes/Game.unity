@@ -40120,26 +40120,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 1730054657707616, guid: da9af021be6a9884d948c166f0454c44, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114704606281057112, guid: da9af021be6a9884d948c166f0454c44,
-        type: 2}
-      propertyPath: mPathGrid
-      value: 
-      objectReference: {fileID: 1299802756867558, guid: f4d740bba76054843ab120478c2b83e7,
-        type: 2}
-    - target: {fileID: 114704606281057112, guid: da9af021be6a9884d948c166f0454c44,
-        type: 2}
-      propertyPath: mPrefabPathGrid
-      value: 
-      objectReference: {fileID: 1299802756867558, guid: f4d740bba76054843ab120478c2b83e7,
-        type: 2}
-    - target: {fileID: 1850228246875380, guid: da9af021be6a9884d948c166f0454c44, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da9af021be6a9884d948c166f0454c44, type: 2}
   m_IsPrefabParent: 0
