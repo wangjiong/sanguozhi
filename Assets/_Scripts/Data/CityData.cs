@@ -2,21 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class City {
-
-    public string name;
-    public int x, y;
-    public int passType = -1;
-
-    override public string ToString() {
-        return "name:" + name + "  (" + x + " , " + y + ")" + " passType:" + passType;
-    }
-}
-
-public class Citys : MonoBehaviour {
-    string TAG = "City==";
-
-    string[] CITYS = {
+public class CityData {
+    static string[] CITYS = {
         "武威","8","40",
         "安定","27","53",
         "陇西","9","69",
@@ -66,7 +53,7 @@ public class Citys : MonoBehaviour {
         "襄平","173","14",
     };
 
-    string[] PASSES = {
+    static string[] PASSES = {
         "绵竹关","8","124","0",
         "涪水关","10","119","1",
         "葭萌关","23","101","0",
@@ -79,7 +66,7 @@ public class Citys : MonoBehaviour {
         "壶关","91","56","1",
     };
 
-    string[] PORTS = {
+    static string[] PORTS = {
         "巫林港","54","129",
         "江津港","73","135",
         "公安港","74","145",
@@ -120,16 +107,24 @@ public class Citys : MonoBehaviour {
         "安平港","168","27",
     };
 
-    public GameObject mCity;
-    public GameObject mPasse;
-    public GameObject mPort;
-
     List<City> mCitys = new List<City>(); // 城市
     List<City> mPasses = new List<City>(); // 关口
     List<City> mPorts = new List<City>(); // 港口
 
+    public List<City> GetCitys() {
+        return mCitys;
+    }
 
-    void Start() {
+    public List<City> GePasses() {
+        return mCitys;
+    }
+
+    public List<City> GetPorts() {
+        return mCitys;
+    }
+
+    public void LoadData() {
+        GameObject cityRoot = GameObject.Find("Citys");
         // 1.城市
         for (int i = 0; i < CITYS.Length;) {
             City city = new City();
@@ -138,17 +133,17 @@ public class Citys : MonoBehaviour {
             city.y = int.Parse(CITYS[i++]);
             mCitys.Add(city);
         }
-        foreach (City city in mCitys) {
-            //print(city);
-            GameObject o = Instantiate(mCity);
-            o.transform.SetParent(this.transform);
-            if (city.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1.5f);
-            }else {
-                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 2f);
-            }
-            o.GetComponentInChildren<TextMesh>().text = city.name;
-        }
+        //// 1-1 创建模型
+        //foreach (City city in mCitys) {
+        //    GameObject o = GameObject.Instantiate(mCity);
+        //    o.transform.SetParent(cityRoot.transform);
+        //    if (city.x % 2 == 0) {
+        //        o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1.5f);
+        //    } else {
+        //        o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 2f);
+        //    }
+        //    o.GetComponentInChildren<TextMesh>().text = city.name;
+        //}
         // 2.关口
         for (int i = 0; i < PASSES.Length;) {
             City city = new City();
@@ -158,29 +153,29 @@ public class Citys : MonoBehaviour {
             city.passType = int.Parse(PASSES[i++]);
             mPasses.Add(city);
         }
-        foreach (City city in mPasses) {
-            //print(city);
-            GameObject o = Instantiate(mPasse);
-            o.transform.SetParent(this.transform);
-            o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
-            if (city.passType == 1) {
-                // 竖
-                if (city.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 0.5f);
-                } else {
-                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1f);
-                }
-                o.transform.Find("Model").localRotation = Quaternion.Euler(0, -90, 0);
-            } else {
-                // 横
-                if (city.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
-                } else {
-                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
-                }
-            }
-            o.GetComponentInChildren<TextMesh>().text = city.name;
-        }
+        //// 2-1 创建模型
+        //foreach (City city in mPasses) {
+        //    GameObject o = GameObject.Instantiate(mPasse);
+        //    o.transform.SetParent(cityRoot.transform);
+        //    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+        //    if (city.passType == 1) {
+        //        // 竖
+        //        if (city.x % 2 == 0) {
+        //            o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 0.5f);
+        //        } else {
+        //            o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1f);
+        //        }
+        //        o.transform.Find("Model").localRotation = Quaternion.Euler(0, -90, 0);
+        //    } else {
+        //        // 横
+        //        if (city.x % 2 == 0) {
+        //            o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+        //        } else {
+        //            o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+        //        }
+        //    }
+        //    o.GetComponentInChildren<TextMesh>().text = city.name;
+        //}
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
             City city = new City();
@@ -189,18 +184,17 @@ public class Citys : MonoBehaviour {
             city.y = int.Parse(PORTS[i++]);
             mPorts.Add(city);
         }
-        foreach (City city in mPorts) {
-            //print(city);
-            GameObject o = Instantiate(mPort);
-            o.transform.SetParent(this.transform);
-            if (city.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
-            } else {
-                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
-            }
-                
-            o.GetComponentInChildren<TextMesh>().text = city.name;
-        }
-    }
+        //// 3-1 创建模型
+        //foreach (City city in mPorts) {
+        //    GameObject o = GameObject.Instantiate(mPort);
+        //    o.transform.SetParent(cityRoot.transform);
+        //    if (city.x % 2 == 0) {
+        //        o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+        //    } else {
+        //        o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+        //    }
 
+        //    o.GetComponentInChildren<TextMesh>().text = city.name;
+        //}
+    }
 }

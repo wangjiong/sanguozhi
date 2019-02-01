@@ -37,17 +37,17 @@ public class Response<T> {
 }
 
 
-public class GameManager : MonoBehaviour {
+public class BattleGameManager : MonoBehaviour {
     static string TAG = "GameManager=="; 
     public static List<General> sGenerals = new List<General>();
 
     public static List<General> sCurrentGenerals = new List<General>();
     public static void SetCurrentGenerals() {
         //print(TAG + "SetCurrentGenerals sCityName:" + sCityName);
-        GameManager.sCurrentGenerals.Clear();
-        foreach (General g in GameManager.sGenerals) {
-            if (g.place.Equals(GameManager.sCityName)) {
-                GameManager.sCurrentGenerals.Add(g);
+        BattleGameManager.sCurrentGenerals.Clear();
+        foreach (General g in BattleGameManager.sGenerals) {
+            if (g.place.Equals(BattleGameManager.sCityName)) {
+                BattleGameManager.sCurrentGenerals.Add(g);
             }
         }
     }
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour {
     void Start() {
         string text = mData.text;
         Loom.RunAsync(() => {
+            // 读取武将数据
             ReadData(text);
         });
     }
@@ -83,27 +84,5 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update() {
-        //RaycastHit hit;
-        //// 从鼠标所在的位置发射
-        //Vector2 screenPosition = Input.mousePosition;
-
-        //if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
-        //    // 格子
-        //    float x = Mathf.Ceil(hit.point.x);
-        //    float z = 0;
-        //    if (x % 2 == 0) {
-        //        z = Mathf.Ceil(hit.point.z);
-        //        mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z - 0.5f);
-        //    } else {
-        //        z = Mathf.Ceil(hit.point.z - 0.5f);
-        //        mPointCube.transform.position = new Vector3(x - 0.5f, mOriginalPosition.y, z);
-        //    }
-        //    if (Input.GetMouseButtonUp(0) && Wujiang.sCurrentWujiang != null) {
-        //        Wujiang.sCurrentWujiang.transform.position = new Vector3(mPointCube.transform.position.x, Wujiang.sCurrentWujiang.transform.position.y, mPointCube.transform.position.z);
-        //        //Wujiang.sCurrentWujiang.OnMouseDown();
-        //    }
-        //}
-
-
     }
 }

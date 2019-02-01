@@ -168,7 +168,7 @@
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\README.txt" />
-    <None Include="Assets\_Resources\data.txt" />
+    <None Include="Assets\_Data\data.txt" />
     <None Include="Assets\_Shaders\Checkerboard.shader" />
     <None Include="Assets\_Shaders\Cus.shader" />
     <None Include="Assets\_Shaders\Gird.shader" />

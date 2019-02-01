@@ -7,30 +7,30 @@ public class Strategy : MonoBehaviour {
         General general01 = null;
         General general02 = null;
         General general03 = null;
-        if (GameManager.sCurrentGenerals.Count >= 3) {
-            general01 = GameManager.sCurrentGenerals[Random.Range(0, GameManager.sCurrentGenerals.Count)];
+        if (BattleGameManager.sCurrentGenerals.Count >= 3) {
+            general01 = BattleGameManager.sCurrentGenerals[Random.Range(0, BattleGameManager.sCurrentGenerals.Count)];
             while (true) {
-                general02 = GameManager.sCurrentGenerals[Random.Range(0, GameManager.sCurrentGenerals.Count)];
+                general02 = BattleGameManager.sCurrentGenerals[Random.Range(0, BattleGameManager.sCurrentGenerals.Count)];
                 if (general02 != general01) {
                     break;
                 }
             }
             while (true) {
-                general03 = GameManager.sCurrentGenerals[Random.Range(0, GameManager.sCurrentGenerals.Count)];
+                general03 = BattleGameManager.sCurrentGenerals[Random.Range(0, BattleGameManager.sCurrentGenerals.Count)];
                 if (general03 != general01 && general03 != general02) {
                     break;
                 }
             }
-        } else if (GameManager.sCurrentGenerals.Count == 2) {
-            general01 = GameManager.sCurrentGenerals[Random.Range(0, GameManager.sCurrentGenerals.Count)];
+        } else if (BattleGameManager.sCurrentGenerals.Count == 2) {
+            general01 = BattleGameManager.sCurrentGenerals[Random.Range(0, BattleGameManager.sCurrentGenerals.Count)];
             while (true) {
-                general02 = GameManager.sCurrentGenerals[Random.Range(0, GameManager.sCurrentGenerals.Count)];
+                general02 = BattleGameManager.sCurrentGenerals[Random.Range(0, BattleGameManager.sCurrentGenerals.Count)];
                 if (general02 != general01) {
                     break;
                 }
             }
-        } else if (GameManager.sCurrentGenerals.Count == 1) {
-            general01 = GameManager.sCurrentGenerals[0];
+        } else if (BattleGameManager.sCurrentGenerals.Count == 1) {
+            general01 = BattleGameManager.sCurrentGenerals[0];
         }
         List<General> temp = new List<General>();
         temp.Add(general01);

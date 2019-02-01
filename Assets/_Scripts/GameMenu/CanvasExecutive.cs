@@ -28,7 +28,7 @@ public class CanvasExecutive : MonoBehaviour {
             int i = 0;
             foreach (int index in mSelectItems) {
                 if (i < 3) {
-                    wujiangs[i++] = GameManager.sCurrentGenerals[index];
+                    wujiangs[i++] = BattleGameManager.sCurrentGenerals[index];
                 }
             }
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
@@ -50,7 +50,7 @@ public class CanvasExecutive : MonoBehaviour {
                     mIndexClick = index;
                     Sort(index, false);
                 }
-                mInfinityScrollView.Setup(GameManager.sCurrentGenerals.Count);
+                mInfinityScrollView.Setup(BattleGameManager.sCurrentGenerals.Count);
                 mInfinityScrollView.InternalReload();
             });
         }
@@ -60,47 +60,47 @@ public class CanvasExecutive : MonoBehaviour {
         if (revert) {
             switch (index) {
                 case 1:
-                    GameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
                     break;
                 case 2:
-                    GameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
                     break;
                 case 3:
-                    GameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
                     break;
                 case 4:
-                    GameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
                     break;
                 case 5:
-                    GameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((b, a) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
                     break;
             }
         } else {
             switch (index) {
                 case 1:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
                     break;
                 case 2:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
                     break;
                 case 3:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
                     break;
                 case 4:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
                     break;
                 case 5:
-                    GameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
+                    BattleGameManager.sCurrentGenerals.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
                     break;
             }
         }
     }
 
     public void Show() {
-        if (GameManager.sCurrentGenerals.Count > 0) {
+        if (BattleGameManager.sCurrentGenerals.Count > 0) {
             gameObject.SetActive(true);
 
-            mInfinityScrollView.Setup(GameManager.sCurrentGenerals.Count);
+            mInfinityScrollView.Setup(BattleGameManager.sCurrentGenerals.Count);
             mInfinityScrollView.InternalReload();
         }
     }

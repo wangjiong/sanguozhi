@@ -122,7 +122,7 @@ public class CanvasExpedition : MonoBehaviour {
                 mWeapons[mWeaponIndex].GetComponent<Image>().sprite = mSprite02[mWeaponIndex];
                 mWeaponText[mWeaponIndex].text = 1000000 - mCurrentSoldier + "";
 
-                List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
+                List<General> temp = Strategy.GetExpeditionGenerals(BattleGameManager.sCurrentGenerals);
                 SetGeneral(temp[0], temp[1], temp[2]);
             });
         }
@@ -139,8 +139,8 @@ public class CanvasExpedition : MonoBehaviour {
             }
             if (mChief != null) {
                 GameObject mWujiang = Instantiate(mWujiangPrefab);
-                mWujiang.transform.position = GameManager.sCity.transform.position;
-                mWujiang.transform.position = new Vector3(GameManager.sCity.transform.position.x, 0.05f , GameManager.sCity.transform.position.z);
+                mWujiang.transform.position = BattleGameManager.sCity.transform.position;
+                mWujiang.transform.position = new Vector3(BattleGameManager.sCity.transform.position.x, 0.05f , BattleGameManager.sCity.transform.position.z);
                 mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
                 mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
                 mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
@@ -192,7 +192,7 @@ public class CanvasExpedition : MonoBehaviour {
         }
         // Test
         string PATH = Application.streamingAssetsPath + "/img/img";
-        string url = PATH + GameManager.sGenerals[0].id + ".jpg";
+        string url = PATH + BattleGameManager.sGenerals[0].id + ".jpg";
         StartCoroutine(LoadImage(url, null));
     }
 

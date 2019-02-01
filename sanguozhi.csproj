@@ -210,10 +210,16 @@
     <Compile Include="Assets\_Editor\MapEditor.cs" />
     <Compile Include="Assets\_Scripts\Ability\AbilityMesh.cs" />
     <Compile Include="Assets\_Scripts\BackController.cs" />
+    <Compile Include="Assets\_Scripts\Battle\BattleGameManager.cs" />
+    <Compile Include="Assets\_Scripts\Battle\City.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Faction.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Regiment.cs" />
     <Compile Include="Assets\_Scripts\Camera\HexMapCamera.cs" />
     <Compile Include="Assets\_Scripts\CameraController.cs" />
+    <Compile Include="Assets\_Scripts\Data\BattleDataManager.cs" />
+    <Compile Include="Assets\_Scripts\Data\CityData.cs" />
+    <Compile Include="Assets\_Scripts\Data\WujiangData.cs" />
     <Compile Include="Assets\_Scripts\EventTrigger.cs" />
-    <Compile Include="Assets\_Scripts\GameManager\GameManager.cs" />
     <Compile Include="Assets\_Scripts\GameManager\Loom.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasDevelop.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasExecutive.cs" />
@@ -221,7 +227,6 @@
     <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
     <Compile Include="Assets\_Scripts\General\ItemHorizontal3.cs" />
-    <Compile Include="Assets\_Scripts\Grid\Citys.cs" />
     <Compile Include="Assets\_Scripts\Grid\GenerateGrid.cs" />
     <Compile Include="Assets\_Scripts\LookAt.cs" />
     <Compile Include="Assets\_Scripts\MainMenuController.cs" />
@@ -296,7 +301,7 @@
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
     <None Include="Assets\TerrainGridSystem\Scripts\PolyTri\README.txt" />
-    <None Include="Assets\_Resources\data.txt" />
+    <None Include="Assets\_Data\data.txt" />
     <None Include="Assets\_Shaders\Checkerboard.shader" />
     <None Include="Assets\_Shaders\Cus.shader" />
     <None Include="Assets\_Shaders\Gird.shader" />
