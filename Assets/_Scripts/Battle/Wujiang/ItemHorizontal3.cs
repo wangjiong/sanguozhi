@@ -57,7 +57,7 @@ public class ItemHorizontal3 : InfinityBaseItem {
         base.Reload(_infinity, _index);
         mIndex = _index;
 
-        General general = BattleGameManager.sCurrentGenerals[_index];
+		WujiangBean general = BattleGameManager.msCurrentCityWujiangs[_index];
         if (mCanvasExecutive.CantainIndex(_index)) {
             mIsSeclet = true;
             mSelectImage.SetActive(true);

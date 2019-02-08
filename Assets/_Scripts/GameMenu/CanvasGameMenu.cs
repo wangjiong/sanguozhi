@@ -37,9 +37,9 @@ public class CanvasGameMenu : MonoBehaviour {
 
     public void SetCityName(string cityName , GameObject city) {
         //print(TAG + "SetCityName cityName:" + cityName);
-        BattleGameManager.sCityName = cityName;
-        BattleGameManager.sCity = city;
-        BattleGameManager.SetCurrentGenerals();
+        BattleGameManager.msCurrentCityName = cityName;
+        BattleGameManager.msCurrentCityGameObject = city;
+        BattleGameManager.SetCurrentCityWujiangs();
     }
 
     IEnumerator SetPosition(Vector2 screenPosition) {

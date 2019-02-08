@@ -54,6 +54,7 @@
      <Compile Include="Assets\HighlightingSystemDemo\Scripts\JSHighlightingController.js" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
      <None Include="Assets\TerrainGridSystem\README.txt" />
+     <None Include="Assets\mapdata.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo07_CellsByRowCol\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo08_Orthographic\README.txt" />
@@ -61,7 +62,7 @@
      <None Include="Assets\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
      <None Include="Assets\_Shaders\Cus.shader" />
-     <None Include="Assets\_Resources\data.txt" />
+     <None Include="Assets\Resources\WujiangData\data.txt" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
@@ -77,6 +78,7 @@
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
      <None Include="Assets\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
+     <None Include="Assets\Materials\VertexColors.shader" />
      <None Include="Assets\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
      <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
      <None Include="Assets\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />

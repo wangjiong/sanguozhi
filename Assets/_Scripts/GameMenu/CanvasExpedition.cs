@@ -15,7 +15,7 @@ public class CanvasExpedition : MonoBehaviour {
     public Button[] mArms;
 
     // 设置武将信息
-    General mChief, mJunior01, mJunior02;
+	WujiangBean mChief, mJunior01, mJunior02;
 
     public GameObject mWujiangPrefab;
 
@@ -122,7 +122,7 @@ public class CanvasExpedition : MonoBehaviour {
                 mWeapons[mWeaponIndex].GetComponent<Image>().sprite = mSprite02[mWeaponIndex];
                 mWeaponText[mWeaponIndex].text = 1000000 - mCurrentSoldier + "";
 
-                List<General> temp = Strategy.GetExpeditionGenerals(BattleGameManager.sCurrentGenerals);
+				List<WujiangBean> temp = Strategy.GetExpeditionGenerals(BattleGameManager.msCurrentCityWujiangs);
                 SetGeneral(temp[0], temp[1], temp[2]);
             });
         }
@@ -139,8 +139,8 @@ public class CanvasExpedition : MonoBehaviour {
             }
             if (mChief != null) {
                 GameObject mWujiang = Instantiate(mWujiangPrefab);
-                mWujiang.transform.position = BattleGameManager.sCity.transform.position;
-                mWujiang.transform.position = new Vector3(BattleGameManager.sCity.transform.position.x, 0.05f , BattleGameManager.sCity.transform.position.z);
+                mWujiang.transform.position = BattleGameManager.msCurrentCityGameObject.transform.position;
+                mWujiang.transform.position = new Vector3(BattleGameManager.msCurrentCityGameObject.transform.position.x, 0.05f , BattleGameManager.msCurrentCityGameObject.transform.position.z);
                 mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
                 mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
                 mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
@@ -192,12 +192,12 @@ public class CanvasExpedition : MonoBehaviour {
         }
         // Test
         string PATH = Application.streamingAssetsPath + "/img/img";
-        string url = PATH + BattleGameManager.sGenerals[0].id + ".jpg";
+        string url = PATH + BattleGameManager.msWujiangs[0].id + ".jpg";
         StartCoroutine(LoadImage(url, null));
     }
 
     
-    public void SetGeneral(General chief, General junior01, General junior02) {
+	public void SetGeneral(WujiangBean chief, WujiangBean junior01, WujiangBean junior02) {
         mChief = chief;
         mJunior01 = junior01;
         mJunior02 = junior02;
@@ -207,7 +207,7 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     // 设置攻击防御
-    public void SetAbilitysValue(General chief, General junior01, General junior02) {
+	public void SetAbilitysValue(WujiangBean chief, WujiangBean junior01, WujiangBean junior02) {
         if (chief == null) {
             return;
         }
@@ -379,7 +379,7 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     // 设置名字和特技
-    void SetNameAndSkill(General chief, General junior01, General junior02) {
+	void SetNameAndSkill(WujiangBean chief, WujiangBean junior01, WujiangBean junior02) {
         if (chief != null) {
             mNamesAndSkillTexts[0].text = chief.name;
             mNamesAndSkillTexts[1].text = chief.teji;
@@ -395,7 +395,7 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     // 设置图片
-    void SetImage(General chief, General junior01, General junior02) {
+	void SetImage(WujiangBean chief, WujiangBean junior01, WujiangBean junior02) {
         string PATH = Application.streamingAssetsPath + "/img/img";
         if (chief != null) {
             string url = PATH + chief.id + ".jpg";

@@ -28,9 +28,6 @@ public class Wujiang : MonoBehaviour {
     public GameObject mPrefabPathGrid;
     GameObject mPathNodesParent;
 
-    void OnEnable() {
-    }
-
     void Start() {
         mPathNodesParent = GameObject.Find("PathNodes");
     }
