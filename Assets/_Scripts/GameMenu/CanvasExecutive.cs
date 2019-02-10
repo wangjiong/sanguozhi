@@ -97,12 +97,12 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void Show() {
-        if (BattleGameManager.msCurrentCityWujiangs.Count > 0) {
+        //if (BattleGameManager.msCurrentCityWujiangs.Count > 0) {
             gameObject.SetActive(true);
 
             mInfinityScrollView.Setup(BattleGameManager.msCurrentCityWujiangs.Count);
             mInfinityScrollView.InternalReload();
-        }
+        //}
     }
 
     public bool CanSelect() {

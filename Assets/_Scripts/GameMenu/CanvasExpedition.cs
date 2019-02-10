@@ -128,6 +128,7 @@ public class CanvasExpedition : MonoBehaviour {
         }
         // 显示武将界面
         mExecutiveBtn.GetComponent<Button>().onClick.AddListener(delegate () {
+			//Debug.Log("CanvasExecutive");
             mCanvasExecutive.GetComponent<CanvasExecutive>().Show();
         });
         // 确定、返回

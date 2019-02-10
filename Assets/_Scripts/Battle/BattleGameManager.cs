@@ -30,18 +30,18 @@ public class BattleGameManager : MonoBehaviour {
 		mCityData = new CityData();
 		mCityData.LoadData();
 
-		//mWujiangData = new WujiangData();
-		//mWujiangData.LoadData();
+		mWujiangData = new WujiangData();
+		mWujiangData.LoadData();
 	}
 
 	// 1.武将
-	public static List<WujiangBean> msWujiangs = new List<WujiangBean>();
+	public static List<WujiangBean> msAllWujiangs = new List<WujiangBean>();
 	// 1-1 当前选择的武将
 	public static List<WujiangBean> msCurrentCityWujiangs = new List<WujiangBean>();
     public static void SetCurrentCityWujiangs() {
-        //print(TAG + "SetCurrentGenerals sCityName:" + sCityName);
+		//Debug.Log(TAG + "SetCurrentGenerals sCityName:" + msCurrentCityName + " msAllWujiangs:" + msAllWujiangs.Count );
         BattleGameManager.msCurrentCityWujiangs.Clear();
-		foreach (WujiangBean g in BattleGameManager.msWujiangs) {
+		foreach (WujiangBean g in BattleGameManager.msAllWujiangs) {
             if (g.place.Equals(BattleGameManager.msCurrentCityName)) {
                 BattleGameManager.msCurrentCityWujiangs.Add(g);
             }
