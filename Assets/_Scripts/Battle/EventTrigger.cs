@@ -39,7 +39,15 @@ public class EventTrigger : MonoBehaviour {
                 // 城市
                 if (Input.GetMouseButtonUp(0)) {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
-                    mCanvasGameMenu.SetCityName(hit.collider.GetComponentInChildren<TextMesh>().text, hit.collider.gameObject);
+					GameObject city;
+					if (hit.collider.gameObject.name.Equals ("Model")) {
+						// 关隘
+						city = hit.collider.transform.parent.gameObject;
+					} else {
+						// 港口
+						city = hit.collider.transform.gameObject;
+					}
+					mCanvasGameMenu.SetCityName(city.GetComponentInChildren<TextMesh>().text, city);
                 }
             }
             // 格子

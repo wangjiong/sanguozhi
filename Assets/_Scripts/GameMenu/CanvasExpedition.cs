@@ -191,9 +191,9 @@ public class CanvasExpedition : MonoBehaviour {
             });
         }
         // Test
-        string PATH = Application.streamingAssetsPath + "/img/img";
-        string url = PATH + BattleGameManager.msWujiangs[0].id + ".jpg";
-        StartCoroutine(LoadImage(url, null));
+        //string PATH = Application.streamingAssetsPath + "/img/img";
+        //string url = PATH + BattleGameManager.msWujiangs[0].id + ".jpg";
+        //StartCoroutine(LoadImage(url, null));
     }
 
     
