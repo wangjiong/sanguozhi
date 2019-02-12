@@ -18,12 +18,11 @@ public class CanvasExecutive : MonoBehaviour {
 
     int mSelectTotalCount = 3;
     HashSet<int> mSelectItems = new HashSet<int>();
+    HashSet<int> mSelectWujiangIds = new HashSet<int>();
 
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
-            //List<General> temp = Strategy.GetExpeditionGenerals(GameManager.sCurrentGenerals);
-            //mCanvasExpedition.SetGeneral(temp[0], temp[1], temp[2]);
 			WujiangBean[] wujiangs = new WujiangBean[3];
             int i = 0;
             foreach (int index in mSelectItems) {
@@ -44,9 +43,11 @@ public class CanvasExecutive : MonoBehaviour {
             int index = i;
             mButtons[i].onClick.AddListener(delegate () {
                 if (mIndexClick == index) {
+                    // 反复点击重排
                     mIndexClick = 0;
                     Sort(index, true);
                 } else {
+                    // 点击其他的
                     mIndexClick = index;
                     Sort(index, false);
                 }
@@ -97,12 +98,10 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void Show() {
-        //if (BattleGameManager.msCurrentCityWujiangs.Count > 0) {
-            gameObject.SetActive(true);
+        gameObject.SetActive(true);
 
-            mInfinityScrollView.Setup(BattleGameManager.msCurrentCityWujiangs.Count);
-            mInfinityScrollView.InternalReload();
-        //}
+        mInfinityScrollView.Setup(BattleGameManager.msCurrentCityWujiangs.Count);
+        mInfinityScrollView.InternalReload();
     }
 
     public bool CanSelect() {
@@ -112,18 +111,21 @@ public class CanvasExecutive : MonoBehaviour {
         return true;
     }
 
-    public bool CantainIndex(int index) {
-        if (mSelectItems.Contains(index)) {
+    public bool CantainWujiangId(int wujiangId) {
+        if (mSelectWujiangIds.Contains(wujiangId)) {
             return true;
         }
         return false;
     }
 
     public void SelectItem(bool isOn, int index) {
+        WujiangBean general = BattleGameManager.msCurrentCityWujiangs[index];
         if (isOn) {
             mSelectItems.Add(index);
+            mSelectWujiangIds.Add(general.id);
         } else {
             mSelectItems.Remove(index);
+            mSelectWujiangIds.Remove(general.id);
         }
     }
 }
