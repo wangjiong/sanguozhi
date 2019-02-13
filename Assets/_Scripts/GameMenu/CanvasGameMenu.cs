@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,10 +21,8 @@ public class CanvasGameMenu : MonoBehaviour {
 
     bool mPositionFlag = true; // 第一次ShowPosition有问题
 
-    
-
     public void ShowCanvasGameMenu(Vector2 screenPosition) {
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         if (mPositionFlag) {
             StartCoroutine(SetPosition(screenPosition));
             mPositionFlag = false;
@@ -33,13 +30,6 @@ public class CanvasGameMenu : MonoBehaviour {
             mFirstMenu.transform.position = screenPosition;
             mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
         }
-    }
-
-    public void SetCityName(string cityName , GameObject city) {
-        //print(TAG + "SetCityName cityName:" + cityName);
-        BattleGameManager.msCurrentCityName = cityName;
-        BattleGameManager.msCurrentCityGameObject = city;
-        BattleGameManager.SetCurrentCityWujiangs();
     }
 
     IEnumerator SetPosition(Vector2 screenPosition) {

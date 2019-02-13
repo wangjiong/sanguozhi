@@ -27,7 +27,7 @@ public class CanvasExecutive : MonoBehaviour {
             int i = 0;
             foreach (int index in mSelectItems) {
                 if (i < 3) {
-                    wujiangs[i++] = BattleGameManager.msCurrentCityWujiangs[index];
+                    wujiangs[i++] = BattleGameManager.GetInstance().GetCurrentCityWujiangs()[index];
                 }
             }
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
@@ -51,47 +51,48 @@ public class CanvasExecutive : MonoBehaviour {
                     mIndexClick = index;
                     Sort(index, false);
                 }
-                mInfinityScrollView.Setup(BattleGameManager.msCurrentCityWujiangs.Count);
+                mInfinityScrollView.Setup(BattleGameManager.GetInstance().GetCurrentCityWujiangs().Count);
                 mInfinityScrollView.InternalReload();
             });
         }
     }
 
     private void Sort(int index, bool revert) {
+        List<WujiangBean> currentCityWujiangs = BattleGameManager.GetInstance().GetCurrentCityWujiangs();
         if (revert) {
             switch (index) {
                 case 1:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
                     break;
                 case 2:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
                     break;
                 case 3:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
                     break;
                 case 4:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
                     break;
                 case 5:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((b, a) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
                     break;
             }
         } else {
             switch (index) {
                 case 1:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
                     break;
                 case 2:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
                     break;
                 case 3:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
                     break;
                 case 4:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
                     break;
                 case 5:
-                    BattleGameManager.msCurrentCityWujiangs.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
                     break;
             }
         }
@@ -100,7 +101,7 @@ public class CanvasExecutive : MonoBehaviour {
     public void Show() {
         gameObject.SetActive(true);
 
-        mInfinityScrollView.Setup(BattleGameManager.msCurrentCityWujiangs.Count);
+        mInfinityScrollView.Setup(BattleGameManager.GetInstance().GetCurrentCityWujiangs().Count);
         mInfinityScrollView.InternalReload();
     }
 
@@ -119,7 +120,7 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void SelectItem(bool isOn, int index) {
-        WujiangBean general = BattleGameManager.msCurrentCityWujiangs[index];
+        WujiangBean general = BattleGameManager.GetInstance().GetCurrentCityWujiangs()[index];
         if (isOn) {
             mSelectItems.Add(index);
             mSelectWujiangIds.Add(general.id);

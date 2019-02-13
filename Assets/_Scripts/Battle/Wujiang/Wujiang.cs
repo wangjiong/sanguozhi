@@ -18,6 +18,9 @@ public class Wujiang : MonoBehaviour {
     public static Wujiang msCurrentWujiang;
 
     static string TAG = "Wujiang==";
+
+    WujiangBean mWujiangBean;
+
     public Image mAvatar;
     public Text mHealth;
     public Text mName;

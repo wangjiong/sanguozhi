@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CityBean {
+
+    public string name;
+    public int x, y;
+    public int passType = -1;
+
+    public City city;
+}
+
 public class CityData {
 	
 	static string CITY_MODEL = "Citys/City";
@@ -116,16 +126,22 @@ public class CityData {
     List<CityBean> mPasses = new List<CityBean>(); // 关口
     List<CityBean> mPorts = new List<CityBean>(); // 港口
 
+    Dictionary<string, City> mAllCitys = new Dictionary<string, City>();
+
     public List<CityBean> GetCitys() {
         return mCitys;
     }
 
     public List<CityBean> GePasses() {
-        return mCitys;
+        return mPasses;
     }
 
     public List<CityBean> GetPorts() {
-        return mCitys;
+        return mPorts;
+    }
+
+    public Dictionary<string, City> GetAllCitys() {
+        return mAllCitys;
     }
 
     public void LoadData() {
@@ -140,15 +156,22 @@ public class CityData {
             mCitys.Add(city);
         }
         // 1-1 创建模型
-        foreach (CityBean city in mCitys) {
+        foreach (CityBean cityBean in mCitys) {
 			GameObject o = GameObject.Instantiate(Resources.Load(CITY_MODEL)) as GameObject;
             o.transform.SetParent(cityRoot.transform);
-            if (city.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1.5f);
+            if (cityBean.x % 2 == 0) {
+                o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 1.5f);
             } else {
-                o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 2f);
+                o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 2f);
             }
-            o.GetComponentInChildren<TextMesh>().text = city.name;
+            o.GetComponentInChildren<TextMesh>().text = cityBean.name;
+
+            // cityComponent
+            City cityComponent = o.AddComponent<City>();
+            cityComponent.SetCityBean(cityBean);
+
+            cityBean.city = cityComponent;
+            mAllCitys.Add(cityBean.name, cityComponent);
         }
         // 2.关口
         for (int i = 0; i < PASSES.Length;) {
@@ -160,27 +183,33 @@ public class CityData {
             mPasses.Add(city);
         }
         // 2-1 创建模型
-        foreach (CityBean city in mPasses) {
+        foreach (CityBean cityBean in mPasses) {
 			GameObject o = GameObject.Instantiate(Resources.Load(PASS_MODEL)) as GameObject;
             o.transform.SetParent(cityRoot.transform);
-            o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
-            if (city.passType == 1) {
+            o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
+            if (cityBean.passType == 1) {
                 // 竖
-                if (city.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 0.5f);
+                if (cityBean.x % 2 == 0) {
+                    o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 0.5f);
                 } else {
-                    o.transform.localPosition = new Vector3(city.x + 1.5f, 0, -city.y - 1f);
+                    o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 1f);
                 }
                 o.transform.Find("Model").localRotation = Quaternion.Euler(0, -90, 0);
             } else {
                 // 横
-                if (city.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+                if (cityBean.x % 2 == 0) {
+                    o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
                 } else {
-                    o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+                    o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1.5f);
                 }
             }
-            o.GetComponentInChildren<TextMesh>().text = city.name;
+            o.GetComponentInChildren<TextMesh>().text = cityBean.name;
+            // cityComponent
+            City cityComponent = o.AddComponent<City>();
+            cityComponent.SetCityBean(cityBean);
+
+            cityBean.city = cityComponent;
+            mAllCitys.Add(cityBean.name, cityComponent);
         }
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
@@ -191,16 +220,31 @@ public class CityData {
             mPorts.Add(city);
         }
         // 3-1 创建模型
-        foreach (CityBean city in mPorts) {
+        foreach (CityBean cityBean in mPorts) {
 			GameObject o = GameObject.Instantiate(Resources.Load(PORT_MODEL)) as GameObject;
             o.transform.SetParent(cityRoot.transform);
-            if (city.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1f);
+            if (cityBean.x % 2 == 0) {
+                o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
             } else {
-                o.transform.localPosition = new Vector3(city.x + 0.5f, 0, -city.y - 1.5f);
+                o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1.5f);
             }
 
-            o.GetComponentInChildren<TextMesh>().text = city.name;
+            o.GetComponentInChildren<TextMesh>().text = cityBean.name;
+
+            // cityComponent
+            City cityComponent = o.AddComponent<City>();
+            cityComponent.SetCityBean(cityBean);
+
+            cityBean.city = cityComponent;
+            mAllCitys.Add(cityBean.name, cityComponent);
+        }
+    }
+
+    public void AllocateWujiangData(WujiangData wujiangData){
+        foreach (WujiangBean wujiangBean in wujiangData.GetAllWujiangs()) {
+            if (mAllCitys.ContainsKey(wujiangBean.place)) {
+                mAllCitys[wujiangBean.place].GetWujiangBeans().Add(wujiangBean);
+            }
         }
     }
 }

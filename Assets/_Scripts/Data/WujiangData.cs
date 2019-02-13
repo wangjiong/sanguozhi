@@ -26,6 +26,8 @@ public class WujiangBean {
 	public string meili;
 
 	public string liezhuang;
+
+    public Wujiang wujiang;
 }
 
 // Json解析为该对象
@@ -36,16 +38,22 @@ public class Response<T> {
 public class WujiangData {
 	
 	static string WUJIANG_DATA = "WujiangData/data";
-		
-	public void LoadData() {
+
+    List<WujiangBean> mAllWujiangs = new List<WujiangBean>();
+
+    public List<WujiangBean> GetAllWujiangs() {
+        return mAllWujiangs;
+    }
+
+    public void LoadData() {
 		//Debug.Log("WujiangData LoadData");
 
 		TextAsset wujiangJSON = Resources.Load<TextAsset>(WUJIANG_DATA);
 		string text = wujiangJSON.text;
-		Loom.RunAsync(() => {
+		//Loom.RunAsync(() => {
 			// 读取武将数据
 			ReadData(text);
-		});
+		//});
 	}
 
 	private void ReadData(string text) {
@@ -55,16 +63,16 @@ public class WujiangData {
 		stopwatch.Start(); //  开始监视代码运行时间
 
 		Response<WujiangBean> response = JsonUtility.FromJson<Response<WujiangBean>>(text);
-		BattleGameManager.msAllWujiangs = response.list;
+        mAllWujiangs = response.list;
 
 		stopwatch.Stop(); //  停止监视
 		System.TimeSpan timespan = stopwatch.Elapsed;
 		double milliseconds = timespan.TotalSeconds;  //  总毫秒数
-		//Debug.Log(milliseconds);
+        //Debug.Log(milliseconds);
 
-		//Debug.Log("ReadData sGenerals:"+ sGenerals.Count);
-		//foreach (General g in sGenerals) {
-		//    Debug.Log(g.place);
-		//}
-	}
+        //Debug.Log("ReadData wujiang:" + mAllWujiangs.Count);
+        //foreach (WujiangBean g in mAllWujiangs) {
+        //    Debug.Log(g.place);
+        //}
+    }
 }

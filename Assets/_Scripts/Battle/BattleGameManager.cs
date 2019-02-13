@@ -27,30 +27,32 @@ public class BattleGameManager : MonoBehaviour {
 	}
 
 	void LoadData(){
-		mCityData = new CityData();
+        // 加载城池数据
+        mCityData = new CityData();
 		mCityData.LoadData();
-
-		mWujiangData = new WujiangData();
+        // 加载城池数据
+        mWujiangData = new WujiangData();
 		mWujiangData.LoadData();
-	}
+        // 归属武将
+        mCityData.AllocateWujiangData(mWujiangData);
 
-	// 1.武将
-	public static List<WujiangBean> msAllWujiangs = new List<WujiangBean>();
-	// 1-1 当前选择的武将
-	public static List<WujiangBean> msCurrentCityWujiangs = new List<WujiangBean>();
-    public static void SetCurrentCityWujiangs() {
-		//Debug.Log(TAG + "SetCurrentGenerals sCityName:" + msCurrentCityName + " msAllWujiangs:" + msAllWujiangs.Count );
-        BattleGameManager.msCurrentCityWujiangs.Clear();
-		foreach (WujiangBean g in BattleGameManager.msAllWujiangs) {
-            if (g.place.Equals(BattleGameManager.msCurrentCityName)) {
-                BattleGameManager.msCurrentCityWujiangs.Add(g);
-            }
-        }
     }
 
-	// 2.当前选择的城市
-    public static string msCurrentCityName;
-    public static GameObject msCurrentCityGameObject;
+    // 当前选择的城市
+    City mCurrentCity;
 
+    public void SetCurrentCity(City city) {
+        mCurrentCity = city;
+        //Debug.Log("SetCurrentCity:" + mCurrentCity.GetCityBean().name + " GetWujiangBeans:" + mCurrentCity.GetWujiangBeans().Count);
+    }
+
+    public City GetCurrentCity() {
+        return mCurrentCity;
+    }
+
+    public List<WujiangBean> GetCurrentCityWujiangs() {
+        //Debug.Log("GetCurrentCityWujiangs:" + mCurrentCity.GetCityBean().name + " GetWujiangBeans:" + mCurrentCity.GetWujiangBeans().Count);
+        return mCurrentCity.GetWujiangBeans();
+    }
 
 }

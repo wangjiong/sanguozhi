@@ -1,9 +1,7 @@
 ﻿using BitBenderGames;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class EventTrigger : MonoBehaviour {
     string TAG = "EventTrigger==";
@@ -36,9 +34,8 @@ public class EventTrigger : MonoBehaviour {
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
             if (hit.collider.CompareTag("City")) {
-                // 城市
+                // 点击城市
                 if (Input.GetMouseButtonUp(0)) {
-                    mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
 					GameObject city;
 					if (hit.collider.gameObject.name.Equals ("Model")) {
 						// 关隘
@@ -47,7 +44,9 @@ public class EventTrigger : MonoBehaviour {
 						// 港口
 						city = hit.collider.transform.gameObject;
 					}
-					mCanvasGameMenu.SetCityName(city.GetComponentInChildren<TextMesh>().text, city);
+                    BattleGameManager.GetInstance().SetCurrentCity(city.GetComponent<City>());
+                    // 显示小菜单
+                    mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
                 }
             }
             // 格子

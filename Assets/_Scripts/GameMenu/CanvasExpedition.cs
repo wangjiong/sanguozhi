@@ -122,7 +122,7 @@ public class CanvasExpedition : MonoBehaviour {
                 mWeapons[mWeaponIndex].GetComponent<Image>().sprite = mSprite02[mWeaponIndex];
                 mWeaponText[mWeaponIndex].text = 1000000 - mCurrentSoldier + "";
 
-				List<WujiangBean> temp = Strategy.GetExpeditionGenerals(BattleGameManager.msCurrentCityWujiangs);
+				List<WujiangBean> temp = Strategy.GetExpeditionGenerals(BattleGameManager.GetInstance().GetCurrentCityWujiangs());
                 SetGeneral(temp[0], temp[1], temp[2]);
             });
         }
@@ -139,9 +139,10 @@ public class CanvasExpedition : MonoBehaviour {
                 canvasGameMenu.SetActive(false);
             }
             if (mChief != null) {
+                // 出兵
                 GameObject mWujiang = Instantiate(mWujiangPrefab);
-                mWujiang.transform.position = BattleGameManager.msCurrentCityGameObject.transform.position;
-                mWujiang.transform.position = new Vector3(BattleGameManager.msCurrentCityGameObject.transform.position.x, 0.05f , BattleGameManager.msCurrentCityGameObject.transform.position.z);
+                mWujiang.transform.position = BattleGameManager.GetInstance().GetCurrentCity().transform.position;
+                mWujiang.transform.position = new Vector3(BattleGameManager.GetInstance().GetCurrentCity().transform.position.x, 0.05f , BattleGameManager.GetInstance().GetCurrentCity().transform.position.z);
                 mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
                 mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
                 mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
