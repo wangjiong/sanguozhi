@@ -55,6 +55,9 @@ public class CanvasExpedition : MonoBehaviour {
     // 能力5变形
     public AbilityMesh mAbilityMesh;
 
+    // 城池
+    City mCity;
+
     void OnEnable() {
         mChiefImg.color = new Color(1, 1, 1, 0);
         mJunior01Img.color = new Color(1, 1, 1, 0);
@@ -146,6 +149,13 @@ public class CanvasExpedition : MonoBehaviour {
                 mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
                 mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
                 mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
+                // 减少城池里面的武将
+                List<WujiangBean> wujiangs = mCity.GetWujiangBeans();
+                for (int i= wujiangs.Count-1;i>=0;i--) {
+                    if (wujiangs[i] == mChief || wujiangs[i] == mJunior01 || wujiangs[i] == mJunior02) {
+                        wujiangs.Remove(wujiangs[i]);
+                    }
+                }
             }
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
@@ -436,5 +446,9 @@ public class CanvasExpedition : MonoBehaviour {
                 image.color = new Color(1, 1, 1, 1);
             }
         }
+    }
+
+    public void SetCity(City city) {
+        mCity = city;
     }
 }

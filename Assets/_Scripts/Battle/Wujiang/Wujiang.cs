@@ -10,7 +10,7 @@ public class Node {
     public float nodeCurrentCosted = float.MaxValue;
     public Node(Coordinates coordinates) {
         nodeCoordinates = coordinates;
-        int terrainType = MapManager.GetInstance().mMapDatas[coordinates.x, coordinates.y];
+        int terrainType = MapManager.GetInstance().GetMapDatas()[coordinates.x, coordinates.y];
         nodeCost = MapConfig.msTerrainWight[terrainType];
     }
 }

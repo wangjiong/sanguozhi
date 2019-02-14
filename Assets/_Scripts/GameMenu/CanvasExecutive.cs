@@ -32,10 +32,12 @@ public class CanvasExecutive : MonoBehaviour {
             }
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
             mSelectItems.Clear();
+            mSelectWujiangIds.Clear();
             gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             mSelectItems.Clear();
+            mSelectWujiangIds.Clear();
             gameObject.SetActive(false);
         });
         // 武将表格

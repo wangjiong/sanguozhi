@@ -52,10 +52,14 @@ public class CanvasGameMenu : MonoBehaviour {
             int index = i;
             mMenuSecondBtns[i].GetComponent<Button>().onClick.AddListener(delegate () {
                 if (index == 0) {
+                    // 开发界面
                     mCanvasDevelop.SetActive(true);
                 } else if (index == 1) {
+                    // 出征界面
                     mCanvasExpedition.SetActive(true);
+                    mCanvasExpedition.GetComponent<CanvasExpedition>().SetCity(BattleGameManager.GetInstance().GetCurrentCity());
                 } else if (index == 2) {
+                    // 搜索界面
                     mCanvasSearch.SetActive(true);
                 }
             });

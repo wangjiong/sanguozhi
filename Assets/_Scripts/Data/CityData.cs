@@ -172,6 +172,9 @@ public class CityData {
 
             cityBean.city = cityComponent;
             mAllCitys.Add(cityBean.name, cityComponent);
+
+            // 修改地形数据
+            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Dushi;
         }
         // 2.关口
         for (int i = 0; i < PASSES.Length;) {
@@ -210,6 +213,9 @@ public class CityData {
 
             cityBean.city = cityComponent;
             mAllCitys.Add(cityBean.name, cityComponent);
+
+            // 修改地形数据
+            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Guansuo;
         }
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
@@ -237,6 +243,9 @@ public class CityData {
 
             cityBean.city = cityComponent;
             mAllCitys.Add(cityBean.name, cityComponent);
+
+            // 修改地形数据
+            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Gang;
         }
     }
 

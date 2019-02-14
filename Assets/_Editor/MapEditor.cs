@@ -43,7 +43,7 @@ public class MapEditor : MonoBehaviour {
         mOriginalPosition = mPointerIndicator.transform.position;
         mTerrain = GameObject.Find("Terrain");
         // 枚举
-        foreach (MapManager.TerrainType item in Enum.GetValues(typeof(MapManager.TerrainType))) {
+        foreach (TerrainType item in Enum.GetValues(typeof(TerrainType))) {
             mTerrainTypeName.Add(item.ToString());
         }
         // 颜色
@@ -104,7 +104,7 @@ public class MapEditor : MonoBehaviour {
     void ShowTerrainTypeTogglsEvent(bool isOn, int terrainTypeIndex) {
         if (isOn) {
             mTerrainTypeToggles[terrainTypeIndex].isOn = true;
-            if (terrainTypeIndex == (int)MapManager.TerrainType.TerrainType_Invalid) {
+            if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
                 return;
             }
             // 创建特定地形
@@ -125,7 +125,7 @@ public class MapEditor : MonoBehaviour {
                 }
             }
         } else {
-            if (terrainTypeIndex == (int)MapManager.TerrainType.TerrainType_Invalid) {
+            if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
                 return;
             }
             // 销毁特定地形
@@ -239,7 +239,7 @@ public class MapEditor : MonoBehaviour {
             string newName = mTerrainTypeName[mMapDatas[coordinates.x, coordinates.y]];
             if (mShowTerrainTypeDictionary.ContainsKey(coordinates)) {
                 // 4-1 如果之前的位置有显示，那么直接改变颜色即可
-                if (terrainTypeIndex == (int)MapManager.TerrainType.TerrainType_Invalid) {
+                if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
                     // 如果是无效地形，那么直接销毁
                     GameObject g = mShowTerrainTypeDictionary[coordinates];
                     Destroy(g);
@@ -250,7 +250,7 @@ public class MapEditor : MonoBehaviour {
                 }
             } else {
                 // 4-2 如果之前的位置没有显示，那么直接
-                if (terrainTypeIndex == (int)MapManager.TerrainType.TerrainType_Invalid) {
+                if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
                     // 如果是无效地形，那么直接return
                     return;
                 } else {
@@ -268,7 +268,7 @@ public class MapEditor : MonoBehaviour {
     }
 
     void Load() {
-        mMapDatas = MapManager.GetInstance().mMapDatas;
+        mMapDatas = MapManager.GetInstance().GetMapDatas();
         Debug.Log("Load");
         FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Open);
         byte[] bytes = new byte[fs.Length];
