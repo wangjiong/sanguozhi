@@ -126,22 +126,23 @@ public class CityData {
     List<CityBean> mPasses = new List<CityBean>(); // 关口
     List<CityBean> mPorts = new List<CityBean>(); // 港口
 
+    // 通过名字存放所有City
     Dictionary<string, City> mAllCitys = new Dictionary<string, City>();
+    // 通过坐标存放所有City
+    Dictionary<Coordinates, City> mAllCityCoordinates = new Dictionary<Coordinates, City>();
 
-    public List<CityBean> GetCitys() {
-        return mCitys;
+    public City GetCity(string name) {
+        if (mAllCitys.ContainsKey(name)) {
+            return mAllCitys[name];
+        }
+        return null;
     }
 
-    public List<CityBean> GePasses() {
-        return mPasses;
-    }
-
-    public List<CityBean> GetPorts() {
-        return mPorts;
-    }
-
-    public Dictionary<string, City> GetAllCitys() {
-        return mAllCitys;
+    public City GetCity(Coordinates coordinates) {
+        if (mAllCityCoordinates.ContainsKey(coordinates)) {
+            return mAllCityCoordinates[coordinates];
+        }
+        return null;
     }
 
     public void LoadData() {
@@ -174,6 +175,7 @@ public class CityData {
             neighbours.Add(cityBean.coordinate);
             foreach (Coordinates coordinate in neighbours) {
                 MapManager.GetInstance().GetMapDatas()[coordinate.x, coordinate.y] = (int)TerrainType.TerrainType_Dushi;
+                mAllCityCoordinates.Add(coordinate , cityComponent);
             }
         }
         // 2.关口
@@ -203,6 +205,7 @@ public class CityData {
 
             // 修改地形数据
             MapManager.GetInstance().GetMapDatas()[cityBean.coordinate.x, cityBean.coordinate.y] = (int)TerrainType.TerrainType_Guansuo;
+            mAllCityCoordinates.Add(cityBean.coordinate, cityComponent);
         }
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
@@ -229,6 +232,7 @@ public class CityData {
 
             // 修改地形数据
             MapManager.GetInstance().GetMapDatas()[cityBean.coordinate.x, cityBean.coordinate.y] = (int)TerrainType.TerrainType_Gang;
+            mAllCityCoordinates.Add(cityBean.coordinate, cityComponent);
         }
     }
 

@@ -63,6 +63,12 @@ public class Wujiang : MonoBehaviour {
                 if (coordinates.Equals(node.Key)) {
                     // 只有在可行走的区域内才可以移动
                     transform.position = position;
+                    // 如果移动的目标点为都市、关口、港口，那么让武将进城
+                    City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
+                    if (city) {
+                        city.GetWujiangBeans().Add(mWujiangBean);
+                        Destroy(gameObject);
+                    }
                     HidePath();
                     Seclet(false);
                     return;

@@ -33,8 +33,25 @@ public class EventTrigger : MonoBehaviour {
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
+            // 1.点击格子
+            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCenterPosition(hit.point);
+            pointCubePosition.y = mOriginalPosition.y;
+            mPointCube.transform.position = pointCubePosition;
+            if (Input.GetMouseButtonUp(0)) {
+                if (Wujiang.msCurrentWujiang != null) {
+                    if (!Wujiang.msCurrentWujiang.IsShowPath()) {
+                        // 如果没有显示路径
+                        Wujiang.msCurrentWujiang.ShowPath();
+                    } else {
+                        // 如果显示路径
+                        Wujiang.msCurrentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, Wujiang.msCurrentWujiang.transform.position.y, mPointCube.transform.position.z));
+                        return;
+                    }
+                }
+            }
+            // 2.点击城市
             if (hit.collider.CompareTag("City")) {
-                // 点击城市
+                
                 if (Input.GetMouseButtonUp(0)) {
 					GameObject city;
 					if (hit.collider.gameObject.name.Equals ("Model")) {
@@ -49,31 +66,9 @@ public class EventTrigger : MonoBehaviour {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
                 }
             }
-            // 格子
-            Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCenterPosition(hit.point);
-            pointCubePosition.y = mOriginalPosition.y;
-            mPointCube.transform.position = pointCubePosition;
-
-            if (Input.GetMouseButtonUp(0)) {
-                if (Wujiang.msCurrentWujiang != null) {
-                    if (!Wujiang.msCurrentWujiang.IsShowPath()) {
-                        // 如果没有显示路径
-                        Wujiang.msCurrentWujiang.ShowPath();
-                    }else {
-                        // 如果显示路径
-                        Wujiang.msCurrentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, Wujiang.msCurrentWujiang.transform.position.y, mPointCube.transform.position.z));
-              
-                    }
-                }
-            }
-
-            // Debug
-            //Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(hit.point);
-            //Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
-            //p.y = mOriginalPosition.y;
-            //GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " " + p;
+            
         }
-
+        // 3.点击空白
         if (Input.GetMouseButtonDown(0)) {
             mCanvasGameMenu.gameObject.SetActive(false);
         }

@@ -38,6 +38,10 @@ public class BattleGameManager : MonoBehaviour {
 
     }
 
+    public CityData GetCityData() {
+        return mCityData;
+    }
+
     // 当前选择的城市
     City mCurrentCity;
 
