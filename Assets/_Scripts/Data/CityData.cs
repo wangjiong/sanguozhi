@@ -6,8 +6,8 @@ using UnityEngine;
 public class CityBean {
 
     public string name;
-    public int x, y;
-    public int passType = -1;
+    public Coordinates coordinate = new Coordinates();
+    public int direction = 0; // 默认坐北朝南
 
     public City city;
 }
@@ -70,15 +70,15 @@ public class CityData {
 
     static string[] PASSES = {
         "绵竹关","8","124","0",
-        "涪水关","10","119","1",
+        "涪水关","10","119","90",
         "葭萌关","23","101","0",
         "剑阁","14","96","0",
         "阳平关","27","82","0",
-        "潼关","60","77","1",
-        "函谷关","67","77","1",
-        "武关","67","85","1",
-        "虎牢关","89","76","1",
-        "壶关","91","56","1",
+        "潼关","60","77","90",
+        "函谷关","67","77","90",
+        "武关","67","85","90",
+        "虎牢关","89","76","90",
+        "壶关","91","56","90",
     };
 
     static string[] PORTS = {
@@ -146,24 +146,20 @@ public class CityData {
 
     public void LoadData() {
 		GameObject cityRoot = new GameObject("Citys");
-		cityRoot.transform.position = new Vector3 (0,0,200);
+		cityRoot.transform.position = new Vector3 (0,0,0);
         // 1.城市
         for (int i = 0; i < CITYS.Length;) {
             CityBean city = new CityBean();
             city.name = CITYS[i++];
-            city.x = int.Parse(CITYS[i++]);
-            city.y = int.Parse(CITYS[i++]);
+            city.coordinate.x = int.Parse(CITYS[i++]) + 1;// 注意城池需要偏移
+            city.coordinate.y = int.Parse(CITYS[i++]) + 2;
             mCitys.Add(city);
         }
-        // 1-1 创建模型
+        // 1-1 创建城市模型
         foreach (CityBean cityBean in mCitys) {
 			GameObject o = GameObject.Instantiate(Resources.Load(CITY_MODEL)) as GameObject;
             o.transform.SetParent(cityRoot.transform);
-            if (cityBean.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 1.5f);
-            } else {
-                o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 2f);
-            }
+            o.transform.localPosition = MapManager.GetInstance().CorrdinateToTerrainPosition(cityBean.coordinate);
             o.GetComponentInChildren<TextMesh>().text = cityBean.name;
 
             // cityComponent
@@ -174,67 +170,54 @@ public class CityData {
             mAllCitys.Add(cityBean.name, cityComponent);
 
             // 修改地形数据
-            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Dushi;
+            List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(cityBean.coordinate);
+            neighbours.Add(cityBean.coordinate);
+            foreach (Coordinates coordinate in neighbours) {
+                MapManager.GetInstance().GetMapDatas()[coordinate.x, coordinate.y] = (int)TerrainType.TerrainType_Dushi;
+            }
         }
         // 2.关口
         for (int i = 0; i < PASSES.Length;) {
             CityBean city = new CityBean();
             city.name = PASSES[i++];
-            city.x = int.Parse(PASSES[i++]);
-            city.y = int.Parse(PASSES[i++]);
-            city.passType = int.Parse(PASSES[i++]);
+            city.coordinate.x = int.Parse(PASSES[i++]);
+            city.coordinate.y = int.Parse(PASSES[i++]);
+            city.direction = int.Parse(PASSES[i++]);
             mPasses.Add(city);
         }
-        // 2-1 创建模型
+        // 2-1 创建关口模型
         foreach (CityBean cityBean in mPasses) {
-			GameObject o = GameObject.Instantiate(Resources.Load(PASS_MODEL)) as GameObject;
-            o.transform.SetParent(cityRoot.transform);
-            o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
-            if (cityBean.passType == 1) {
-                // 竖
-                if (cityBean.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 0.5f);
-                } else {
-                    o.transform.localPosition = new Vector3(cityBean.x + 1.5f, 0, -cityBean.y - 1f);
-                }
-                o.transform.Find("Model").localRotation = Quaternion.Euler(0, -90, 0);
-            } else {
-                // 横
-                if (cityBean.x % 2 == 0) {
-                    o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
-                } else {
-                    o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1.5f);
-                }
-            }
-            o.GetComponentInChildren<TextMesh>().text = cityBean.name;
+			GameObject cityGameObject = GameObject.Instantiate(Resources.Load(PASS_MODEL)) as GameObject;
+            cityGameObject.transform.SetParent(cityRoot.transform);
+            cityGameObject.transform.localPosition = MapManager.GetInstance().CorrdinateToTerrainPosition(cityBean.coordinate);
+            GameObject model = cityGameObject.transform.Find("Model").gameObject;
+            //model.transform.localRotation = Quaternion.Euler(0, cityBean.direction, 0);
+            model.transform.Rotate(new Vector3(0,0, cityBean.direction) , Space.Self);
+            cityGameObject.GetComponentInChildren<TextMesh>().text = cityBean.name;
             // cityComponent
-            City cityComponent = o.AddComponent<City>();
+            City cityComponent = cityGameObject.AddComponent<City>();
             cityComponent.SetCityBean(cityBean);
 
             cityBean.city = cityComponent;
             mAllCitys.Add(cityBean.name, cityComponent);
 
             // 修改地形数据
-            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Guansuo;
+            MapManager.GetInstance().GetMapDatas()[cityBean.coordinate.x, cityBean.coordinate.y] = (int)TerrainType.TerrainType_Guansuo;
         }
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
             CityBean city = new CityBean();
             city.name = PORTS[i++];
-            city.x = int.Parse(PORTS[i++]);
-            city.y = int.Parse(PORTS[i++]);
+            city.coordinate.x = int.Parse(PORTS[i++]);
+            city.coordinate.y = int.Parse(PORTS[i++]);
+            //city.direction = int.Parse(PASSES[i++]);
             mPorts.Add(city);
         }
-        // 3-1 创建模型
+        // 3-1 创建港口模型
         foreach (CityBean cityBean in mPorts) {
 			GameObject o = GameObject.Instantiate(Resources.Load(PORT_MODEL)) as GameObject;
             o.transform.SetParent(cityRoot.transform);
-            if (cityBean.x % 2 == 0) {
-                o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1f);
-            } else {
-                o.transform.localPosition = new Vector3(cityBean.x + 0.5f, 0, -cityBean.y - 1.5f);
-            }
-
+            o.transform.localPosition = MapManager.GetInstance().CorrdinateToTerrainPosition(cityBean.coordinate);
             o.GetComponentInChildren<TextMesh>().text = cityBean.name;
 
             // cityComponent
@@ -245,7 +228,7 @@ public class CityData {
             mAllCitys.Add(cityBean.name, cityComponent);
 
             // 修改地形数据
-            MapManager.GetInstance().GetMapDatas()[cityBean.x, cityBean.y] = (int)TerrainType.TerrainType_Gang;
+            MapManager.GetInstance().GetMapDatas()[cityBean.coordinate.x, cityBean.coordinate.y] = (int)TerrainType.TerrainType_Gang;
         }
     }
 

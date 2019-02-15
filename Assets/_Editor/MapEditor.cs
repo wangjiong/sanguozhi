@@ -276,12 +276,15 @@ public class MapEditor : MonoBehaviour {
         fs.Close();
         string s = new UTF8Encoding().GetString(bytes);
         string[] itemIds = s.Split(';');
-        //Debug.Log(itemIds.Length);
-        //Debug.Log(itemIds[itemIds.Length - 1]);
         // 初始化地图
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
-                mMapDatas[i, j] = int.Parse(itemIds[i * 200 + j]);
+                int terrainType = int.Parse(itemIds[i * 200 + j]);
+                if (terrainType != (int)TerrainType.TerrainType_Dushi &&
+                    terrainType != (int)TerrainType.TerrainType_Guansuo &&
+                    terrainType != (int)TerrainType.TerrainType_Gang) {
+                    mMapDatas[i, j] = terrainType;
+                }
             }
         }
         Save();
