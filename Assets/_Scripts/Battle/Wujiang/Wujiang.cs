@@ -19,13 +19,13 @@ public class Wujiang : MonoBehaviour {
 
     static string TAG = "Wujiang==";
 
-    WujiangBean mWujiangBean;
-
     public Image mAvatar;
     public Text mHealth;
     public Text mName;
     bool mSelected;
     HighlightableObject mHighlightableObjecto;
+
+    WujiangBean[] mWujiangBeans;// 武将最多三个，主将一定为第一个
 
     // Path
     public GameObject mPrefabPathGrid;
@@ -66,7 +66,9 @@ public class Wujiang : MonoBehaviour {
                     // 如果移动的目标点为都市、关口、港口，那么让武将进城
                     City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
                     if (city) {
-                        city.GetWujiangBeans().Add(mWujiangBean);
+                        foreach (WujiangBean wujiangBean in mWujiangBeans) {
+                            city.GetWujiangBeans().Add(wujiangBean);
+                        }
                         Destroy(gameObject);
                     }
                     HidePath();
@@ -124,7 +126,6 @@ public class Wujiang : MonoBehaviour {
                     g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
                 }
             }
-            //Debug.Log( "mPathGridsCacheIndex:"+ mPathGridsCacheIndex + "mNodesCache:" + mPathGameObjectCache.Count);
         }
     }
 
@@ -160,5 +161,13 @@ public class Wujiang : MonoBehaviour {
             mPathGameObjectCache.Add(g);
         }
         return mPathGameObjectCache[mPathGridsCacheIndex++];
+    }
+
+    public void SetWujiangBeans(WujiangBean[] wujiangBeans) {
+        mWujiangBeans = wujiangBeans;
+    }
+
+    public WujiangBean[] GetWujiangBeans() {
+        return mWujiangBeans;
     }
 }

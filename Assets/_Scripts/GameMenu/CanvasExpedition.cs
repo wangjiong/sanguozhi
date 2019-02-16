@@ -144,17 +144,25 @@ public class CanvasExpedition : MonoBehaviour {
             }
             if (mChief != null) {
                 // 出兵
-                GameObject mWujiang = Instantiate(mWujiangPrefab);
-                mWujiang.transform.position = mCity.transform.position;
-                mWujiang.transform.position = new Vector3(mCity.transform.position.x, 0.05f , mCity.transform.position.z);
-                mWujiang.GetComponent<Wujiang>().mAvatar.sprite = mChiefImg.sprite;
-                mWujiang.GetComponent<Wujiang>().mHealth.text = mSliderText[0].text.Split('/')[0];
-                mWujiang.GetComponent<Wujiang>().mName.text = mChief.name;
+                GameObject wujiangGameObject = Instantiate(mWujiangPrefab);
+                wujiangGameObject.transform.position = new Vector3(mCity.transform.position.x, 0.05f , mCity.transform.position.z);
+                Wujiang wujiang = wujiangGameObject.GetComponent<Wujiang>();
+                wujiang.mAvatar.sprite = mChiefImg.sprite;
+                wujiang.mHealth.text = mSliderText[0].text.Split('/')[0];
+                wujiang.mName.text = mChief.name;
+                WujiangBean[] wujiangBeans = new WujiangBean[3];
+                wujiangBeans[0] = mChief;
+                wujiangBeans[1] = mJunior01;
+                wujiangBeans[2] = mJunior02;
+                wujiang.SetWujiangBeans(wujiangBeans);
                 // 减少城池里面的武将
-                List<WujiangBean> wujiangs = mCity.GetWujiangBeans();
-                for (int i= wujiangs.Count-1;i>=0;i--) {
-                    if (wujiangs[i] == mChief || wujiangs[i] == mJunior01 || wujiangs[i] == mJunior02) {
-                        wujiangs.Remove(wujiangs[i]);
+                List<WujiangBean> allWujiangs = mCity.GetWujiangBeans();
+                for (int i = allWujiangs.Count - 1; i >= 0; i--) {
+                    for (int j = 0; j < wujiangBeans.Length; j++) {
+                        if (allWujiangs[i] == wujiangBeans[j]) {
+                            allWujiangs.Remove(allWujiangs[i]);
+                            break;
+                        }
                     }
                 }
             }
