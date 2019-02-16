@@ -33,18 +33,19 @@ public class EventTrigger : MonoBehaviour {
         // 从鼠标所在的位置发射
         Vector2 screenPosition = Input.mousePosition;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(screenPosition), out hit)) {
-            // 1.点击格子
+            // 1.点击格子，主要用于行军
             Vector3 pointCubePosition = MapManager.GetInstance().TerrainPositionToCenterPosition(hit.point);
             pointCubePosition.y = mOriginalPosition.y;
             mPointCube.transform.position = pointCubePosition;
             if (Input.GetMouseButtonUp(0)) {
-                if (Wujiang.msCurrentWujiang != null) {
-                    if (!Wujiang.msCurrentWujiang.IsShowPath()) {
+                Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
+                if (currentWujiang != null) {
+                    if (!currentWujiang.IsShowPath()) {
                         // 如果没有显示路径
-                        Wujiang.msCurrentWujiang.ShowPath();
+                        currentWujiang.ShowPath();
                     } else {
-                        // 如果显示路径
-                        Wujiang.msCurrentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, Wujiang.msCurrentWujiang.transform.position.y, mPointCube.transform.position.z));
+                        // 如果有显示路径
+                        currentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                         return;
                     }
                 }

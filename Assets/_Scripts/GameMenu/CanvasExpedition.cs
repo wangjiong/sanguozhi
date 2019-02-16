@@ -155,6 +155,11 @@ public class CanvasExpedition : MonoBehaviour {
                 wujiangBeans[1] = mJunior01;
                 wujiangBeans[2] = mJunior02;
                 wujiang.SetWujiangBeans(wujiangBeans);
+                // 显示路径
+                Wujiang.SetCurrentWujiang(wujiang);
+                wujiang.SetWujiangState(WujiangState.WujiangState_Prepare);
+                wujiang.SetCity(mCity);
+                wujiang.ShowPath();
                 // 减少城池里面的武将
                 List<WujiangBean> allWujiangs = mCity.GetWujiangBeans();
                 for (int i = allWujiangs.Count - 1; i >= 0; i--) {

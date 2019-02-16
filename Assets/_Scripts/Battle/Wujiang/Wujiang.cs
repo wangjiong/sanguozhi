@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TGS;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +12,17 @@ public class Node {
         nodeCost = MapConfig.msTerrainWight[terrainType];
     }
 }
-public class Wujiang : MonoBehaviour {
-    public static Wujiang msCurrentWujiang;
 
+public enum WujiangState {
+    WujiangState_Prepare,
+    WujiangState_Battle,
+    WujiangState_Fallback,
+}
+
+public class Wujiang : MonoBehaviour {
     static string TAG = "Wujiang==";
+
+    static Wujiang msCurrentWujiang;
 
     public Image mAvatar;
     public Text mHealth;
@@ -31,8 +36,37 @@ public class Wujiang : MonoBehaviour {
     public GameObject mPrefabPathGrid;
     GameObject mPathNodesParent;
 
+    WujiangState mWujiangState;
+
+    City mCity;
+
     void Start() {
-        mPathNodesParent = GameObject.Find("PathNodes");
+        //mWujiangState = WujiangState.WujiangState_Battle;
+    }
+
+    public static void SetCurrentWujiang(Wujiang wujiang) {
+        msCurrentWujiang = wujiang;
+        msCurrentWujiang.Seclet(true);
+    }
+
+    public static Wujiang GetCurrentWujiang() {
+        return msCurrentWujiang;
+    }
+
+    public void SetWujiangState(WujiangState WujiangState) {
+        mWujiangState = WujiangState;
+    }
+
+    public WujiangState GetWujiangState() {
+        return mWujiangState;
+    }
+
+    public void SetCity(City city) {
+        mCity = city;
+    }
+
+    public City SetCity() {
+        return mCity;
     }
 
     public void HideLight() {
@@ -41,14 +75,11 @@ public class Wujiang : MonoBehaviour {
     }
 
     public void OnMouseDown() {
-        if (mHighlightableObjecto == null) {
-            mHighlightableObjecto = gameObject.AddComponent<HighlightableObject>();
+        if (mWujiangState == WujiangState.WujiangState_Prepare) {
+            return;
         }
         mSelected = !mSelected;
         Seclet(mSelected);
-        if (!mSelected) {
-            HidePath();
-        }
     }
 
     Dictionary<Coordinates, Node> mNodesCache = new Dictionary<Coordinates, Node>();
@@ -61,15 +92,23 @@ public class Wujiang : MonoBehaviour {
         foreach (KeyValuePair<Coordinates, Node> node in mNodesCache) {
             if (node.Value.nodeCurrentCosted <= mWujiangAllCost) {
                 if (coordinates.Equals(node.Key)) {
-                    // 只有在可行走的区域内才可以移动
-                    transform.position = position;
                     // 如果移动的目标点为都市、关口、港口，那么让武将进城
                     City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
+                    // 不能回当前的城池
+                    if (mWujiangState == WujiangState.WujiangState_Prepare) {
+                        if ( city == mCity) {
+                            return;
+                        }else {
+                            mWujiangState = WujiangState.WujiangState_Battle;
+                        }
+                    }
                     if (city) {
                         foreach (WujiangBean wujiangBean in mWujiangBeans) {
                             city.GetWujiangBeans().Add(wujiangBean);
                         }
                         Destroy(gameObject);
+                    } else {
+                        transform.position = position;
                     }
                     HidePath();
                     Seclet(false);
@@ -84,11 +123,15 @@ public class Wujiang : MonoBehaviour {
         if (mSelected) {
             // 1.选中
             msCurrentWujiang = this;
+            if (mHighlightableObjecto == null) {
+                mHighlightableObjecto = gameObject.AddComponent<HighlightableObject>();
+            }
             mHighlightableObjecto.ConstantOnImmediate(Color.red);
         } else {
             // 2.不选中
             msCurrentWujiang = null;
             mHighlightableObjecto.Off();
+            HidePath();
         }
     }
 
@@ -157,6 +200,10 @@ public class Wujiang : MonoBehaviour {
     private GameObject GetGridNode() {
         if (mPathGridsCacheIndex >= mPathGameObjectCache.Count) {
             GameObject g = Instantiate(mPrefabPathGrid);
+            if (mPathNodesParent == null) {
+                mPathNodesParent = new GameObject("PathNodes");
+                mPathNodesParent.transform.position = new Vector3(0, 0, 0);
+            }
             g.transform.SetParent(mPathNodesParent.transform);
             mPathGameObjectCache.Add(g);
         }
