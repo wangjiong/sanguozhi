@@ -21,6 +21,16 @@ public class CanvasGameMenu : MonoBehaviour {
 
     bool mPositionFlag = true; // 第一次ShowPosition有问题
 
+    City mCity; // 属于菜单的城池
+
+    public void SetCity(City city) {
+        mCity = city;
+    }
+
+    public City GetCity() {
+        return mCity;
+    }
+
     public void ShowCanvasGameMenu(Vector2 screenPosition) {
         gameObject.SetActive(true);
         if (mPositionFlag) {
@@ -57,7 +67,7 @@ public class CanvasGameMenu : MonoBehaviour {
                 } else if (index == 1) {
                     // 出征界面
                     mCanvasExpedition.SetActive(true);
-                    mCanvasExpedition.GetComponent<CanvasExpedition>().SetCity(BattleGameManager.GetInstance().GetCurrentCity());
+                    mCanvasExpedition.GetComponent<CanvasExpedition>().SetCity(mCity);
                 } else if (index == 2) {
                     // 搜索界面
                     mCanvasSearch.SetActive(true);

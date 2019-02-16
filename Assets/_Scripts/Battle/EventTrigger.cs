@@ -61,8 +61,8 @@ public class EventTrigger : MonoBehaviour {
 						// 港口
 						city = hit.collider.transform.gameObject;
 					}
-                    BattleGameManager.GetInstance().SetCurrentCity(city.GetComponent<City>());
                     // 显示小菜单
+                    mCanvasGameMenu.SetCity(city.GetComponent<City>());
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
                 }
             }

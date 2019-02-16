@@ -20,6 +20,8 @@ public class CanvasExecutive : MonoBehaviour {
     HashSet<int> mSelectItems = new HashSet<int>();
     HashSet<int> mSelectWujiangIds = new HashSet<int>();
 
+    City mCity;
+
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
@@ -27,7 +29,7 @@ public class CanvasExecutive : MonoBehaviour {
             int i = 0;
             foreach (int index in mSelectItems) {
                 if (i < 3) {
-                    wujiangs[i++] = BattleGameManager.GetInstance().GetCurrentCityWujiangs()[index];
+                    wujiangs[i++] = mCity.GetWujiangBeans()[index];
                 }
             }
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
@@ -53,14 +55,14 @@ public class CanvasExecutive : MonoBehaviour {
                     mIndexClick = index;
                     Sort(index, false);
                 }
-                mInfinityScrollView.Setup(BattleGameManager.GetInstance().GetCurrentCityWujiangs().Count);
+                mInfinityScrollView.Setup(mCity.GetWujiangBeans().Count);
                 mInfinityScrollView.InternalReload();
             });
         }
     }
 
     private void Sort(int index, bool revert) {
-        List<WujiangBean> currentCityWujiangs = BattleGameManager.GetInstance().GetCurrentCityWujiangs();
+        List<WujiangBean> currentCityWujiangs = mCity.GetWujiangBeans();
         if (revert) {
             switch (index) {
                 case 1:
@@ -103,8 +105,16 @@ public class CanvasExecutive : MonoBehaviour {
     public void Show() {
         gameObject.SetActive(true);
 
-        mInfinityScrollView.Setup(BattleGameManager.GetInstance().GetCurrentCityWujiangs().Count);
+        mInfinityScrollView.Setup(mCity.GetWujiangBeans().Count);
         mInfinityScrollView.InternalReload();
+    }
+
+    public void SetCity(City city) {
+        mCity = city;
+    }
+
+    public City GetCity() {
+        return mCity;
     }
 
     public bool CanSelect() {
@@ -122,7 +132,7 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public void SelectItem(bool isOn, int index) {
-        WujiangBean general = BattleGameManager.GetInstance().GetCurrentCityWujiangs()[index];
+        WujiangBean general = mCity.GetWujiangBeans()[index];
         if (isOn) {
             mSelectItems.Add(index);
             mSelectWujiangIds.Add(general.id);

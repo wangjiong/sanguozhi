@@ -42,21 +42,4 @@ public class BattleGameManager : MonoBehaviour {
         return mCityData;
     }
 
-    // 当前选择的城市
-    City mCurrentCity;
-
-    public void SetCurrentCity(City city) {
-        mCurrentCity = city;
-        //Debug.Log("SetCurrentCity:" + mCurrentCity.GetCityBean().name + " GetWujiangBeans:" + mCurrentCity.GetWujiangBeans().Count);
-    }
-
-    public City GetCurrentCity() {
-        return mCurrentCity;
-    }
-
-    public List<WujiangBean> GetCurrentCityWujiangs() {
-        //Debug.Log("GetCurrentCityWujiangs:" + mCurrentCity.GetCityBean().name + " GetWujiangBeans:" + mCurrentCity.GetWujiangBeans().Count);
-        return mCurrentCity.GetWujiangBeans();
-    }
-
 }
