@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapConfig {
     public static float[] msTerrainWight = {
-        1, // 无效地形
+        100000, // 无效地形
         1, // 草地
         1,// 土
         1,// 沙地
