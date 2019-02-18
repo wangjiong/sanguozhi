@@ -104,7 +104,7 @@ public class MapEditor : MonoBehaviour {
     void ShowTerrainTypeTogglsEvent(bool isOn, int terrainTypeIndex) {
         if (isOn) {
             mTerrainTypeToggles[terrainTypeIndex].isOn = true;
-            if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
+            if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid || terrainTypeIndex == (int)TerrainType.TerrainType_Caodi) {
                 return;
             }
             // 创建特定地形
@@ -295,6 +295,9 @@ public class MapEditor : MonoBehaviour {
         StringBuilder mapData = new StringBuilder();
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
+                //if (mMapDatas[i, j] == (int)TerrainType.TerrainType_Invalid) {
+                //    mMapDatas[i, j] = (int)TerrainType.TerrainType_Caodi;
+                //}
                 mapData.Append(mMapDatas[i, j] + ";");
             }
         }

@@ -14,7 +14,8 @@ public class Node {
 }
 
 public enum WujiangState {
-    WujiangState_Prepare,
+    WujiangState_Prepare_Expedition,
+    WujiangState_Prepare_Move,
     WujiangState_Battle,
     WujiangState_Fallback,
 }
@@ -41,7 +42,6 @@ public class Wujiang : MonoBehaviour {
     City mCity;
 
     void Start() {
-        //mWujiangState = WujiangState.WujiangState_Battle;
     }
 
     public static void SetCurrentWujiang(Wujiang wujiang) {
@@ -75,7 +75,12 @@ public class Wujiang : MonoBehaviour {
     }
 
     public void OnMouseDown() {
-        if (mWujiangState == WujiangState.WujiangState_Prepare) {
+        // 当前选中的武将准备出征，那么不能点击任何武将
+        if (msCurrentWujiang && msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition) {
+            return;
+        }
+        // 当前选中的武将准备移动，那么不能点击其他武将
+        if (msCurrentWujiang && msCurrentWujiang.GetWujiangState() != WujiangState.WujiangState_Battle) {
             return;
         }
         mSelected = !mSelected;
@@ -95,11 +100,9 @@ public class Wujiang : MonoBehaviour {
                     // 如果移动的目标点为都市、关口、港口，那么让武将进城
                     City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
                     // 不能回当前的城池
-                    if (mWujiangState == WujiangState.WujiangState_Prepare) {
-                        if ( city == mCity) {
+                    if (mWujiangState == WujiangState.WujiangState_Prepare_Expedition) {
+                        if (city == mCity) {
                             return;
-                        }else {
-                            mWujiangState = WujiangState.WujiangState_Battle;
                         }
                     }
                     if (city) {
@@ -112,6 +115,7 @@ public class Wujiang : MonoBehaviour {
                     }
                     HidePath();
                     Seclet(false);
+                    mWujiangState = WujiangState.WujiangState_Battle;
                     return;
                 }
             }

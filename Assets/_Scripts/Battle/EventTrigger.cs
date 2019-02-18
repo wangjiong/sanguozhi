@@ -40,13 +40,18 @@ public class EventTrigger : MonoBehaviour {
             if (Input.GetMouseButtonUp(0)) {
                 Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
                 if (currentWujiang != null) {
-                    if (!currentWujiang.IsShowPath()) {
-                        // 如果没有显示路径
-                        currentWujiang.ShowPath();
-                    } else {
-                        // 如果有显示路径
+                    if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition) {
+                        // 当前武将处于出征状态
                         currentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                         return;
+                    } else {
+                        if (currentWujiang.GetWujiangState() != WujiangState.WujiangState_Prepare_Move) {
+                            currentWujiang.SetWujiangState(WujiangState.WujiangState_Prepare_Move);
+                            currentWujiang.ShowPath();
+                        } else {
+                            currentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
+                            return;
+                        }
                     }
                 }
             }

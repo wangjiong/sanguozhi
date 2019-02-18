@@ -193,7 +193,6 @@ public class CityData {
             cityGameObject.transform.SetParent(cityRoot.transform);
             cityGameObject.transform.localPosition = MapManager.GetInstance().CorrdinateToTerrainPosition(cityBean.coordinate);
             GameObject model = cityGameObject.transform.Find("Model").gameObject;
-            //model.transform.localRotation = Quaternion.Euler(0, cityBean.direction, 0);
             model.transform.Rotate(new Vector3(0,0, cityBean.direction) , Space.Self);
             cityGameObject.GetComponentInChildren<TextMesh>().text = cityBean.name;
             // cityComponent
@@ -204,8 +203,30 @@ public class CityData {
             mAllCitys.Add(cityBean.name, cityComponent);
 
             // 修改地形数据
+            // 1.确认关口地形
             MapManager.GetInstance().GetMapDatas()[cityBean.coordinate.x, cityBean.coordinate.y] = (int)TerrainType.TerrainType_Guansuo;
             mAllCityCoordinates.Add(cityBean.coordinate, cityComponent);
+            // 2.确认无效地形
+            if (cityBean.direction == 0) {
+                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(cityBean.coordinate);
+                foreach (Coordinates coordinate in neighbours) {
+                    // 上下两个不要
+                    if (coordinate.x != cityBean.coordinate.x) {
+                        MapManager.GetInstance().GetMapDatas()[coordinate.x, coordinate.y] = (int)TerrainType.TerrainType_Invalid;
+                        mAllCityCoordinates.Add(coordinate, cityComponent);
+                    }
+                }
+            }else {
+                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(cityBean.coordinate);
+                foreach (Coordinates coordinate in neighbours) {
+                    // 只要上下两个
+                    if (coordinate.x == cityBean.coordinate.x) {
+                        MapManager.GetInstance().GetMapDatas()[coordinate.x, coordinate.y] = (int)TerrainType.TerrainType_Invalid;
+                        mAllCityCoordinates.Add(coordinate, cityComponent);
+                    }
+                }
+            }
+            
         }
         // 3.港口
         for (int i = 0; i < PORTS.Length;) {
