@@ -41,8 +41,21 @@ public class WujiangData {
 
     List<WujiangBean> mAllWujiangs = new List<WujiangBean>();
 
+    // 所有已经出征的武将
+    Dictionary<Coordinates, Wujiang> mWujiangExpeditions = new Dictionary<Coordinates, Wujiang>();
+
     public List<WujiangBean> GetAllWujiangs() {
         return mAllWujiangs;
+    }
+
+    public Dictionary<Coordinates, Wujiang> GetWujiangExpeditions() {
+        return mWujiangExpeditions;
+    }
+
+    public void UpdateWujiangExpeditionCorrdinates(Coordinates c1, Coordinates c2) {
+        Wujiang Wujiang = mWujiangExpeditions[c1];
+        mWujiangExpeditions.Remove(c1);
+        mWujiangExpeditions[c2] = Wujiang;
     }
 
     public void LoadData() {

@@ -42,14 +42,14 @@ public class EventTrigger : MonoBehaviour {
                 if (currentWujiang != null) {
                     if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition) {
                         // 当前武将处于出征状态
-                        currentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
+                        currentWujiang.Move(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                         return;
                     } else {
                         if (currentWujiang.GetWujiangState() != WujiangState.WujiangState_Prepare_Move) {
                             currentWujiang.SetWujiangState(WujiangState.WujiangState_Prepare_Move);
                             currentWujiang.ShowPath();
                         } else {
-                            currentWujiang.SetPosition(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
+                            currentWujiang.Move(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                             return;
                         }
                     }
