@@ -2,20 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Node {
-    public Coordinates nodeCoordinates;
-    public float nodeCost = 1;
-    public float nodeCurrentCosted = float.MaxValue;
-    public Node(Coordinates coordinates) {
-        nodeCoordinates = coordinates;
-        // 根据地形信息获取权重
-        uint terrainType = MapManager.GetInstance().GetTerrainType(coordinates);
-        // 暂时只考虑低8为地表地形
-        terrainType = MapManager.ToLowTerrainType(terrainType);
-        nodeCost = MapConfig.msTerrainWight[terrainType];
-    }
-}
-
 public enum WujiangState {
     WujiangState_Prepare_Expedition,
     WujiangState_Prepare_Move,
@@ -28,27 +14,26 @@ public class Wujiang : MonoBehaviour {
 
     static Wujiang msCurrentWujiang;
 
+    // 属性
+    Coordinates mCoordinates;
+    City mCity;
+    // 面板属性
+    WujiangBean[] mWujiangBeans;// 武将最多三个，主将一定为第一个
     public Image mAvatar;
     public Text mHealth;
     public Text mName;
+
+    // 路径相关
+    float mWujiangPathfindingCost = 6;
+    Dictionary<Coordinates, Node> mPathfindingResult;
+
+    // 其他
     bool mSelected;
     HighlightableObject mHighlightableObjecto;
-
-    WujiangBean[] mWujiangBeans;// 武将最多三个，主将一定为第一个
-
-    // Path
-    public GameObject mPrefabPathGrid;
-    GameObject mPathNodesParent;
-
     WujiangState mWujiangState;
-
-    Coordinates mCoordinates;
-
-    City mCity;
 
     void Start() {
         mCoordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
-
         BattleGameManager.GetInstance().GetWujiangData().SetWujiangExpeditionCorrdinates(mCoordinates, this);
     }
 
@@ -86,6 +71,10 @@ public class Wujiang : MonoBehaviour {
         mHighlightableObjecto.Off();
     }
 
+    public float GetWujiangPathfindingCost() {
+        return mWujiangPathfindingCost;
+    }
+
     public void OnMouseDown() {
         // 当前选中的武将准备移动，那么不能点击其他武将
         if (msCurrentWujiang && msCurrentWujiang.GetWujiangState() != WujiangState.WujiangState_Battle) {
@@ -94,17 +83,37 @@ public class Wujiang : MonoBehaviour {
         mSelected = !mSelected;
         Seclet(mSelected);
     }
+    public void Seclet(bool seclet) {
+        mSelected = seclet;
+        if (mSelected) {
+            // 1.选中
+            msCurrentWujiang = this;
+            if (mHighlightableObjecto == null) {
+                mHighlightableObjecto = gameObject.AddComponent<HighlightableObject>();
+            }
+            mHighlightableObjecto.ConstantOnImmediate(Color.red);
+        } else {
+            // 2.不选中
+            msCurrentWujiang = null;
+            mHighlightableObjecto.Off();
+            HidePath();
+        }
+    }
 
-    Dictionary<Coordinates, Node> mNodesCache = new Dictionary<Coordinates, Node>();
-    Dictionary<Coordinates, Node> mResult = new Dictionary<Coordinates, Node>();
-    List<GameObject> mPathGameObjectCache = new List<GameObject>();
-    int mPathGridsCacheIndex = 0;
-    float mWujiangAllCost = 6;
+    // 显示路径
+    public void ShowPath() {
+        mPathfindingResult = Pathfinding.GetInstance().ShowPath(this);
+    }
+
+    // 隐藏路径
+    public void HidePath() {
+        Pathfinding.GetInstance().ClearNode();
+    }
 
     public void Move(Vector3 position) {
         Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(position);
-        foreach (KeyValuePair<Coordinates, Node> node in mResult) {
-            if (node.Value.nodeCurrentCosted <= mWujiangAllCost) {
+        foreach (KeyValuePair<Coordinates, Node> node in mPathfindingResult) {
+            if (node.Value.nodeCurrentCosted <= mWujiangPathfindingCost) {
                 if (coordinates.Equals(node.Key)) {
                     // 如果移动的目标点为都市、关口、港口，那么让武将进城
                     City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
@@ -134,106 +143,6 @@ public class Wujiang : MonoBehaviour {
                 }
             }
         }
-    }
-
-    public void Seclet(bool seclet) {
-        mSelected = seclet;
-        if (mSelected) {
-            // 1.选中
-            msCurrentWujiang = this;
-            if (mHighlightableObjecto == null) {
-                mHighlightableObjecto = gameObject.AddComponent<HighlightableObject>();
-            }
-            mHighlightableObjecto.ConstantOnImmediate(Color.red);
-        } else {
-            // 2.不选中
-            msCurrentWujiang = null;
-            mHighlightableObjecto.Off();
-            HidePath();
-        }
-    }
-
-    // 显示路径
-    public void ShowPath() {
-        // 所有武将
-        Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
-        // 所有地形
-
-        if (mPrefabPathGrid) {
-            ClearNode();
-            Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
-            Queue<Node> queue = new Queue<Node>();
-            Node startNode = GetNode(current);
-            startNode.nodeCurrentCosted = 1;
-            queue.Enqueue(startNode);
-            mResult[startNode.nodeCoordinates] = startNode;
-            while (queue.Count > 0) {
-                Node currentNode = queue.Dequeue();
-                List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(currentNode.nodeCoordinates);
-                foreach (Coordinates c in neighbours) {
-                    // 检查是否越界
-                    if (MapManager.GetInstance().CheckBoundary(c)) {
-                        Node node = GetNode(c); // 创建node
-                        float newCost = currentNode.nodeCurrentCosted + node.nodeCost;
-                        if (newCost < node.nodeCurrentCosted) {
-                            node.nodeCurrentCosted = newCost;
-                            // 1.当前点的cost小于总cost
-                            if (node.nodeCurrentCosted <= mWujiangAllCost) {
-                                // 2.不能移动到其他武将的点上
-                                if (wujiangExpeditions.ContainsKey(node.nodeCoordinates)) {
-                                    Wujiang wujiang = wujiangExpeditions[node.nodeCoordinates];
-                                    if (wujiang && wujiang != this) {
-                                        continue;
-                                    }
-                                }
-                                queue.Enqueue(node);
-                                mResult[node.nodeCoordinates] = node;
-                            }
-                        }
-                    }
-                }
-            }
-            // 显示可走路径的网格
-            foreach (KeyValuePair<Coordinates, Node> node in mResult) {
-                GameObject g = GetGridNode();
-                g.SetActive(true);
-                g.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(node.Key);
-            }
-        }
-    }
-
-    // 隐藏路径
-    public void HidePath() {
-        ClearNode();
-    }
-
-    private void ClearNode() {
-        mResult.Clear();
-        mNodesCache.Clear();
-        mPathGridsCacheIndex = 0;
-        foreach (GameObject g in mPathGameObjectCache) {
-            g.SetActive(false);
-        }
-    }
-
-    private Node GetNode(Coordinates c) {
-        if (!mNodesCache.ContainsKey(c)) {
-            mNodesCache.Add(c, new Node(c));
-        }
-        return mNodesCache[c];
-    }
-
-    private GameObject GetGridNode() {
-        if (mPathGridsCacheIndex >= mPathGameObjectCache.Count) {
-            GameObject g = Instantiate(mPrefabPathGrid);
-            if (mPathNodesParent == null) {
-                mPathNodesParent = new GameObject("PathNodes");
-                mPathNodesParent.transform.position = new Vector3(0, 0, 0);
-            }
-            g.transform.SetParent(mPathNodesParent.transform);
-            mPathGameObjectCache.Add(g);
-        }
-        return mPathGameObjectCache[mPathGridsCacheIndex++];
     }
 
     public void SetWujiangBeans(WujiangBean[] wujiangBeans) {
