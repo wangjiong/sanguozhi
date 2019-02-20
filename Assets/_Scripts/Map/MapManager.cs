@@ -70,7 +70,16 @@ public enum TerrainType {
     TerrainType_Guansuo,// 关所
     TerrainType_Gang,// 港
     TerrainType_Xiaojing, //小径
+
+
+    // 00000000 00000000 00000000 00000000 ， 后面8位代表地表地形的类型 ， 前面的24位代表复合类型
+    TerrainType_Wujiang = 1 << 8,// 武将
+    TerrainType_Kaifajianzhu = 1 << 9, // 开发建筑
+    TerrainType_Fire =    1 << 10,// 火
+    TerrainType_Junshisheshi = 1 << 11,// 军事设施
 }
+
+
 
 public class MapManager {
     static MapManager msMapManager = null;
@@ -78,9 +87,11 @@ public class MapManager {
     public int mMapCorrdinateWidth = 200;
     public int mMapCorrdinateHeight = 200;
 
+    public static uint TERRAINTYPE_MASK = 0xFFFFFFF0;
+
     public int mSideLength = 1;
 
-    int[,] mMapDatas = null;
+    uint[,] mMapDatas = null;
 
     public static MapManager GetInstance() {
         if (msMapManager == null) {
@@ -93,11 +104,41 @@ public class MapManager {
         Init();
     }
     public void Init() {
-        mMapDatas = new int[mMapCorrdinateWidth, mMapCorrdinateHeight];
+        mMapDatas = new uint[mMapCorrdinateWidth, mMapCorrdinateHeight];
     }
 
-    public int[,] GetMapDatas() {
+    public uint[,] GetMapDatas() {
         return mMapDatas;
+    }
+
+    public uint GetTerrainType(Coordinates coordinates) {
+        return mMapDatas[coordinates.x, coordinates.y];
+    }
+
+    public static uint ToLowTerrainType(uint terrainType) {
+        return terrainType & ~TERRAINTYPE_MASK;
+    }
+    public void AddTerrainType(Coordinates coordinates, TerrainType terrainType) {
+        uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
+        if ((uint)terrainType < 256) {
+            // 1.地表地形的类型，只设置低8位
+            mMapDatas[coordinates.x, coordinates.y] = (originTerrainType & TERRAINTYPE_MASK) + (uint)terrainType;
+            //Debug.Log("AddTerrainType : " + mMapDatas[coordinates.x, coordinates.y] + " terrainType:" + (uint)terrainType + " " + (originTerrainType & TERRAINTYPE_LOW_MASK));
+        } else {
+            // 2.复合类型，只设置高24位
+            mMapDatas[coordinates.x, coordinates.y] = originTerrainType | (uint)terrainType;
+        }
+    }
+
+    public void RemoveTerrainType(Coordinates coordinates, TerrainType terrainType) {
+        uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
+        if ((uint)terrainType < 256) {
+            // 1.地表地形的类型，只设置低8位
+            mMapDatas[coordinates.x, coordinates.y] = originTerrainType & TERRAINTYPE_MASK;
+        } else {
+            // 2.复合类型，只设置高24位
+            mMapDatas[coordinates.x, coordinates.y] = originTerrainType & ~(uint)terrainType;
+        }
     }
 
     public bool CheckBoundary(Coordinates c) {

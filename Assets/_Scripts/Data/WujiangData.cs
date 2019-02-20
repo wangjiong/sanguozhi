@@ -52,10 +52,19 @@ public class WujiangData {
         return mWujiangExpeditions;
     }
 
+    public void SetWujiangExpeditionCorrdinates(Coordinates c1, Wujiang Wujiang) {
+        mWujiangExpeditions[c1] = Wujiang;
+        if (Wujiang) {
+            MapManager.GetInstance().AddTerrainType(c1, TerrainType.TerrainType_Wujiang);
+        } else {
+            MapManager.GetInstance().RemoveTerrainType(c1, TerrainType.TerrainType_Wujiang);
+        }
+    }
+
     public void UpdateWujiangExpeditionCorrdinates(Coordinates c1, Coordinates c2) {
         Wujiang Wujiang = mWujiangExpeditions[c1];
-        mWujiangExpeditions.Remove(c1);
-        mWujiangExpeditions[c2] = Wujiang;
+        SetWujiangExpeditionCorrdinates(c1, null);
+        SetWujiangExpeditionCorrdinates(c2, Wujiang);
     }
 
     public void LoadData() {

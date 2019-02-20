@@ -8,7 +8,10 @@ public class Node {
     public float nodeCurrentCosted = float.MaxValue;
     public Node(Coordinates coordinates) {
         nodeCoordinates = coordinates;
-        int terrainType = MapManager.GetInstance().GetMapDatas()[coordinates.x, coordinates.y];
+        // 根据地形信息获取权重
+        uint terrainType = MapManager.GetInstance().GetTerrainType(coordinates);
+        // 暂时只考虑低8为地表地形
+        terrainType = MapManager.ToLowTerrainType(terrainType);
         nodeCost = MapConfig.msTerrainWight[terrainType];
     }
 }
@@ -45,11 +48,12 @@ public class Wujiang : MonoBehaviour {
 
     void Start() {
         mCoordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
-        BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions()[mCoordinates] = this;
+
+        BattleGameManager.GetInstance().GetWujiangData().SetWujiangExpeditionCorrdinates(mCoordinates, this);
     }
 
     void OnDestroy() {
-        BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions().Remove(mCoordinates);
+        BattleGameManager.GetInstance().GetWujiangData().SetWujiangExpeditionCorrdinates(mCoordinates, null);
     }
 
     public static void SetCurrentWujiang(Wujiang wujiang) {
@@ -151,7 +155,10 @@ public class Wujiang : MonoBehaviour {
 
     // 显示路径
     public void ShowPath() {
+        // 所有武将
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
+        // 所有地形
+
         if (mPrefabPathGrid) {
             ClearNode();
             Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
@@ -173,11 +180,13 @@ public class Wujiang : MonoBehaviour {
                             // 1.当前点的cost小于总cost
                             if (node.nodeCurrentCosted <= mWujiangAllCost) {
                                 // 2.不能移动到其他武将的点上
-                                if (wujiangExpeditions.ContainsKey(node.nodeCoordinates) && wujiangExpeditions[node.nodeCoordinates] != this) {
-                                }else {
-                                    queue.Enqueue(node);
-                                    mResult[node.nodeCoordinates] = node;
+                                if (MapManager.GetInstance().GetTerrainType(node.nodeCoordinates) == (uint)TerrainType.TerrainType_Wujiang) {
+                                    if (wujiangExpeditions[node.nodeCoordinates] != this) {
+                                        continue;
+                                    }
                                 }
+                                queue.Enqueue(node);
+                                mResult[node.nodeCoordinates] = node;
                             }
                         }
                     }

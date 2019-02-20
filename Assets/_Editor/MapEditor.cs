@@ -23,7 +23,7 @@ public class MapEditor : MonoBehaviour {
 
     // 1.地形类型
     List<Toggle> mTerrainTypeToggles = new List<Toggle>();
-    int mTerrainTypeIndex = 0;
+    uint mTerrainTypeIndex = 0;
     // 2.显示地形
     List<Toggle> mShowTerrainTypeToggles = new List<Toggle>();
     Dictionary<Coordinates, GameObject> mShowTerrainTypeDictionary = new Dictionary<Coordinates, GameObject>(); // 存储相应位置的地形类型的显示的物体
@@ -33,7 +33,7 @@ public class MapEditor : MonoBehaviour {
     int mSliderValue = 0;
 
     // 地图
-    int[,] mMapDatas;
+    uint[,] mMapDatas;
     // 相机
     MobileTouchCamera mMobileTouchCamera;
 
@@ -77,7 +77,7 @@ public class MapEditor : MonoBehaviour {
             showTerrainTypeToggle.onValueChanged.AddListener(delegate (bool isOn) { ShowTerrainTypeTogglsEvent(isOn, index); });
             mShowTerrainTypeToggles.Add(showTerrainTypeToggle);
         }
-        mTerrainTypeToggles[mTerrainTypeIndex].isOn = true;
+        mTerrainTypeToggles[(int)mTerrainTypeIndex].isOn = true;
         // 3.地形大小
         mSlider = GameObject.Find("Slider").GetComponent<Slider>();
         mSlider.onValueChanged.AddListener(delegate (float value) { ChangeSizeSliderEvent(value); });
@@ -90,7 +90,7 @@ public class MapEditor : MonoBehaviour {
     // 1.改变地形
     void ChangeTerrainTypeTogglsEvent(bool isOn, int terrainTypeIndex) {
         if (isOn) {
-            mTerrainTypeIndex = terrainTypeIndex;
+            mTerrainTypeIndex = (uint)terrainTypeIndex;
             for (int i = 0; i < mTerrainTypeToggles.Count; i++) {
                 if (i != terrainTypeIndex) {
                     // 改变刷子的地形类型
@@ -224,19 +224,19 @@ public class MapEditor : MonoBehaviour {
                 if (Input.GetMouseButtonUp(1)) {
                     Save();
                 }
-                if (mMapDatas!=null) {
-                    int terrainType = mMapDatas[coordinates.x, coordinates.y];
-                    GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + mTerrainTypeNames[terrainType];
+                if (mMapDatas != null) {
+                    uint terrainType = mMapDatas[coordinates.x, coordinates.y];
+                    GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + terrainType + " " + mTerrainTypeNames[MapManager.ToLowTerrainType(terrainType)];
                 }
             }
         }
     }
 
     // 4.改变地形的显示
-    void ChangeShowTerrainType(Coordinates coordinates, int terrainTypeIndex) {
+    void ChangeShowTerrainType(Coordinates coordinates, uint terrainTypeIndex) {
         if (mMapDatas[coordinates.x, coordinates.y] != terrainTypeIndex) {
             mMapDatas[coordinates.x, coordinates.y] = terrainTypeIndex;
-            string newName = mTerrainTypeName[mMapDatas[coordinates.x, coordinates.y]];
+            string newName = mTerrainTypeName[(int)mMapDatas[coordinates.x, coordinates.y]];
             if (mShowTerrainTypeDictionary.ContainsKey(coordinates)) {
                 // 4-1 如果之前的位置有显示，那么直接改变颜色即可
                 if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid) {
@@ -246,7 +246,7 @@ public class MapEditor : MonoBehaviour {
                     mShowTerrainTypeDictionary.Remove(coordinates);
                 } else {
                     mShowTerrainTypeDictionary[coordinates].name = newName;
-                    mShowTerrainTypeDictionary[coordinates].GetComponent<Renderer>().material.color = mTerrainTypColor[terrainTypeIndex];
+                    mShowTerrainTypeDictionary[coordinates].GetComponent<Renderer>().material.color = mTerrainTypColor[(int)terrainTypeIndex];
                 }
             } else {
                 // 4-2 如果之前的位置没有显示，那么直接
@@ -259,7 +259,7 @@ public class MapEditor : MonoBehaviour {
                     p.y = mOriginalPosition.y - 0.00001f;
                     g.transform.position = p;
                     g.name = newName;
-                    g.GetComponent<Renderer>().material.color = mTerrainTypColor[terrainTypeIndex];
+                    g.GetComponent<Renderer>().material.color = mTerrainTypColor[(int)terrainTypeIndex];
                     g.transform.SetParent(mTerrain.transform);
                     mShowTerrainTypeDictionary.Add(coordinates, g);
                 }
@@ -283,7 +283,7 @@ public class MapEditor : MonoBehaviour {
                 if (terrainType != (int)TerrainType.TerrainType_Dushi &&
                     terrainType != (int)TerrainType.TerrainType_Guansuo &&
                     terrainType != (int)TerrainType.TerrainType_Gang) {
-                    mMapDatas[i, j] = terrainType;
+                    mMapDatas[i, j] = (uint)terrainType;
                 }
             }
         }
