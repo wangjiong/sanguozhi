@@ -180,8 +180,9 @@ public class Wujiang : MonoBehaviour {
                             // 1.当前点的cost小于总cost
                             if (node.nodeCurrentCosted <= mWujiangAllCost) {
                                 // 2.不能移动到其他武将的点上
-                                if (MapManager.GetInstance().GetTerrainType(node.nodeCoordinates) == (uint)TerrainType.TerrainType_Wujiang) {
-                                    if (wujiangExpeditions[node.nodeCoordinates] != this) {
+                                if (wujiangExpeditions.ContainsKey(node.nodeCoordinates)) {
+                                    Wujiang wujiang = wujiangExpeditions[node.nodeCoordinates];
+                                    if (wujiang && wujiang != this) {
                                         continue;
                                     }
                                 }

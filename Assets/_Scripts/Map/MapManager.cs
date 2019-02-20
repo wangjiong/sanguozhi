@@ -88,6 +88,9 @@ public class MapManager {
     public int mMapCorrdinateHeight = 200;
 
     public static uint TERRAINTYPE_MASK = 0xFFFFFFF0;
+    public static uint ToLowTerrainType(uint terrainType) {
+        return terrainType & ~TERRAINTYPE_MASK;
+    }
 
     public int mSideLength = 1;
 
@@ -115,9 +118,6 @@ public class MapManager {
         return mMapDatas[coordinates.x, coordinates.y];
     }
 
-    public static uint ToLowTerrainType(uint terrainType) {
-        return terrainType & ~TERRAINTYPE_MASK;
-    }
     public void AddTerrainType(Coordinates coordinates, TerrainType terrainType) {
         uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
         if ((uint)terrainType < 256) {

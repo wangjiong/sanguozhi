@@ -53,10 +53,11 @@ public class WujiangData {
     }
 
     public void SetWujiangExpeditionCorrdinates(Coordinates c1, Wujiang Wujiang) {
-        mWujiangExpeditions[c1] = Wujiang;
         if (Wujiang) {
+            mWujiangExpeditions[c1] = Wujiang;
             MapManager.GetInstance().AddTerrainType(c1, TerrainType.TerrainType_Wujiang);
         } else {
+            mWujiangExpeditions.Remove(c1);
             MapManager.GetInstance().RemoveTerrainType(c1, TerrainType.TerrainType_Wujiang);
         }
     }
