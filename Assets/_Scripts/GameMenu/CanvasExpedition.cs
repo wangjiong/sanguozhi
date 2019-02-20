@@ -52,7 +52,7 @@ public class CanvasExpedition : MonoBehaviour {
     int mMove; // 移动能力
     // 战法
     public Text[] mSkillText;
-    // 能力5变形
+    // 能力5边型
     public AbilityMesh mAbilityMesh;
 
     // 城池
@@ -67,19 +67,18 @@ public class CanvasExpedition : MonoBehaviour {
         }
         // Slider
         foreach (Slider slider in mSlider) {
-            slider.value = 0;
+            slider.value = 0.5f;
         }
         for (int index = 0; index < mSliderText.Length; index++) {
-            int value = 0;
             if (index == 0) {
                 int max = 20000;
-                mSliderText[index].text = (int)(max * value) + "/" + max;
+                mSliderText[index].text = (int)(max * mSlider[index].value) + "/" + max;
             } else if (index == 1) {
                 int max = 10000;
-                mSliderText[index].text = (int)(max * value) + "/" + max;
+                mSliderText[index].text = (int)(max * mSlider[index].value) + "/" + max;
             } else if (index == 2) {
                 int max = 50000;
-                mSliderText[index].text = (int)(max * value) + "/" + max;
+                mSliderText[index].text = (int)(max * mSlider[index].value) + "/" + max;
             }
         }
         mSliderDayText.text = "0日";
