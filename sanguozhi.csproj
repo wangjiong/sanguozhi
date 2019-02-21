@@ -228,7 +228,6 @@
     <Compile Include="Assets\_Scripts\Battle\Ability\AbilityMesh.cs" />
     <Compile Include="Assets\_Scripts\Battle\BattleGameManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\City\City.cs" />
-    <Compile Include="Assets\_Scripts\Battle\EventTrigger.cs" />
     <Compile Include="Assets\_Scripts\Battle\Faction.cs" />
     <Compile Include="Assets\_Scripts\Battle\Regiment.cs" />
     <Compile Include="Assets\_Scripts\Battle\Strategy\Strategy.cs" />

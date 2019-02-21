@@ -24,10 +24,12 @@ public class CanvasBattleMenu : MonoBehaviour {
                     gameObject.SetActive(false);
                     mWujiang.Seclet(false);
                     mWujiang.SetWujiangState(WujiangState.WujiangState_Battle);
-                } else {
+                } else if (index == 3) {
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                     Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
                     mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2, sizeDelta.y * scale.y / 2, 0);
+                } else {
+                    mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
                 }
             });
 
