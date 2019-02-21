@@ -77,6 +77,7 @@ public class EventTrigger : MonoBehaviour {
         // 3.点击空白
         if (Input.GetMouseButtonDown(0)) {
             mCanvasGameMenu.gameObject.SetActive(false);
+            BattleGameManager.GetInstance().GetCanvasBattleMenu().gameObject.SetActive(false);
         }
     }
 

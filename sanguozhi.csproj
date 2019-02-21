@@ -240,12 +240,14 @@
     <Compile Include="Assets\_Scripts\Data\CityData.cs" />
     <Compile Include="Assets\_Scripts\Data\WujiangData.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\BackController.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\CanvasBattleMenu.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasDevelop.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasExecutive.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasExpedition.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasGameMenu.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\CanvasSearch.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\MainMenuController.cs" />
+    <Compile Include="Assets\_Scripts\GameMenu\MenuManager.cs" />
     <Compile Include="Assets\_Scripts\GameMenu\MenuModel.cs" />
     <Compile Include="Assets\_Scripts\Map\GenerateGrid.cs" />
     <Compile Include="Assets\_Scripts\Map\MapConfig.cs" />

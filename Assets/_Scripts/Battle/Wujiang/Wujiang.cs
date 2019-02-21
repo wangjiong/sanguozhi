@@ -135,10 +135,11 @@ public class Wujiang : MonoBehaviour {
                         // Update WujiangExpeditions
                         BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
                         mCoordinates = coordinates;
+                        // 显示战斗菜单
+                        BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
+                        BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
                     }
                     HidePath();
-                    Seclet(false);
-                    mWujiangState = WujiangState.WujiangState_Battle;
                     return;
                 }
             }

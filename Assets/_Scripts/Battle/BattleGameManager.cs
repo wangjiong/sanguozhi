@@ -9,7 +9,9 @@ public class BattleGameManager : MonoBehaviour {
 
 	static BattleGameManager msBattleGameManager = null;
 
-	private void Awake(){
+    public CanvasBattleMenu mCanvasGameMenu;
+
+    private void Awake(){
 		msBattleGameManager = this;
 	}
 
@@ -35,7 +37,6 @@ public class BattleGameManager : MonoBehaviour {
 		mWujiangData.LoadData();
         // 归属武将
         mCityData.AllocateWujiangData(mWujiangData);
-
     }
 
     public CityData GetCityData() {
@@ -44,5 +45,9 @@ public class BattleGameManager : MonoBehaviour {
 
     public WujiangData GetWujiangData() {
         return mWujiangData;
+    }
+
+    public CanvasBattleMenu GetCanvasBattleMenu() {
+        return mCanvasGameMenu;
     }
 }
