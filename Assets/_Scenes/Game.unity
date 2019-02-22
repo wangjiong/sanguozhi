@@ -33243,6 +33243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3dc564936e2f274f925455b9e922943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mFirstMenu: {fileID: 1901683576}
   mMenuFirstBtns:
   - {fileID: 1295915325}
   - {fileID: 528069442}
@@ -33258,7 +33259,6 @@ MonoBehaviour:
   - {fileID: 802636339}
   - {fileID: 1857205979}
   - {fileID: 1245056509}
-  mFirstMenu: {fileID: 0}
 --- !u!114 &1595341705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40393,7 +40393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c62120e600c8146beafee19cefdb5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCanvasGameMenu: {fileID: 1428355554}
 --- !u!114 &1914582479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42533,7 +42532,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1730054657707616, guid: da9af021be6a9884d948c166f0454c44, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da9af021be6a9884d948c166f0454c44, type: 2}
@@ -44186,6 +44185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3718dd2840dfe4a88fd2a7f72ae995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mCanvasGameMenu: {fileID: 1428355554}
+  mCanvasBattleMenu: {fileID: 1595341704}
+  mMobileTouchCamera: {fileID: 1914582480}
 --- !u!1 &2059721126
 GameObject:
   m_ObjectHideFlags: 0

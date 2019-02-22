@@ -28,7 +28,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;ENABLE_DUCK_TYPING;CROSS_PLATFORM_INPUT;MOBILE_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;ENABLE_DUCK_TYPING;CROSS_PLATFORM_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -38,7 +38,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;ENABLE_DUCK_TYPING;CROSS_PLATFORM_INPUT;MOBILE_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;ENABLE_VSTU;ENABLE_DUCK_TYPING;CROSS_PLATFORM_INPUT;UNITY_HAS_GOOGLEVR</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -116,6 +116,12 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets/_Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets/_Plugins/DOTween/DOTween.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="sanguozhi.Plugins.csproj">
@@ -142,37 +148,40 @@
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
-    <None Include="Assets\_Lib\InfinityScrollView\Editor\BaseObject\readme.txt" />
-    <None Include="Assets\_Lib\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
-    <None Include="Assets\_Lib\Materials\VertexColors.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo02_2DGrids\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo05_CellsColoring\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo06b_CellsPositions2\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo07_CellsByRowCol\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo08_Orthographic\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo09_Mask\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo10_TerrainPositioning\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo11_TerritoryConquer\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Demos\Demo13_TerritoryByTexture\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\README.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitHighlight.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritory.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
-    <None Include="Assets\_Lib\TerrainGridSystem\Scripts\PolyTri\README.txt" />
     <None Include="Assets\_Materials\Checkerboard.shader" />
     <None Include="Assets\_Materials\Cus.shader" />
     <None Include="Assets\_Materials\Gird.shader" />
+    <None Include="Assets\_Plugins\DOTween\DOTween.XML" />
+    <None Include="Assets\_Plugins\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\_Plugins\DOTween\readme.txt" />
+    <None Include="Assets\_Plugins\InfinityScrollView\Editor\BaseObject\readme.txt" />
+    <None Include="Assets\_Plugins\InfinityScrollView\Samples\ResourceSample\Data\UserIdSamples.txt" />
+    <None Include="Assets\_Plugins\Materials\VertexColors.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo01_TerrainBalls\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo02_2DGrids\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo03_CellsVisibility\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo04a_CellTexture\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo04b_TerritoryTexture\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo05_CellsColoring\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo06_CellsPositions\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo06b_CellsPositions2\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo07_CellsByRowCol\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo08_Orthographic\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo09_Mask\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo10_TerrainPositioning\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo11_TerritoryConquer\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo12_PathFinding\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Demos\Demo13_TerritoryByTexture\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\README.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitHighlight.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitSingleColorCell.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritory.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitSingleColorTerritoryThick.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitSurfacesColor.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Resources\Shaders\UnlitSurfacesTexture.shader" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Scripts\PolyTri\P2T_AUTHORS.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Scripts\PolyTri\P2T_LICENSE.txt" />
+    <None Include="Assets\_Plugins\TerrainGridSystem\Scripts\PolyTri\README.txt" />
     <None Include="Assets\mapdata.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

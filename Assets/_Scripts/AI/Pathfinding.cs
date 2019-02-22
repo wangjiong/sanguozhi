@@ -6,6 +6,7 @@ public class Node {
     public Coordinates nodeCoordinates;
     public float nodeCost = 1;
     public float nodeCurrentCosted = float.MaxValue;
+    public Node nodeParent;
     public Node(Coordinates coordinates) {
         nodeCoordinates = coordinates;
         // 根据地形信息获取权重
@@ -13,6 +14,10 @@ public class Node {
         // 暂时只考虑低8为地表地形
         terrainType = MapManager.ToLowTerrainType(terrainType);
         nodeCost = MapConfig.msTerrainWight[terrainType];
+    }
+
+    public override string ToString() {
+        return "Node nodeCoordinates" + nodeCoordinates + " nodeCurrentCosted:" + nodeCurrentCosted;
     }
 }
 
@@ -72,6 +77,7 @@ public class Pathfinding {
                                 }
                             }
                             queue.Enqueue(node);
+                            node.nodeParent = currentNode;
                             mResult[node.nodeCoordinates] = node;
                         }
                     }

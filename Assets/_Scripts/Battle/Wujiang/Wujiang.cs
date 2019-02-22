@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -123,23 +124,37 @@ public class Wujiang : MonoBehaviour {
                             return;
                         }
                     }
-                    if (city) {
-                        // 1.回到城市
-                        foreach (WujiangBean wujiangBean in mWujiangBeans) {
-                            city.GetWujiangBeans().Add(wujiangBean);
-                        }
-                        Destroy(gameObject);
-                    } else {
-                        // 2.正常移动
-                        transform.position = position;
-                        // Update WujiangExpeditions
-                        BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
-                        mCoordinates = coordinates;
-                        // 显示战斗菜单
-                        BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
-                        BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
+                    // 计算路径
+                    List<Vector3> waypoints = new List<Vector3>();
+                    Node n = node.Value;
+                    while (n!=null) {
+                        Debug.Log(n);
+                        waypoints.Insert(0, MapManager.GetInstance().CorrdinateToTerrainPosition(n.nodeCoordinates));
+                        n = n.nodeParent;
                     }
-                    HidePath();
+                    // 播放动画
+                    Tween t = transform.DOPath(waypoints.ToArray(), 0.5f, PathType.CatmullRom);
+                    // Then set the ease to Linear and use infinite loops
+                    t.SetEase(Ease.Linear);
+                    t.onComplete = delegate () {
+                        if (city) {
+                            // 1.回到城市
+                            foreach (WujiangBean wujiangBean in mWujiangBeans) {
+                                city.GetWujiangBeans().Add(wujiangBean);
+                            }
+                            Destroy(gameObject);
+                        } else {
+                            // 2.正常移动
+                            transform.position = position;
+                            // Update WujiangExpeditions
+                            BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
+                            mCoordinates = coordinates;
+                            // 显示战斗菜单
+                            BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
+                            BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
+                        }
+                        HidePath();
+                    };
                     return;
                 }
             }
