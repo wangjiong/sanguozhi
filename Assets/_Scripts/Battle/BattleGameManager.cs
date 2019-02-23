@@ -66,20 +66,30 @@ public class BattleGameManager : MonoBehaviour {
             if (Input.GetMouseButtonUp(0)) {
                 Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
                 if (currentWujiang != null) {
-                    // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
-                    if (!Wujiang.msShowBattleMenu) {
-                        Wujiang.msShowBattleMenu = true;
+                    // 1.当前处于要攻击状态
+                    // 这个主要是因为...
+                    if (!CanvasBattleMenu.msCanStartSkill) {
+                        CanvasBattleMenu.msCanStartSkill = true;
                         return;
                     }
-                    // 显示战斗菜单
+                    if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Attack) {
+                        mCanvasBattleMenu.StartSkill(MapManager.GetInstance().TerrainPositionToCorrdinate(pointCubePosition));
+                        return;
+                    }
+                    // 2.显示战斗菜单
+                    // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
+                    if (!Wujiang.msCanShowBattleMenu) {
+                        Wujiang.msCanShowBattleMenu = true;
+                        return;
+                    }
                     currentWujiang.ShowBattleMeun(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                     return;
                 }
             }
             // 2.点击城市
             // 这个主要是因为防止刚刚点击城市，移动城市后，菜单就显示出来了
-            if (!Wujiang.msShowCityMenu) {
-                Wujiang.msShowBattleMenu = true;
+            if (!Wujiang.msCanShowCityMenu) {
+                Wujiang.msCanShowBattleMenu = true;
                 return;
             }
             if (hit.collider.CompareTag("City")) {

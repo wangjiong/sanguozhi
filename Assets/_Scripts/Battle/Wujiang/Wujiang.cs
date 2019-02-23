@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public enum WujiangState {
     WujiangState_Prepare_Expedition,
     WujiangState_Prepare_Move,
+    WujiangState_Prepare_Attack,
     WujiangState_Battle,
     WujiangState_Fallback,
 }
@@ -14,8 +15,8 @@ public class Wujiang : MonoBehaviour {
     static string TAG = "Wujiang==";
 
     static Wujiang msCurrentWujiang;
-    public static bool msShowBattleMenu = true;
-    public static bool msShowCityMenu = true;
+    public static bool msCanShowBattleMenu = true;
+    public static bool msCanShowCityMenu = true;
 
     // 属性
     Coordinates mCoordinates;
@@ -25,7 +26,9 @@ public class Wujiang : MonoBehaviour {
     public Image mAvatar;
     public Text mHealth;
     public Text mName;
-
+    public ArmType mArmType = ArmType.ArmType_Qiangbing;
+    public int mArmAbility = 3;
+    public Skills mSkills;
     // 路径相关
     float mWujiangPathfindingCost = 6;
     Dictionary<Coordinates, Node> mPathfindingResult;
@@ -82,9 +85,14 @@ public class Wujiang : MonoBehaviour {
         // 当前选中的武将准备移动，那么不能点击其他武将
         if (msCurrentWujiang) {
             if (msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition ||
-                msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Move
+                msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Move ||
+                msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Attack
                 )
                 return;
+        }
+        // 防止移动过程中点击武将
+        if (!msCanShowCityMenu) {
+            return;
         }
         mSelected = !mSelected;
         Seclet(mSelected);
@@ -92,7 +100,7 @@ public class Wujiang : MonoBehaviour {
         if (mSelected) {
             ShowPath();
             mWujiangState = WujiangState.WujiangState_Prepare_Move;
-            msShowBattleMenu = false;
+            msCanShowBattleMenu = false;
         }
     }
 
@@ -163,7 +171,7 @@ public class Wujiang : MonoBehaviour {
             // 如果小于2个点，那么直接隐藏路径即可
             HidePath();
         } else {
-            msShowCityMenu = false;
+            msCanShowCityMenu = false;
             Tween t = transform.DOPath(waypoints.ToArray(), 0.1f * (waypoints.Count-1), PathType.CatmullRom).SetEase(Ease.Linear);
             t.onComplete = delegate () {
                 if (city) {
@@ -178,10 +186,26 @@ public class Wujiang : MonoBehaviour {
                     BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
                     mCoordinates = coordinates;
                 }
-                msShowCityMenu = true;
+                SetWujiangState(WujiangState.WujiangState_Battle);
+                msCanShowCityMenu = true;
                 HidePath();
             };
         }
+    }
+
+    public void Move(Coordinates targetCoordinates) {
+        List<Vector3> waypoints = new List<Vector3>();
+        waypoints.Add(transform.position);
+        Vector3 targetPosition = MapManager.GetInstance().CorrdinateToTerrainPosition(targetCoordinates);
+        waypoints.Add(targetPosition);
+
+        Tween t = transform.DOPath(waypoints.ToArray(), 0.02f * (waypoints.Count - 1), PathType.CatmullRom).SetEase(Ease.Linear);
+        t.onComplete = delegate () {
+            // 正常移动
+            transform.position = targetPosition;
+            BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, targetCoordinates);
+            mCoordinates = targetCoordinates;
+        };
     }
 
     public void SetWujiangBeans(WujiangBean[] wujiangBeans) {
@@ -190,5 +214,9 @@ public class Wujiang : MonoBehaviour {
 
     public WujiangBean[] GetWujiangBeans() {
         return mWujiangBeans;
+    }
+
+    public Coordinates GetCoordinates() {
+        return mCoordinates;
     }
 }

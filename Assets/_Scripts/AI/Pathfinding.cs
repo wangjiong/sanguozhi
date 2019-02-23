@@ -48,7 +48,7 @@ public class Pathfinding {
     }
 
     public Dictionary<Coordinates, Node> ShowPath(Wujiang wujiang) {
-        // 所有武将
+        // 所有出征的武将
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         ClearNode();
         Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(wujiang.transform.position);

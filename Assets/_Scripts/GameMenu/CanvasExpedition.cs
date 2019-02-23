@@ -149,6 +149,8 @@ public class CanvasExpedition : MonoBehaviour {
                 wujiang.mAvatar.sprite = mChiefImg.sprite;
                 wujiang.mHealth.text = mSliderText[0].text.Split('/')[0];
                 wujiang.mName.text = mChief.name;
+                wujiang.mSkills = new Skills(wujiang);
+
                 WujiangBean[] wujiangBeans = new WujiangBean[3];
                 wujiangBeans[0] = mChief;
                 wujiangBeans[1] = mJunior01;
