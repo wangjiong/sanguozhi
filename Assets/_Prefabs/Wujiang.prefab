@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 114704606281057112}
   m_Layer: 0
   m_Name: Wujiang
-  m_TagString: Untagged
+  m_TagString: Wujiang
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -460,8 +460,6 @@ MonoBehaviour:
   mAvatar: {fileID: 114948850754109506}
   mHealth: {fileID: 114811910170956412}
   mName: {fileID: 114317114675681988}
-  mPrefabPathGrid: {fileID: 1299802756867558, guid: f4d740bba76054843ab120478c2b83e7,
-    type: 2}
 --- !u!114 &114764186706708354
 MonoBehaviour:
   m_ObjectHideFlags: 1

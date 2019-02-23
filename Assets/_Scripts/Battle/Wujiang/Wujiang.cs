@@ -14,6 +14,8 @@ public class Wujiang : MonoBehaviour {
     static string TAG = "Wujiang==";
 
     static Wujiang msCurrentWujiang;
+    public static bool msShowBattleMenu = true;
+    public static bool msShowCityMenu = true;
 
     // 属性
     Coordinates mCoordinates;
@@ -78,12 +80,22 @@ public class Wujiang : MonoBehaviour {
 
     public void OnMouseDown() {
         // 当前选中的武将准备移动，那么不能点击其他武将
-        if (msCurrentWujiang && msCurrentWujiang.GetWujiangState() != WujiangState.WujiangState_Battle) {
-            return;
+        if (msCurrentWujiang) {
+            if (msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition ||
+                msCurrentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Move
+                )
+                return;
         }
         mSelected = !mSelected;
         Seclet(mSelected);
+
+        if (mSelected) {
+            ShowPath();
+            mWujiangState = WujiangState.WujiangState_Prepare_Move;
+            msShowBattleMenu = false;
+        }
     }
+
     public void Seclet(bool seclet) {
         mSelected = seclet;
         if (mSelected) {
@@ -97,7 +109,6 @@ public class Wujiang : MonoBehaviour {
             // 2.不选中
             msCurrentWujiang = null;
             mHighlightableObjecto.Off();
-            HidePath();
         }
     }
 
@@ -111,7 +122,7 @@ public class Wujiang : MonoBehaviour {
         Pathfinding.GetInstance().ClearNode();
     }
 
-    public void Move(Vector3 position) {
+    public bool ShowBattleMeun(Vector3 position) {
         Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(position);
         foreach (KeyValuePair<Coordinates, Node> node in mPathfindingResult) {
             if (node.Value.nodeCurrentCosted <= mWujiangPathfindingCost) {
@@ -121,43 +132,55 @@ public class Wujiang : MonoBehaviour {
                     // 不能回当前的城池
                     if (mWujiangState == WujiangState.WujiangState_Prepare_Expedition) {
                         if (city == mCity) {
-                            return;
+                            return true;
                         }
                     }
-                    // 计算路径
-                    List<Vector3> waypoints = new List<Vector3>();
-                    Node n = node.Value;
-                    while (n!=null) {
-                        Debug.Log(n);
-                        waypoints.Insert(0, MapManager.GetInstance().CorrdinateToTerrainPosition(n.nodeCoordinates));
-                        n = n.nodeParent;
-                    }
-                    // 播放动画
-                    Tween t = transform.DOPath(waypoints.ToArray(), 0.5f, PathType.CatmullRom);
-                    // Then set the ease to Linear and use infinite loops
-                    t.SetEase(Ease.Linear);
-                    t.onComplete = delegate () {
-                        if (city) {
-                            // 1.回到城市
-                            foreach (WujiangBean wujiangBean in mWujiangBeans) {
-                                city.GetWujiangBeans().Add(wujiangBean);
-                            }
-                            Destroy(gameObject);
-                        } else {
-                            // 2.正常移动
-                            transform.position = position;
-                            // Update WujiangExpeditions
-                            BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
-                            mCoordinates = coordinates;
-                            // 显示战斗菜单
-                            BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
-                            BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
-                        }
-                        HidePath();
-                    };
-                    return;
+                    // 显示战斗菜单
+                    BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
+                    BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
+                    // 透明武将
+                    GameObject wujiangTransparent = BattleGameManager.GetInstance().GetWujiangTransparent();
+                    wujiangTransparent.SetActive(true);
+                    wujiangTransparent.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
                 }
             }
+        }
+        return false;
+    }
+
+    public void Move(Vector3 position) {
+        Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(position);
+        Node node = mPathfindingResult[coordinates];
+        City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
+        // 计算路径
+        List<Vector3> waypoints = new List<Vector3>();
+        while (node != null) {
+            waypoints.Insert(0, MapManager.GetInstance().CorrdinateToTerrainPosition(node.nodeCoordinates));
+            node = node.nodeParent;
+        }
+        // 播放动画
+        if (waypoints.Count < 2) {
+            // 如果小于2个点，那么直接隐藏路径即可
+            HidePath();
+        } else {
+            msShowCityMenu = false;
+            Tween t = transform.DOPath(waypoints.ToArray(), 0.1f * (waypoints.Count-1), PathType.CatmullRom).SetEase(Ease.Linear);
+            t.onComplete = delegate () {
+                if (city) {
+                    // 1.回到城市
+                    foreach (WujiangBean wujiangBean in mWujiangBeans) {
+                        city.GetWujiangBeans().Add(wujiangBean);
+                    }
+                    Destroy(gameObject);
+                } else {
+                    // 2.正常移动
+                    transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
+                    BattleGameManager.GetInstance().GetWujiangData().UpdateWujiangExpeditionCorrdinates(mCoordinates, coordinates);
+                    mCoordinates = coordinates;
+                }
+                msShowCityMenu = true;
+                HidePath();
+            };
         }
     }
 

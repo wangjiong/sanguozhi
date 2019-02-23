@@ -6,27 +6,31 @@ using UnityEngine.EventSystems;
 public class BattleGameManager : MonoBehaviour {
     static string TAG = "GameManager==";
 
-	static BattleGameManager msBattleGameManager = null;
+    static string WUJIANG_TRANSPARENT = "WujiangData/WujiangTransparent";
+
+    static BattleGameManager msBattleGameManager = null;
 
     public CanvasGameMenu mCanvasGameMenu;
     public CanvasBattleMenu mCanvasBattleMenu;
     public MobileTouchCamera mMobileTouchCamera;
 
+    GameObject mWujiangTransparent;
+
     GameObject mPointCube;
     Vector3 mOriginalPosition;
 
-    private void Awake(){
-		msBattleGameManager = this;
-	}
+    private void Awake() {
+        msBattleGameManager = this;
+    }
 
-	public static BattleGameManager GetInstance() {
-		return msBattleGameManager;
-	}
+    public static BattleGameManager GetInstance() {
+        return msBattleGameManager;
+    }
 
-	// 1.加载的城池数据
-	private CityData mCityData;
-	// 2.加载的武将数据
-	private WujiangData mWujiangData;
+    // 1.加载的城池数据
+    private CityData mCityData;
+    // 2.加载的武将数据
+    private WujiangData mWujiangData;
 
 
     void Start() {
@@ -36,6 +40,9 @@ public class BattleGameManager : MonoBehaviour {
         // 初始化
         mPointCube = GameObject.Find("Point");
         mOriginalPosition = mPointCube.transform.position;
+
+        mWujiangTransparent = Instantiate(Resources.Load(WUJIANG_TRANSPARENT)) as GameObject;
+        mWujiangTransparent.SetActive(false);
     }
 
     void Update() {
@@ -59,25 +66,28 @@ public class BattleGameManager : MonoBehaviour {
             if (Input.GetMouseButtonUp(0)) {
                 Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
                 if (currentWujiang != null) {
-                    if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition) {
-                        // 当前武将处于出征状态
-                        currentWujiang.Move(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
+                    // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
+                    if (!Wujiang.msShowBattleMenu) {
+                        Wujiang.msShowBattleMenu = true;
                         return;
-                    } else {
-                        if (currentWujiang.GetWujiangState() != WujiangState.WujiangState_Prepare_Move) {
-                            currentWujiang.SetWujiangState(WujiangState.WujiangState_Prepare_Move);
-                            currentWujiang.ShowPath();
-                        } else {
-                            currentWujiang.Move(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
-                            return;
-                        }
                     }
+                    // 显示战斗菜单
+                    currentWujiang.ShowBattleMeun(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
+                    return;
                 }
             }
             // 2.点击城市
+            // 这个主要是因为防止刚刚点击城市，移动城市后，菜单就显示出来了
+            if (!Wujiang.msShowCityMenu) {
+                Wujiang.msShowBattleMenu = true;
+                return;
+            }
             if (hit.collider.CompareTag("City")) {
-
-                if (Input.GetMouseButtonUp(0)) {
+                Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
+                if (currentWujiang != null) {
+                    return;
+                }
+                    if (Input.GetMouseButtonUp(0)) {
                     GameObject city;
                     if (hit.collider.gameObject.name.Equals("Model")) {
                         // 关隘
@@ -91,12 +101,11 @@ public class BattleGameManager : MonoBehaviour {
                     mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
                 }
             }
-
         }
         // 3.点击空白
         if (Input.GetMouseButtonDown(0)) {
             mCanvasGameMenu.gameObject.SetActive(false);
-            BattleGameManager.GetInstance().GetCanvasBattleMenu().gameObject.SetActive(false);
+            mCanvasBattleMenu.gameObject.SetActive(false);
         }
     }
 
@@ -113,13 +122,13 @@ public class BattleGameManager : MonoBehaviour {
         return results.Count > 0;
     }
 
-    void LoadData(){
+    void LoadData() {
         // 加载城池数据
         mCityData = new CityData();
-		mCityData.LoadData();
+        mCityData.LoadData();
         // 加载城池数据
         mWujiangData = new WujiangData();
-		mWujiangData.LoadData();
+        mWujiangData.LoadData();
         // 归属武将
         mCityData.AllocateWujiangData(mWujiangData);
     }
@@ -135,4 +144,10 @@ public class BattleGameManager : MonoBehaviour {
     public CanvasBattleMenu GetCanvasBattleMenu() {
         return mCanvasBattleMenu;
     }
+
+    public GameObject GetWujiangTransparent() {
+        return mWujiangTransparent;
+    }
+
+
 }

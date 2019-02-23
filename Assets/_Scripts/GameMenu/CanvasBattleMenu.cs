@@ -21,9 +21,12 @@ public class CanvasBattleMenu : MonoBehaviour {
             int index = i;
             mMenuFirstBtns[index].GetComponent<Button>().onClick.AddListener(delegate () {
                 if (index == 0) {
+                    // 隐藏战斗菜单
                     gameObject.SetActive(false);
-                    mWujiang.Seclet(false);
+                    // 待机（目前为移动）
+                    mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position);
                     mWujiang.SetWujiangState(WujiangState.WujiangState_Battle);
+                    mWujiang.Seclet(false);
                 } else if (index == 3) {
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                     Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
@@ -49,8 +52,7 @@ public class CanvasBattleMenu : MonoBehaviour {
 
     void OnDisable() {
         mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
-        mWujiang.Seclet(false);
-        mWujiang.SetWujiangState(WujiangState.WujiangState_Battle);
+        BattleGameManager.GetInstance().GetWujiangTransparent().SetActive(false);
     }
 
     public void ShowMenu(Vector2 screenPosition) {
