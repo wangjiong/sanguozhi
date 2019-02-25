@@ -156,7 +156,7 @@ public class Wujiang : MonoBehaviour {
         return false;
     }
 
-    public void Move(Vector3 position) {
+    public void Move(Vector3 position , StartSkillDelegate StartSkillDelegate = null , Coordinates attackCoordinates = null) {
         Coordinates coordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(position);
         Node node = mPathfindingResult[coordinates];
         City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
@@ -170,6 +170,10 @@ public class Wujiang : MonoBehaviour {
         if (waypoints.Count < 2) {
             // 如果小于2个点，那么直接隐藏路径即可
             HidePath();
+            // 如果有技能的话，放技能
+            if (StartSkillDelegate != null) {
+                StartSkillDelegate(attackCoordinates);
+            }
         } else {
             msCanShowCityMenu = false;
             Tween t = transform.DOPath(waypoints.ToArray(), 0.1f * (waypoints.Count-1), PathType.CatmullRom).SetEase(Ease.Linear);
@@ -189,6 +193,10 @@ public class Wujiang : MonoBehaviour {
                 SetWujiangState(WujiangState.WujiangState_Battle);
                 msCanShowCityMenu = true;
                 HidePath();
+                // 如果有技能的话，放技能
+                if (StartSkillDelegate!=null) {
+                    StartSkillDelegate(attackCoordinates);
+                }
             };
         }
     }

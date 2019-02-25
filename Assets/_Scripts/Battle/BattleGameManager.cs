@@ -73,7 +73,8 @@ public class BattleGameManager : MonoBehaviour {
                         return;
                     }
                     if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Attack) {
-                        mCanvasBattleMenu.StartSkill(MapManager.GetInstance().TerrainPositionToCorrdinate(pointCubePosition));
+                        // 释放技能
+                        mCanvasBattleMenu.MoveAndStartSkill(MapManager.GetInstance().TerrainPositionToCorrdinate(pointCubePosition));
                         return;
                     }
                     // 2.显示战斗菜单

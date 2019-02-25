@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void StartSkillDelegate(Coordinates coordinates);
+
 public class CanvasBattleMenu : MonoBehaviour {
     string TAG = "CanvasBattleMenu==";
 
@@ -36,16 +38,18 @@ public class CanvasBattleMenu : MonoBehaviour {
             int index = i;
             mMenuFirstBtns[index].GetComponent<Button>().onClick.AddListener(delegate () {
                 if (index == 0) {
-                    // 隐藏战斗菜单
+                    // 隐藏整个菜单
                     gameObject.SetActive(false);
                     // 待机（目前为移动）
                     mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position);
                     mWujiang.Seclet(false);
                 } else if (index == 3) {
+                    // 显示技能菜单
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                     Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
                     mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2, sizeDelta.y * scale.y / 2, 0);
                 } else {
+                    // 隐耳机菜单
                     mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
                 }
             });
@@ -59,7 +63,7 @@ public class CanvasBattleMenu : MonoBehaviour {
                 mSkillIndex = index;
                 mTargets = mWujiang.mSkills.mShowSkillTargets[index](mWujiang);
                 mWujiang.SetWujiangState(WujiangState.WujiangState_Prepare_Attack);
-                mWujiang.HidePath();
+                //mWujiang.HidePath();
                 ShowSkillTarget(mTargets);
                 gameObject.SetActive(false);
             });
@@ -69,27 +73,39 @@ public class CanvasBattleMenu : MonoBehaviour {
 
     void OnDisable() {
         mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
-        BattleGameManager.GetInstance().GetWujiangTransparent().SetActive(false);
     }
 
+    // 显示攻击目标
     void ShowSkillTarget(List<Coordinates> targets) {
         foreach (Coordinates coordinates in targets) {
             GameObject g;
-            if (mCacheIndex< mTargetCache.Count) {
+            if (mCacheIndex < mTargetCache.Count) {
                 g = mTargetCache[mCacheIndex];
-            }else {
+            } else {
                 g = Instantiate(mTargetPrefab) as GameObject;
                 g.transform.parent = mTargetParent.transform;
                 mTargetCache.Add(g);
             }
             mCacheIndex++;
             Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
-            g.transform.position = new Vector3(p.x , 0.51f , p.z);
+            g.transform.position = new Vector3(p.x, 0.51f, p.z);
         }
         msCanStartSkill = false;
     }
 
+    // 移动和放技能
+    public void MoveAndStartSkill(Coordinates attackCoordinates) {
+        //  1.先移动，再放技能
+        // 注意这里有两个坐标概念:
+        // 1.要移动到的位置
+        // 2.点击攻击的目标coordinates
+        mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position, StartSkill , attackCoordinates);
+        BattleGameManager.GetInstance().GetWujiangTransparent().SetActive(false);
+    }
+
+    // 放技能
     public void StartSkill(Coordinates coordinates) {
+        // 只有点击Targets集合中的才能放技能
         foreach (Coordinates c in mTargets) {
             if (c.Equals(coordinates)) {
                 mWujiang.mSkills.mSkills[mSkillIndex](mWujiang, c);
@@ -105,6 +121,7 @@ public class CanvasBattleMenu : MonoBehaviour {
         mWujiang.SetWujiangState(WujiangState.WujiangState_Battle);
         mWujiang.Seclet(false);
     }
+
 
     public void ShowMenu(Vector2 screenPosition) {
         gameObject.SetActive(true);

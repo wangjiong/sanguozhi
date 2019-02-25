@@ -35,11 +35,14 @@ public class Skills {
 
     List<Coordinates> ShowSkillTarget_Qibing01(Wujiang wujiang) {
         List<Coordinates> targets = new List<Coordinates>();
-        List<Coordinates> neighbour = MapManager.GetInstance().GetNeighbours(wujiang.GetCoordinates());
+        List<Coordinates> neighbour = MapManager.GetInstance().GetNeighbours(MapManager.GetInstance().TerrainPositionToCorrdinate(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position));
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         foreach (Coordinates c in neighbour) {
             if (wujiangExpeditions.ContainsKey(c)) {
-                targets.Add(c);
+                // 不能是自己
+                if (!wujiang.GetCoordinates().Equals(c)) {
+                    targets.Add(c);
+                }
             }
         }
         return targets;
@@ -56,24 +59,31 @@ public class Skills {
     void Skill_Qibing01(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
+
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = c2.HexX - c1.HexX;
         int dy = c2.HexY - c1.HexY;
-        Coordinates myCoordinates = new Coordinates();
-        myCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
+        Coordinates otherCoordinates = new Coordinates();
+        otherCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
 
         // 这里必须先移动target
-        targetWujiang.Move(myCoordinates);
+        targetWujiang.Move(otherCoordinates);
         wujiang.Move(c2);
-
     }
 
     void Skill_Qibing02(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
+
+        Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
-        wujiang.Move(c2);
+        int dx = (c2.HexX - c1.HexX) ;
+        int dy = (c2.HexY - c1.HexY) ;
+
+        Coordinates myCoordinates = new Coordinates();
+        myCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
+        wujiang.Move(myCoordinates);
     }
 
     void Skill_Qibing03(Wujiang wujiang, Coordinates target) {
