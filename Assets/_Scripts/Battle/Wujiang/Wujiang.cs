@@ -15,8 +15,6 @@ public class Wujiang : MonoBehaviour {
     static string TAG = "Wujiang==";
 
     static Wujiang msCurrentWujiang;
-    public static bool msCanShowBattleMenu = true;
-    public static bool msCanShowCityMenu = true;
 
     // 属性
     Coordinates mCoordinates;
@@ -91,16 +89,13 @@ public class Wujiang : MonoBehaviour {
                 return;
         }
         // 防止移动过程中点击武将
-        if (!msCanShowCityMenu) {
-            return;
-        }
         mSelected = !mSelected;
         Seclet(mSelected);
 
         if (mSelected) {
             ShowPath();
             mWujiangState = WujiangState.WujiangState_Prepare_Move;
-            msCanShowBattleMenu = false;
+            BattleGameManager.msIgnoreRaycast = true;
         }
     }
 
@@ -175,9 +170,10 @@ public class Wujiang : MonoBehaviour {
                 StartSkillDelegate(attackCoordinates);
             }
         } else {
-            msCanShowCityMenu = false;
+            BattleGameManager.msIgnoreRaycast = true;
             Tween t = transform.DOPath(waypoints.ToArray(), 0.1f * (waypoints.Count-1), PathType.CatmullRom).SetEase(Ease.Linear);
             t.onComplete = delegate () {
+                BattleGameManager.msIgnoreRaycast = false;
                 if (city) {
                     // 1.回到城市
                     foreach (WujiangBean wujiangBean in mWujiangBeans) {
@@ -191,7 +187,6 @@ public class Wujiang : MonoBehaviour {
                     mCoordinates = coordinates;
                 }
                 SetWujiangState(WujiangState.WujiangState_Battle);
-                msCanShowCityMenu = true;
                 HidePath();
                 // 如果有技能的话，放技能
                 if (StartSkillDelegate!=null) {

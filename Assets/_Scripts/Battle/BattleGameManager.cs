@@ -10,6 +10,8 @@ public class BattleGameManager : MonoBehaviour {
 
     static BattleGameManager msBattleGameManager = null;
 
+    public static bool msIgnoreRaycast = false;
+
     public CanvasGameMenu mCanvasGameMenu;
     public CanvasBattleMenu mCanvasBattleMenu;
     public MobileTouchCamera mMobileTouchCamera;
@@ -64,52 +66,42 @@ public class BattleGameManager : MonoBehaviour {
             pointCubePosition.y = mOriginalPosition.y;
             mPointCube.transform.position = pointCubePosition;
             if (Input.GetMouseButtonUp(0)) {
+                // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
+                if (msIgnoreRaycast) {
+                    msIgnoreRaycast = false;
+                    return;
+                }
                 Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
                 if (currentWujiang != null) {
                     // 1.当前处于要攻击状态
                     // 这个主要是因为...
-                    if (!CanvasBattleMenu.msCanStartSkill) {
-                        CanvasBattleMenu.msCanStartSkill = true;
-                        return;
-                    }
                     if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Attack) {
                         // 释放技能
                         mCanvasBattleMenu.MoveAndStartSkill(MapManager.GetInstance().TerrainPositionToCorrdinate(pointCubePosition));
                         return;
                     }
                     // 2.显示战斗菜单
-                    // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
-                    if (!Wujiang.msCanShowBattleMenu) {
-                        Wujiang.msCanShowBattleMenu = true;
-                        return;
-                    }
                     currentWujiang.ShowBattleMeun(new Vector3(mPointCube.transform.position.x, currentWujiang.transform.position.y, mPointCube.transform.position.z));
                     return;
                 }
-            }
-            // 2.点击城市
-            // 这个主要是因为防止刚刚点击城市，移动城市后，菜单就显示出来了
-            if (!Wujiang.msCanShowCityMenu) {
-                Wujiang.msCanShowBattleMenu = true;
-                return;
-            }
-            if (hit.collider.CompareTag("City")) {
-                Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
-                if (currentWujiang != null) {
-                    return;
-                }
-                    if (Input.GetMouseButtonUp(0)) {
-                    GameObject city;
-                    if (hit.collider.gameObject.name.Equals("Model")) {
-                        // 关隘
-                        city = hit.collider.transform.parent.gameObject;
-                    } else {
-                        // 港口
-                        city = hit.collider.transform.gameObject;
+                // 2.点击城市
+                if (hit.collider.CompareTag("City")) {
+                    if (currentWujiang != null) {
+                        return;
                     }
-                    // 显示小菜单
-                    mCanvasGameMenu.SetCity(city.GetComponent<City>());
-                    mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
+                    if (Input.GetMouseButtonUp(0)) {
+                        GameObject city;
+                        if (hit.collider.gameObject.name.Equals("Model")) {
+                            // 关隘
+                            city = hit.collider.transform.parent.gameObject;
+                        } else {
+                            // 港口
+                            city = hit.collider.transform.gameObject;
+                        }
+                        // 显示小菜单
+                        mCanvasGameMenu.SetCity(city.GetComponent<City>());
+                        mCanvasGameMenu.ShowCanvasGameMenu(screenPosition);
+                    }
                 }
             }
         }

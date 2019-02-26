@@ -8,8 +8,6 @@ public delegate void StartSkillDelegate(Coordinates coordinates);
 public class CanvasBattleMenu : MonoBehaviour {
     string TAG = "CanvasBattleMenu==";
 
-    public static bool msCanStartSkill = true;
-
     public GameObject mFirstMenu;
     public GameObject[] mMenuFirstBtns;
 
@@ -90,7 +88,7 @@ public class CanvasBattleMenu : MonoBehaviour {
             Vector3 p = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
             g.transform.position = new Vector3(p.x, 0.51f, p.z);
         }
-        msCanStartSkill = false;
+        BattleGameManager.msIgnoreRaycast = true;
     }
 
     // 移动和放技能
