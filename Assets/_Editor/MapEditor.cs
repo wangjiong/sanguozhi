@@ -290,9 +290,11 @@ public class MapEditor : MonoBehaviour {
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
                 int terrainType = int.Parse(itemIds[i * 200 + j]);
+                terrainType = (int)MapManager.ToLowTerrainType((uint)terrainType);
                 if (terrainType != (int)TerrainType.TerrainType_Dushi &&
                     terrainType != (int)TerrainType.TerrainType_Guansuo &&
-                    terrainType != (int)TerrainType.TerrainType_Gang) {
+                    terrainType != (int)TerrainType.TerrainType_Gang
+                    ) {
                     mMapDatas[i, j] = (uint)terrainType;
                 }
             }
@@ -301,6 +303,9 @@ public class MapEditor : MonoBehaviour {
     }
 
     void Save() {
+        if (!mCanChange) {
+            return;
+        }
         Debug.Log("Save " + mTerrainTypeNames[mTerrainTypeIndex]);
         StringBuilder mapData = new StringBuilder();
         for (int i = 0; i < 200; i++) {

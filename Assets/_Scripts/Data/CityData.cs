@@ -174,7 +174,7 @@ public class CityData {
             List<Coordinates> neighbours = MapManager.GetInstance().GetNeighbours(cityBean.coordinate);
             neighbours.Add(cityBean.coordinate);
             foreach (Coordinates coordinate in neighbours) {
-                MapManager.GetInstance().AddTerrainType(coordinate, TerrainType.TerrainType_Dushi);
+                MapManager.GetInstance().SetTerrainType(coordinate, TerrainType.TerrainType_Dushi);
                 mAllCityCoordinates.Add(coordinate, cityComponent);
             }
         }
@@ -204,7 +204,7 @@ public class CityData {
 
             // 修改地形数据
             // 1.确认关口地形
-            MapManager.GetInstance().AddTerrainType(cityBean.coordinate, TerrainType.TerrainType_Guansuo);
+            MapManager.GetInstance().SetTerrainType(cityBean.coordinate, TerrainType.TerrainType_Guansuo);
             mAllCityCoordinates.Add(cityBean.coordinate, cityComponent);
             // 2.确认无效地形
             if (cityBean.direction == 0) {
@@ -212,7 +212,7 @@ public class CityData {
                 foreach (Coordinates coordinate in neighbours) {
                     // 上下两个不要
                     if (coordinate.x != cityBean.coordinate.x) {
-                        MapManager.GetInstance().AddTerrainType(coordinate, TerrainType.TerrainType_Invalid);
+                        MapManager.GetInstance().SetTerrainType(coordinate, TerrainType.TerrainType_Invalid);
                         mAllCityCoordinates.Add(coordinate, cityComponent);
                     }
                 }
@@ -221,7 +221,7 @@ public class CityData {
                 foreach (Coordinates coordinate in neighbours) {
                     // 只要上下两个
                     if (coordinate.x == cityBean.coordinate.x) {
-                        MapManager.GetInstance().AddTerrainType(coordinate, TerrainType.TerrainType_Invalid);
+                        MapManager.GetInstance().SetTerrainType(coordinate, TerrainType.TerrainType_Invalid);
                         mAllCityCoordinates.Add(coordinate, cityComponent);
                     }
                 }
@@ -252,7 +252,7 @@ public class CityData {
             mAllCitys.Add(cityBean.name, cityComponent);
 
             // 修改地形数据
-            MapManager.GetInstance().AddTerrainType(cityBean.coordinate, TerrainType.TerrainType_Gang);
+            MapManager.GetInstance().SetTerrainType(cityBean.coordinate, TerrainType.TerrainType_Gang);
             mAllCityCoordinates.Add(cityBean.coordinate, cityComponent);
         }
     }

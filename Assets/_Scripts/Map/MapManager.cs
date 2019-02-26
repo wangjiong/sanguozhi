@@ -87,9 +87,10 @@ public class MapManager {
     public int mMapCorrdinateWidth = 200;
     public int mMapCorrdinateHeight = 200;
 
-    static uint TERRAINTYPE_MASK = 0xFFFFFF00; // 后面8位代表地表地形的类型 ， 前面的24位代表复合类型
+    static uint TERRAINTYPE_MASK = 0x000000FF; // 后面8位代表地表地形的类型 ， 前面的24位代表复合类型
     public static uint ToLowTerrainType(uint terrainType) {
-        return terrainType & ~TERRAINTYPE_MASK;
+        //Debug.Log("terrainType:" + terrainType + " " + (terrainType & TERRAINTYPE_MASK));
+        return terrainType & TERRAINTYPE_MASK;
     }
 
     public int mSideLength = 1;
@@ -118,6 +119,10 @@ public class MapManager {
         return mMapDatas[coordinates.x, coordinates.y];
     }
 
+    public void SetTerrainType(Coordinates coordinates, TerrainType terrainType) {
+        mMapDatas[coordinates.x, coordinates.y] = (uint)terrainType;
+    }
+
     public void AddTerrainType(Coordinates coordinates, TerrainType terrainType) {
         uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
         if ((uint)terrainType < 256) {
@@ -141,10 +146,9 @@ public class MapManager {
     }
 
     public bool ContainTerrainType(Coordinates coordinates, TerrainType terrainType) {
-        uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
         if ((uint)terrainType < 256) {
             // 1.地表地形的类型，只设置低8位
-            if (mMapDatas[coordinates.x, coordinates.y] == (originTerrainType & TERRAINTYPE_MASK)) {
+            if (mMapDatas[coordinates.x, coordinates.y] == ((uint)terrainType & TERRAINTYPE_MASK)) {
                 return true;
             };
         } else {
