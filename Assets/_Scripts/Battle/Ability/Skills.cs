@@ -19,6 +19,8 @@ public class Skills {
     public List<Skill> mSkills = new List<Skill>();
     public List<ShowSkillTarget> mShowSkillTargets = new List<ShowSkillTarget>();
 
+    public List<Coordinates>[] mAllTargets = new List<Coordinates>[3];
+
     public Skills(Wujiang wujiang) {
         ArmType armType = wujiang.mArmType;
         int armAbility = wujiang.mArmAbility;
@@ -30,6 +32,12 @@ public class Skills {
             mShowSkillTargets.Add(ShowSkillTarget_Qibing01);
             mShowSkillTargets.Add(ShowSkillTarget_Qibing02);
             mShowSkillTargets.Add(ShowSkillTarget_Qibing03);
+        }
+    }
+
+    public void ShowAllTargets(Wujiang wujiang) {
+        for (int i = 0; i < mShowSkillTargets.Count; i++) {
+            mAllTargets[i] = mShowSkillTargets[i](wujiang);
         }
     }
 

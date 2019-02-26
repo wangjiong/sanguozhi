@@ -138,13 +138,13 @@ public class Wujiang : MonoBehaviour {
                             return true;
                         }
                     }
-                    // 显示战斗菜单
-                    BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
-                    BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
                     // 透明武将
                     GameObject wujiangTransparent = BattleGameManager.GetInstance().GetWujiangTransparent();
                     wujiangTransparent.SetActive(true);
                     wujiangTransparent.transform.position = MapManager.GetInstance().CorrdinateToTerrainPosition(coordinates);
+                    // 显示战斗菜单
+                    BattleGameManager.GetInstance().GetCanvasBattleMenu().SetWujiang(this);
+                    BattleGameManager.GetInstance().GetCanvasBattleMenu().ShowMenu(Input.mousePosition);
                 }
             }
         }

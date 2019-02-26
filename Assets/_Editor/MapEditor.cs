@@ -69,7 +69,7 @@ public class MapEditor : MonoBehaviour {
             // 颜色
             item.transform.Find("Color").GetComponent<Image>().color = mTerrainTypColor[i];
             item.transform.SetParent(terrainTypes.transform);
-
+            item.transform.localScale = new Vector3(1.2f,1.2f,1);
             // 1-1.改变地形
             Toggle changeTerrainTypeToggle = item.transform.Find("ChangeTerrainType").GetComponent<Toggle>();
             int index = i;

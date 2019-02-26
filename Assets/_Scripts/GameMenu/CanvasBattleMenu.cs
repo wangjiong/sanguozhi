@@ -14,6 +14,9 @@ public class CanvasBattleMenu : MonoBehaviour {
     public GameObject mSecondMenu;
     public GameObject[] mMenuSecondBtns;
 
+    public Sprite mEnableSprite;
+    public Sprite mDisableSprite;
+
     bool mPositionFlag = true; // 第一次ShowPosition有问题
 
     Wujiang mWujiang;
@@ -59,9 +62,8 @@ public class CanvasBattleMenu : MonoBehaviour {
             mMenuSecondBtns[i].GetComponent<Button>().onClick.AddListener(delegate () {
                 // 显示技能能攻击的目标集合
                 mSkillIndex = index;
-                mTargets = mWujiang.mSkills.mShowSkillTargets[index](mWujiang);
+                mTargets = mWujiang.mSkills.mAllTargets[index];
                 mWujiang.SetWujiangState(WujiangState.WujiangState_Prepare_Attack);
-                //mWujiang.HidePath();
                 ShowSkillTarget(mTargets);
                 gameObject.SetActive(false);
             });
@@ -120,7 +122,7 @@ public class CanvasBattleMenu : MonoBehaviour {
         mWujiang.Seclet(false);
     }
 
-
+    // 显示战斗菜单
     public void ShowMenu(Vector2 screenPosition) {
         gameObject.SetActive(true);
         if (mPositionFlag) {
@@ -130,6 +132,8 @@ public class CanvasBattleMenu : MonoBehaviour {
             mFirstMenu.transform.position = screenPosition;
             mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
         }
+        // 检测是否显示选项
+        CheckFirstBtn();
     }
 
     public void SetWujiang(Wujiang wujiang) {
@@ -139,5 +143,54 @@ public class CanvasBattleMenu : MonoBehaviour {
     IEnumerator SetPosition(Vector2 screenPosition) {
         yield return null;
         mFirstMenu.transform.position = screenPosition;
+    }
+
+    // 检测一级菜单按钮
+    void CheckFirstBtn() {
+        for (int i = 0; i < mMenuFirstBtns.Length; i++) {
+            if (i == 0) {
+                // 待机
+            } else if (i == 1) {
+                // 攻击
+                DisabelBtn(mMenuFirstBtns[i]);
+            } else if (i == 2) {
+                // 齐攻
+                DisabelBtn(mMenuFirstBtns[i]);
+            } else if (i == 3) {
+                // 战法
+                if (CheckShowSkill()) {
+                    EnabelBtn(mMenuFirstBtns[i]);
+                } else {
+                    DisabelBtn(mMenuFirstBtns[i]);
+                }
+            } else {
+                DisabelBtn(mMenuFirstBtns[i]);
+            }
+        }
+    }
+
+    // 检测释放可以释放战法
+    bool CheckShowSkill() {
+        mWujiang.mSkills.ShowAllTargets(mWujiang);
+        foreach (List<Coordinates> targets in mWujiang.mSkills.mAllTargets) {
+            if (targets.Count > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void DisabelBtn(GameObject g) {
+        Button btn = g.GetComponent<Button>();
+        btn.image.sprite = mDisableSprite;
+        btn.GetComponentInChildren<Text>().color = Color.black;
+        btn.interactable = false;
+    }
+
+    void EnabelBtn(GameObject g) {
+        Button btn = g.GetComponent<Button>();
+        btn.image.sprite = mEnableSprite;
+        btn.GetComponentInChildren<Text>().color = Color.white;
+        btn.interactable = true;
     }
 }
