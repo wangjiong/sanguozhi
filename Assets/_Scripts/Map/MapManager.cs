@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class Coordinates {
@@ -49,6 +52,7 @@ public class Coordinates {
 }
 
 public enum TerrainType {
+    // 写死的地表地形
     TerrainType_Invalid, // 无效地形
     TerrainType_Caodi, // 草地
     TerrainType_Tu,// 土
@@ -66,17 +70,20 @@ public enum TerrainType {
     TerrainType_Qiantan,// 浅滩
     TerrainType_An,// 岸
     TerrainType_Ya,// 涯
-    TerrainType_Dushi,// 都市
-    TerrainType_Guansuo,// 关所
-    TerrainType_Gang,// 港
     TerrainType_Xiaojing, //小径
 
-
     // 00000000 00000000 00000000 00000000 ， 后面8位代表地表地形的类型 ， 前面的24位代表复合类型
-    TerrainType_Wujiang = 1 << 8,// 武将
-    TerrainType_Kaifajianzhu = 1 << 9, // 开发建筑
-    TerrainType_Fire =    1 << 10,// 火
-    TerrainType_Junshisheshi = 1 << 11,// 军事设施
+    TerrainType_Dushi = 1 << 8,// 都市
+    TerrainType_Guansuo = 1 << 9,// 关所
+    TerrainType_Guansuo_Invalid = 1 << 10,// 关所(无效地形)
+    TerrainType_Gang = 1 << 11,// 港
+
+    TerrainType_Wujiang = 1 << 12,// 武将
+    TerrainType_Kaifajianzhu = 1 << 13, // 开发建筑
+    TerrainType_Junshisheshi = 1 << 14,// 军事设施
+    TerrainType_Fire =    1 << 15,// 火
+
+    
 }
 
 
@@ -88,9 +95,12 @@ public class MapManager {
     public int mMapCorrdinateHeight = 200;
 
     static uint TERRAINTYPE_MASK = 0x000000FF; // 后面8位代表地表地形的类型 ， 前面的24位代表复合类型
-    public static uint ToLowTerrainType(uint terrainType) {
-        //Debug.Log("terrainType:" + terrainType + " " + (terrainType & TERRAINTYPE_MASK));
+    public static uint GetLowTerrainType(uint terrainType) {
         return terrainType & TERRAINTYPE_MASK;
+    }
+
+    public static uint GetHeightTerrainType(uint terrainType) {
+        return terrainType & ~TERRAINTYPE_MASK;
     }
 
     public int mSideLength = 1;
@@ -111,6 +121,27 @@ public class MapManager {
         mMapDatas = new uint[mMapCorrdinateWidth, mMapCorrdinateHeight];
     }
 
+    public void LoadData() {
+        Debug.Log("Load MapData");
+        FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Open);
+        byte[] bytes = new byte[fs.Length];
+        fs.Read(bytes, 0, bytes.Length);
+        fs.Close();
+        string s = new UTF8Encoding().GetString(bytes);
+        string[] itemIds = s.Split(';');
+        // 初始化地图
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
+                try {
+                    mMapDatas[i, j] = uint.Parse(itemIds[i * 200 + j]);
+                } catch (Exception) {
+                    mMapDatas[i, j] = (uint)TerrainType.TerrainType_Caodi;
+                }
+                
+            }
+        }
+    }
+
     public uint[,] GetMapDatas() {
         return mMapDatas;
     }
@@ -127,7 +158,7 @@ public class MapManager {
         uint originTerrainType = mMapDatas[coordinates.x, coordinates.y];
         if ((uint)terrainType < 256) {
             // 1.地表地形的类型，只设置低8位
-            mMapDatas[coordinates.x, coordinates.y] = (originTerrainType & TERRAINTYPE_MASK) + (uint)terrainType;
+            mMapDatas[coordinates.x, coordinates.y] = (originTerrainType & ~TERRAINTYPE_MASK) + (uint)terrainType;
         } else {
             // 2.复合类型，只设置高24位
             mMapDatas[coordinates.x, coordinates.y] = originTerrainType | (uint)terrainType;

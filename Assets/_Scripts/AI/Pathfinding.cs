@@ -12,7 +12,7 @@ public class Node {
         // 根据地形信息获取权重
         uint terrainType = MapManager.GetInstance().GetTerrainType(coordinates);
         // 暂时只考虑低8为地表地形
-        terrainType = MapManager.ToLowTerrainType(terrainType);
+        terrainType = MapManager.GetLowTerrainType(terrainType);
         nodeCost = MapConfig.msTerrainWight[terrainType];
     }
 

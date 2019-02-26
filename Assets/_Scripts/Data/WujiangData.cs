@@ -69,9 +69,9 @@ public class WujiangData {
     }
 
     public void LoadData() {
-		//Debug.Log("WujiangData LoadData");
+        Debug.Log("Load WujiangData");
 
-		TextAsset wujiangJSON = Resources.Load<TextAsset>(WUJIANG_DATA);
+        TextAsset wujiangJSON = Resources.Load<TextAsset>(WUJIANG_DATA);
 		string text = wujiangJSON.text;
 		//Loom.RunAsync(() => {
 			// 读取武将数据

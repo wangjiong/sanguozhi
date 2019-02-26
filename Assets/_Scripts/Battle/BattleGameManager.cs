@@ -126,12 +126,15 @@ public class BattleGameManager : MonoBehaviour {
     }
 
     void LoadData() {
-        // 加载城池数据
+        // 1.加载地形数据
+        MapManager.GetInstance().LoadData();
+        // 2.加载城池数据
         mCityData = new CityData();
         mCityData.LoadData();
-        // 加载城池数据
+        // 3.加载城池数据
         mWujiangData = new WujiangData();
         mWujiangData.LoadData();
+
         // 归属武将
         mCityData.AllocateWujiangData(mWujiangData);
     }

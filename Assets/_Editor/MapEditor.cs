@@ -16,7 +16,7 @@ public class MapEditor : MonoBehaviour {
     List<GameObject> mPointerIndicatorList = new List<GameObject>();
 
     string[] mTerrainTypeNames = { "无效地形" , "草地", "土", "沙地", "湿地", "毒泉", "森", "川", "河",
-        "海", "荒地", "主径", "栈道", "渡所", "浅滩", "岸", "涯", "都市", "关所", "港", "小径"};
+        "海", "荒地", "主径", "栈道", "渡所", "浅滩", "岸", "涯", "小径"};
     List<string> mTerrainTypeName = new List<string>();
     List<Color> mTerrainTypColor = new List<Color>();
     GameObject mTerrain;
@@ -38,7 +38,7 @@ public class MapEditor : MonoBehaviour {
     MobileTouchCamera mMobileTouchCamera;
 
     // test
-    bool mCanChange = false;
+    bool mEditorModel = false;
 
     void Start() {
         // 鼠标指示点
@@ -107,7 +107,7 @@ public class MapEditor : MonoBehaviour {
     void ShowTerrainTypeTogglsEvent(bool isOn, int terrainTypeIndex) {
         if (isOn) {
             // test
-            mCanChange = true;
+            mEditorModel = true;
 
             mTerrainTypeToggles[terrainTypeIndex].isOn = true;
             if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid || terrainTypeIndex == (int)TerrainType.TerrainType_Caodi) {
@@ -214,7 +214,7 @@ public class MapEditor : MonoBehaviour {
                 // 右键鼠标刷地图
                 if (Input.GetMouseButton(1)) {
                     // test
-                    if (!mCanChange) {
+                    if (!mEditorModel) {
                         return;
                     }
                     if (mPointerIndicatorList.Count == 0) {
@@ -236,7 +236,24 @@ public class MapEditor : MonoBehaviour {
                 }
                 if (mMapDatas != null) {
                     uint terrainType = mMapDatas[coordinates.x, coordinates.y];
-                    GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + terrainType + " " + mTerrainTypeNames[MapManager.ToLowTerrainType(terrainType)];
+                    string s = "";
+                    if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Dushi)) {
+                        s += " " + "都市";
+                    }
+                    if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo)) {
+                        s += " " + "关所";
+                    }
+                    if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo_Invalid)) {
+                        s += " " + "关所(无效地形)";
+                    }
+                    if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Gang)) {
+                        s += " " + "港";
+                    }
+                    if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Wujiang)) {
+                        s += " " + "武将";
+                    }
+                    s += " " + mTerrainTypeNames[MapManager.GetLowTerrainType(terrainType)];
+                    GameObject.Find("DebugPosition").GetComponent<Text>().text = coordinates.ToString() + " terrainType:" + terrainType + s;
                 }
             }
         }
@@ -279,6 +296,9 @@ public class MapEditor : MonoBehaviour {
 
     void Load() {
         mMapDatas = MapManager.GetInstance().GetMapDatas();
+        if (!mEditorModel) {
+            return;
+        }
         Debug.Log("Load");
         FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Open);
         byte[] bytes = new byte[fs.Length];
@@ -289,31 +309,24 @@ public class MapEditor : MonoBehaviour {
         // 初始化地图
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
-                int terrainType = int.Parse(itemIds[i * 200 + j]);
-                terrainType = (int)MapManager.ToLowTerrainType((uint)terrainType);
-                if (terrainType != (int)TerrainType.TerrainType_Dushi &&
-                    terrainType != (int)TerrainType.TerrainType_Guansuo &&
-                    terrainType != (int)TerrainType.TerrainType_Gang
-                    ) {
-                    mMapDatas[i, j] = (uint)terrainType;
-                }
+                mMapDatas[i, j] = uint.Parse(itemIds[i * 200 + j]);
             }
         }
         Save();
     }
 
     void Save() {
-        if (!mCanChange) {
+        if (!mEditorModel) {
             return;
         }
         Debug.Log("Save " + mTerrainTypeNames[mTerrainTypeIndex]);
         StringBuilder mapData = new StringBuilder();
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
-                //if (mMapDatas[i, j] == (int)TerrainType.TerrainType_Invalid) {
-                //    mMapDatas[i, j] = (int)TerrainType.TerrainType_Caodi;
-                //}
-                mapData.Append(mMapDatas[i, j] + ";");
+                // 只存储低位的地形
+                uint terrainType = mMapDatas[i, j];
+                terrainType = MapManager.GetLowTerrainType(terrainType);
+                mapData.Append(terrainType + ";");
             }
         }
         FileStream fs = new FileStream(Application.dataPath + "/mapdata.txt", FileMode.Create);
