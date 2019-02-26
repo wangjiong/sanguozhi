@@ -56,6 +56,7 @@ public class Skills {
         return ShowSkillTarget_Qibing01(wujiang);
     }
 
+    // 骑兵：1
     void Skill_Qibing01(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
@@ -68,10 +69,15 @@ public class Skills {
         otherCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
 
         // 这里必须先移动target
+        if (!CanMoveIn(otherCoordinates)) {
+            return;
+        }
+        
         targetWujiang.Move(otherCoordinates);
         wujiang.Move(c2);
     }
 
+    // 骑兵：2
     void Skill_Qibing02(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
@@ -83,9 +89,13 @@ public class Skills {
 
         Coordinates myCoordinates = new Coordinates();
         myCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
+        if (!CanMoveIn(myCoordinates)) {
+            return;
+        }
         wujiang.Move(myCoordinates);
     }
 
+    // 骑兵：3
     void Skill_Qibing03(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
@@ -97,7 +107,26 @@ public class Skills {
         Coordinates otherCoordinates = new Coordinates();
         myCoordinates.SetHexXY(c1.HexX + dx, c1.HexY + dy);
         otherCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
-        wujiang.Move(myCoordinates);
-        targetWujiang.Move(otherCoordinates);
+
+        if (!CanMoveIn(myCoordinates)) {
+            return;
+        }else if (!CanMoveIn(otherCoordinates)) {
+            targetWujiang.Move(myCoordinates);
+            wujiang.Move(c2);
+        } else {
+            targetWujiang.Move(otherCoordinates);
+            wujiang.Move(myCoordinates);
+        }
+    }
+
+    private bool CanMoveIn(Coordinates coordinates) {
+        if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Wujiang) ||
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Dushi) ||
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo) ||
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Gang)
+            ) {
+            return false;
+        }
+        return true;
     }
 }

@@ -37,6 +37,9 @@ public class MapEditor : MonoBehaviour {
     // 相机
     MobileTouchCamera mMobileTouchCamera;
 
+    // test
+    bool mCanChange = false;
+
     void Start() {
         // 鼠标指示点
         mPointerIndicator = GameObject.Find("Point");
@@ -103,6 +106,9 @@ public class MapEditor : MonoBehaviour {
     // 2.显示地形
     void ShowTerrainTypeTogglsEvent(bool isOn, int terrainTypeIndex) {
         if (isOn) {
+            // test
+            mCanChange = true;
+
             mTerrainTypeToggles[terrainTypeIndex].isOn = true;
             if (terrainTypeIndex == (int)TerrainType.TerrainType_Invalid || terrainTypeIndex == (int)TerrainType.TerrainType_Caodi) {
                 return;
@@ -207,6 +213,10 @@ public class MapEditor : MonoBehaviour {
             if (coordinates.x >= 0 && coordinates.x < 200 && coordinates.y >= 0 && coordinates.y < 200) {
                 // 右键鼠标刷地图
                 if (Input.GetMouseButton(1)) {
+                    // test
+                    if (!mCanChange) {
+                        return;
+                    }
                     if (mPointerIndicatorList.Count == 0) {
                         // 检查当前的地形类型是否有显示
                         ChangeShowTerrainType(coordinates, mTerrainTypeIndex);
