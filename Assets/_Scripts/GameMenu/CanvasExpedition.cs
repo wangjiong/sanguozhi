@@ -153,8 +153,7 @@ public class CanvasExpedition : MonoBehaviour {
                 // 设置武将技能
                 wujiang.mArmType = (ArmType)mWeaponIndex;
                 wujiang.mArmAbility = mArmAbility;
-
-                wujiang.mSkills = new Skills(wujiang);
+                wujiang.mSkills = new Skills(wujiang , new string[] { mSkillText[0].text, mSkillText[1].text, mSkillText[2].text });
 
                 WujiangBean[] wujiangBeans = new WujiangBean[3];
                 wujiangBeans[0] = mChief;

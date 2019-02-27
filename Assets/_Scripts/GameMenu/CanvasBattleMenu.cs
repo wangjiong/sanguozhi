@@ -49,10 +49,23 @@ public class CanvasBattleMenu : MonoBehaviour {
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                     Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
                     mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2, sizeDelta.y * scale.y / 2, 0);
-                    // 更具武将适性显示技能个数
-                    // todo
+                    // 根据武将适性显示技能个数
+                    for (int j = 0; j < mMenuSecondBtns.Length; j++) {
+                        if (j < mWujiang.mSkills.mSkillNames.Count) {
+                            mMenuSecondBtns[j].SetActive(true);
+                            mMenuSecondBtns[j].GetComponentInChildren<Text>().text = mWujiang.mSkills.mSkillNames[j];
+                            // 根据是否可以释放技能来决定是否只用按钮
+                            if (mWujiang.mSkills.mAllTargets[j].Count > 0) {
+                                DisabelBtn(mMenuSecondBtns[j]);
+                            } else {
+                                EnabelBtn(mMenuSecondBtns[j]);
+                            }
+                        } else {
+                            mMenuSecondBtns[j].SetActive(false);
+                        }
+                    }
                 } else {
-                    // 隐耳机菜单
+                    // 隐藏二级菜单
                     mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
                 }
             });
@@ -101,7 +114,7 @@ public class CanvasBattleMenu : MonoBehaviour {
         // 注意这里有两个坐标概念:
         // 1.要移动到的位置
         // 2.点击攻击的目标coordinates
-        mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position, StartSkill , attackCoordinates);
+        mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position, StartSkill, attackCoordinates);
         BattleGameManager.GetInstance().GetWujiangTransparent().SetActive(false);
     }
 
