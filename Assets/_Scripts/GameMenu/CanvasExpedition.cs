@@ -31,6 +31,7 @@ public class CanvasExpedition : MonoBehaviour {
     public Sprite[] mSprite01; // 普通
     public Sprite[] mSprite02; // 高亮
     public int mWeaponIndex = 0;
+    int mArmAbility = 0;
 
     // Slider
     public int mCurrentSoldier;
@@ -149,6 +150,10 @@ public class CanvasExpedition : MonoBehaviour {
                 wujiang.mAvatar.sprite = mChiefImg.sprite;
                 wujiang.mHealth.text = mSliderText[0].text.Split('/')[0];
                 wujiang.mName.text = mChief.name;
+                // 设置武将技能
+                wujiang.mArmType = (ArmType)mWeaponIndex;
+                wujiang.mArmAbility = mArmAbility;
+
                 wujiang.mSkills = new Skills(wujiang);
 
                 WujiangBean[] wujiangBeans = new WujiangBean[3];
@@ -238,8 +243,13 @@ public class CanvasExpedition : MonoBehaviour {
         if (chief == null) {
             return;
         }
-        junior01 = chief;
-        junior02 = chief;
+        if (junior01 == null) {
+            junior01 = chief;
+        }
+        if (junior02 == null) {
+            junior02 = chief;
+        }
+
         float a1 = 0; // 兵种
         float a2 = 0;
         float a5 = 100;
@@ -355,6 +365,7 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     private void SetWeaponSkill(int type) {
+        mArmAbility = type;
         mSkillText[0].text = "";
         mSkillText[1].text = "";
         mSkillText[2].text = "";

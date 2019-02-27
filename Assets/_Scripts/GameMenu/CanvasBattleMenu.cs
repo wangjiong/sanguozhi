@@ -39,16 +39,18 @@ public class CanvasBattleMenu : MonoBehaviour {
             int index = i;
             mMenuFirstBtns[index].GetComponent<Button>().onClick.AddListener(delegate () {
                 if (index == 0) {
-                    // 隐藏整个菜单
+                    // 隐藏整个菜单(一级菜单)
                     gameObject.SetActive(false);
                     // 待机（目前为移动）
                     mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position);
                     mWujiang.Seclet(false);
                 } else if (index == 3) {
-                    // 显示技能菜单
+                    // 显示技能菜单(二级菜单)
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
                     Vector2 sizeDelta = mMenuFirstBtns[index].GetComponent<RectTransform>().sizeDelta;
                     mSecondMenu.transform.position = mMenuFirstBtns[index].transform.position + new Vector3(sizeDelta.x * scale.x / 2, sizeDelta.y * scale.y / 2, 0);
+                    // 更具武将适性显示技能个数
+                    // todo
                 } else {
                     // 隐耳机菜单
                     mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);

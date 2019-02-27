@@ -287,4 +287,12 @@ public class MapManager {
         Coordinates c = new Coordinates().SetHexXY(hexX, hexY);
         neighbours.Add(c);
     }
+
+    public bool CheckInLine(Coordinates c1, Coordinates c2) {
+        if (c1.HexX == c2.HexX || c1.HexY == c2.HexY || c1.HexZ == c2.HexZ) {
+            return true;
+        }
+        return false;
+    }
+
 }

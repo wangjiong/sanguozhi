@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -248,6 +246,10 @@
     <Compile Include="Assets\_Plugins\mobile_touch_camera\scripts\tools\SetBoundaryFromCollider.cs" />
     <Compile Include="Assets\_Scripts\AI\Pathfinding.cs" />
     <Compile Include="Assets\_Scripts\Battle\Ability\AbilityMesh.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Ability\SkillJibing.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Ability\SkillNubing.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Ability\SkillQiangbing.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Ability\SkillQibing.cs" />
     <Compile Include="Assets\_Scripts\Battle\Ability\Skills.cs" />
     <Compile Include="Assets\_Scripts\Battle\BattleGameManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\City\City.cs" />
