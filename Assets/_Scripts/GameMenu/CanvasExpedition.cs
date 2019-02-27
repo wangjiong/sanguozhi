@@ -364,7 +364,7 @@ public class CanvasExpedition : MonoBehaviour {
     }
 
     private void SetWeaponSkill(int type) {
-        mArmAbility = type;
+        mArmAbility = type - 1;
         mSkillText[0].text = "";
         mSkillText[1].text = "";
         mSkillText[2].text = "";

@@ -56,9 +56,9 @@ public class CanvasBattleMenu : MonoBehaviour {
                             mMenuSecondBtns[j].GetComponentInChildren<Text>().text = mWujiang.mSkills.mSkillNames[j];
                             // 根据是否可以释放技能来决定是否只用按钮
                             if (mWujiang.mSkills.mAllTargets[j].Count > 0) {
-                                DisabelBtn(mMenuSecondBtns[j]);
-                            } else {
                                 EnabelBtn(mMenuSecondBtns[j]);
+                            } else {
+                                DisabelBtn(mMenuSecondBtns[j]);
                             }
                         } else {
                             mMenuSecondBtns[j].SetActive(false);

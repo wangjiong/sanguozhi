@@ -99,9 +99,11 @@ public class Skills {
             mSkillNames.Add(skillNames[1]);
             mSkillNames.Add(skillNames[2]);
         }
+        Debug.Log("wujiang.mArmAbility:" + wujiang.mArmAbility + " " + mSkillNames.Count);
     }
 
     public void ShowAllTargets(Wujiang wujiang) {
+        mAllTargets.Clear();
         for (int i = 0; i < mShowSkillTargets.Count; i++) {
             mAllTargets.Add(mShowSkillTargets[i](wujiang));
         }
