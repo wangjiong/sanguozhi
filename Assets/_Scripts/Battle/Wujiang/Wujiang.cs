@@ -9,6 +9,7 @@ public enum WujiangState {
     WujiangState_Prepare_Attack,
     WujiangState_Battle,
     WujiangState_Fallback,
+    WujiangState_Dead,
 }
 
 public class Wujiang : MonoBehaviour {
@@ -27,6 +28,8 @@ public class Wujiang : MonoBehaviour {
     public ArmType mArmType = ArmType.ArmType_Qiangbing;
     public int mArmAbility = 3;
     public Skills mSkills;
+
+    int mHealthValue;
     // 路径相关
     float mWujiangPathfindingCost = 6;
     Dictionary<Coordinates, Node> mPathfindingResult;
@@ -39,6 +42,8 @@ public class Wujiang : MonoBehaviour {
     void Start() {
         mCoordinates = MapManager.GetInstance().TerrainPositionToCorrdinate(transform.position);
         BattleGameManager.GetInstance().GetWujiangData().SetWujiangExpeditionCorrdinates(mCoordinates, this);
+
+        mHealthValue = int.Parse(mHealth.text);
     }
 
     void OnDestroy() {
@@ -221,5 +226,19 @@ public class Wujiang : MonoBehaviour {
 
     public Coordinates GetCoordinates() {
         return mCoordinates;
+    }
+
+    public void OnDamage(int damage) {
+        mHealthValue = mHealthValue -= damage;
+        if (mHealthValue<=0) {
+            Dead();
+        }else {
+            mHealth.text = mHealthValue.ToString();
+        }
+    }
+
+    public void Dead() {
+        mWujiangState = WujiangState.WujiangState_Dead;
+        Destroy(gameObject);
     }
 }

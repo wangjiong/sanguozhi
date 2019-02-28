@@ -113,7 +113,9 @@ public class Skills {
         if (MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Wujiang) ||
             MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Dushi) ||
             MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo) ||
-            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Gang)
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Gang) ||
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Invalid) ||
+            MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo_Invalid)
             ) {
             return false;
         }

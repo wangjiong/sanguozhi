@@ -32,6 +32,9 @@ public class SkillQibing {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
 
+        // 1.伤害
+        targetWujiang.OnDamage(1000);
+        // 2.移动
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = c2.HexX - c1.HexX;
@@ -41,6 +44,10 @@ public class SkillQibing {
 
         // 这里必须先移动target
         if (!Skills.CanMoveIn(otherCoordinates)) {
+            if (targetWujiang.GetWujiangState() == WujiangState.WujiangState_Dead) {
+                wujiang.Move(c2);
+                return;
+            }
             return;
         }
 
@@ -52,7 +59,9 @@ public class SkillQibing {
     public static void Skill_Qibing02(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
-
+        // 1.伤害
+        targetWujiang.OnDamage(3000);
+        // 2.移动
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = (c2.HexX - c1.HexX);
@@ -61,6 +70,10 @@ public class SkillQibing {
         Coordinates myCoordinates = new Coordinates();
         myCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
         if (!Skills.CanMoveIn(myCoordinates)) {
+            if (targetWujiang.GetWujiangState() == WujiangState.WujiangState_Dead) {
+                wujiang.Move(c2);
+                return;
+            }
             return;
         }
         wujiang.Move(myCoordinates);
@@ -70,6 +83,10 @@ public class SkillQibing {
     public static void Skill_Qibing03(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
+
+        // 1.伤害
+        targetWujiang.OnDamage(5000);
+        // 2.移动
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = (c2.HexX - c1.HexX) * 2;
@@ -80,10 +97,18 @@ public class SkillQibing {
         otherCoordinates.SetHexXY(c2.HexX + dx, c2.HexY + dy);
 
         if (!Skills.CanMoveIn(myCoordinates)) {
+            if (targetWujiang.GetWujiangState() == WujiangState.WujiangState_Dead) {
+                wujiang.Move(c2);
+                return;
+            }
             return;
         } else if (!Skills.CanMoveIn(otherCoordinates)) {
-            targetWujiang.Move(myCoordinates);
-            wujiang.Move(c2);
+            if (targetWujiang.GetWujiangState() == WujiangState.WujiangState_Dead) {
+                wujiang.Move(myCoordinates);
+            }else {
+                targetWujiang.Move(myCoordinates);
+                wujiang.Move(c2);
+            }
         } else {
             targetWujiang.Move(otherCoordinates);
             wujiang.Move(myCoordinates);

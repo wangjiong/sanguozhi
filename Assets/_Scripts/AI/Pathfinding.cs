@@ -10,14 +10,22 @@ public class Node {
     public Node(Coordinates coordinates) {
         nodeCoordinates = coordinates;
         // 根据地形信息获取权重
-        uint terrainType = MapManager.GetInstance().GetTerrainType(coordinates);
-        // 暂时只考虑低8为地表地形
-        terrainType = MapManager.GetLowTerrainType(terrainType);
-        nodeCost = MapConfig.msTerrainWight[terrainType];
+        nodeCost = GetTerrainCost(coordinates);
     }
 
     public override string ToString() {
         return "Node nodeCoordinates" + nodeCoordinates + " nodeCurrentCosted:" + nodeCurrentCosted;
+    }
+
+    public static float GetTerrainCost(Coordinates coordinates) {
+        uint terrainType = MapManager.GetInstance().GetTerrainType(coordinates);
+        // 高8位
+        if ( MapManager.GetInstance().ContainTerrainType(coordinates, TerrainType.TerrainType_Guansuo_Invalid) ) {
+            return MapConfig.msTerrainWight[(int)TerrainType.TerrainType_Invalid];
+        }
+        // 低8位
+        uint lowTerrainType = MapManager.GetLowTerrainType(terrainType);
+        return MapConfig.msTerrainWight[lowTerrainType];
     }
 }
 
