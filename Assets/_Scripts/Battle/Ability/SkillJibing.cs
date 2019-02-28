@@ -31,6 +31,9 @@ public class SkillJibing {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
 
+        // 1.伤害
+        targetWujiang.OnDamage(3000);
+        // 2.移动
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = c1.HexX - c2.HexX;
@@ -47,9 +50,30 @@ public class SkillJibing {
     }
 
     public static void Skill_Jibing02(Wujiang wujiang, Coordinates target) {
+        Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
+        List<Coordinates> neighbors = MapManager.GetInstance().GetNeighbours(wujiang.GetCoordinates());
+
+        if (wujiangExpeditions.ContainsKey(target)) {
+            wujiangExpeditions[target].OnDamage(4000);
+        }
+        foreach (Coordinates c in neighbors) {
+            if (MapManager.GetInstance().CheckInNeighbors(target, c)) {
+                if (wujiangExpeditions.ContainsKey(c)) {
+                    wujiangExpeditions[c].OnDamage(4000);
+                }
+            }
+        }
     }
 
     public static void Skill_Jibing03(Wujiang wujiang, Coordinates target) {
+        Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
+        List<Coordinates> neighbors = MapManager.GetInstance().GetNeighbours(wujiang.GetCoordinates());
+
+        foreach (Coordinates c in neighbors) {
+            if (wujiangExpeditions.ContainsKey(c)) {
+                wujiangExpeditions[c].OnDamage(5000);
+            }
+        }
     }
 
 }

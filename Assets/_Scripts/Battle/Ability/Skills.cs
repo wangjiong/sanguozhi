@@ -99,7 +99,7 @@ public class Skills {
             mSkillNames.Add(skillNames[1]);
             mSkillNames.Add(skillNames[2]);
         }
-        Debug.Log("wujiang.mArmAbility:" + wujiang.mArmAbility + " " + mSkillNames.Count);
+        //Debug.Log("wujiang.mArmAbility:" + wujiang.mArmAbility + " " + mSkillNames.Count);
     }
 
     public void ShowAllTargets(Wujiang wujiang) {

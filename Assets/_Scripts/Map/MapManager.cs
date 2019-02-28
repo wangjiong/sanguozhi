@@ -81,9 +81,9 @@ public enum TerrainType {
     TerrainType_Wujiang = 1 << 12,// 武将
     TerrainType_Kaifajianzhu = 1 << 13, // 开发建筑
     TerrainType_Junshisheshi = 1 << 14,// 军事设施
-    TerrainType_Fire =    1 << 15,// 火
+    TerrainType_Fire = 1 << 15,// 火
 
-    
+
 }
 
 
@@ -137,7 +137,7 @@ public class MapManager {
                 } catch (Exception) {
                     mMapDatas[i, j] = (uint)TerrainType.TerrainType_Caodi;
                 }
-                
+
             }
         }
     }
@@ -291,6 +291,29 @@ public class MapManager {
     public bool CheckInLine(Coordinates c1, Coordinates c2) {
         if (c1.HexX == c2.HexX || c1.HexY == c2.HexY || c1.HexZ == c2.HexZ) {
             return true;
+        }
+        return false;
+    }
+
+    public bool CheckInNeighbors(Coordinates c1, Coordinates c2) {
+        if (c1.HexX == c2.HexX) {
+            if (Mathf.Abs(c1.HexY - c2.HexY) == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (c1.HexY == c2.HexY) {
+            if (Mathf.Abs(c1.HexZ - c2.HexZ) == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (c1.HexZ == c2.HexZ) {
+            if (Mathf.Abs(c1.HexY - c2.HexY) == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
         return false;
     }

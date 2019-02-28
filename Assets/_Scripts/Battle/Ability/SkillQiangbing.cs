@@ -30,6 +30,10 @@ public class SkillQiangbing {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
 
+        // 1.伤害
+        targetWujiang.OnDamage(3000);
+        // 2.移动
+
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = c2.HexX - c1.HexX;
@@ -45,11 +49,19 @@ public class SkillQiangbing {
     }
 
     public static void Skill_Qiangbing02(Wujiang wujiang, Coordinates target) {
+        Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
+        Wujiang targetWujiang = wujiangExpeditions[target];
+        // 1.伤害
+        targetWujiang.OnDamage(3000);
+        // 2.移动
     }
 
     public static void Skill_Qiangbing03(Wujiang wujiang, Coordinates target) {
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         Wujiang targetWujiang = wujiangExpeditions[target];
+        // 1.伤害
+        targetWujiang.OnDamage(5000);
+        // 2.移动
         Coordinates c1 = wujiang.GetCoordinates();
         Coordinates c2 = targetWujiang.GetCoordinates();
         int dx = (c2.HexX - c1.HexX) * 2;
