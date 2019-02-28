@@ -137,27 +137,37 @@ public class CanvasBattleMenu : MonoBehaviour {
         mWujiang.Seclet(false);
     }
 
+    float mFirstHeight = 430;
+    float mWidth = 100;
+    //float mSecondHeight = 145;
+
+    public Vector2 FilterFirstScreenPosition(Vector2 screenPosition) {
+        if (screenPosition.y < mFirstHeight) {
+            screenPosition.y = mFirstHeight;
+        }
+        if (screenPosition.y > Screen.height) {
+            screenPosition.y = Screen.height;
+        }
+        if (screenPosition.x < 0) {
+            screenPosition.x = 0;
+        }
+        if (screenPosition.x > Screen.width - mWidth) {
+            screenPosition.x = Screen.width - mWidth;
+        }
+        return screenPosition;
+    }
+
     // 显示战斗菜单
     public void ShowMenu(Vector2 screenPosition) {
         gameObject.SetActive(true);
-        if (mPositionFlag) {
-            StartCoroutine(SetPosition(screenPosition));
-            mPositionFlag = false;
-        } else {
-            mFirstMenu.transform.position = screenPosition;
-            mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
-        }
+        mFirstMenu.transform.position = FilterFirstScreenPosition(screenPosition);
+        mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
         // 检测是否显示选项
         CheckFirstBtn();
     }
 
     public void SetWujiang(Wujiang wujiang) {
         mWujiang = wujiang;
-    }
-
-    IEnumerator SetPosition(Vector2 screenPosition) {
-        yield return null;
-        mFirstMenu.transform.position = screenPosition;
     }
 
     // 检测一级菜单按钮

@@ -19,9 +19,11 @@ public class CanvasGameMenu : MonoBehaviour {
 
     public GameObject mCanvasDevelop;
 
-    bool mPositionFlag = true; // 第一次ShowPosition有问题
-
     City mCity; // 属于菜单的城池
+
+    float mFirstHeight = 290;
+    float mWidth = 100;
+    float mSecondHeight = 145;
 
     public void SetCity(City city) {
         mCity = city;
@@ -31,20 +33,27 @@ public class CanvasGameMenu : MonoBehaviour {
         return mCity;
     }
 
-    public void ShowCanvasGameMenu(Vector2 screenPosition) {
-        gameObject.SetActive(true);
-        if (mPositionFlag) {
-            StartCoroutine(SetPosition(screenPosition));
-            mPositionFlag = false;
-        } else {
-            mFirstMenu.transform.position = screenPosition;
-            mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
+    public Vector2 FilterFirstScreenPosition(Vector2 screenPosition) {
+        if (screenPosition.y < mFirstHeight) {
+            screenPosition.y = mFirstHeight;
         }
+        if (screenPosition.y > Screen.height) {
+            screenPosition.y = Screen.height;
+        }
+        if (screenPosition.x < 0) {
+            screenPosition.x = 0;
+        }
+        if (screenPosition.x > Screen.width - mWidth) {
+            screenPosition.x = Screen.width - mWidth;
+        }
+        return screenPosition;
     }
 
-    IEnumerator SetPosition(Vector2 screenPosition) {
-        yield return null;
-        mFirstMenu.transform.position = screenPosition;
+    // 显示菜单
+    public void ShowCanvasGameMenu(Vector2 screenPosition) {
+        gameObject.SetActive(true);
+        mFirstMenu.transform.position = FilterFirstScreenPosition(screenPosition);
+        mSecondMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(1000, 1000);
     }
 
     void Start() {
