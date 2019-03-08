@@ -44,6 +44,7 @@ public class CanvasBattleMenu : MonoBehaviour {
                     // 待机（目前为移动）
                     mWujiang.Move(BattleGameManager.GetInstance().GetWujiangTransparent().transform.position);
                     mWujiang.Seclet(false);
+                    BattleGameManager.GetInstance().GetWujiangTransparent().SetActive(false);
                 } else if (index == 3) {
                     // 显示技能菜单(二级菜单)
                     Vector3 scale = mMenuFirstBtns[index].transform.lossyScale;
@@ -139,7 +140,7 @@ public class CanvasBattleMenu : MonoBehaviour {
 
     float mFirstHeight = 430;
     float mWidth = 100;
-    //float mSecondHeight = 145;
+    float mSecondHeight = 145;
 
     public Vector2 FilterFirstScreenPosition(Vector2 screenPosition) {
         if (screenPosition.y < mFirstHeight) {
