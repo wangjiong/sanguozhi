@@ -35,14 +35,14 @@ public class CanvasExecutive : MonoBehaviour {
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
             mSelectItems.Clear();
             mSelectWujiangIds.Clear();
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             mSelectItems.Clear();
             mSelectWujiangIds.Clear();
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         });
-        // 武将表格
+        // 武将表格()
         for (int i = 1; i < mButtons.Length; i++) {
             int index = i;
             mButtons[i].onClick.AddListener(delegate () {
@@ -55,6 +55,7 @@ public class CanvasExecutive : MonoBehaviour {
                     mIndexClick = index;
                     Sort(index, false);
                 }
+                // List列表
                 mInfinityScrollView.Setup(mCity.GetWujiangBeans().Count);
                 mInfinityScrollView.InternalReload();
             });

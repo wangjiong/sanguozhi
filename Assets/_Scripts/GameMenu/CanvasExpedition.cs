@@ -119,6 +119,7 @@ public class CanvasExpedition : MonoBehaviour {
         for (int i = 0; i < mArms.Length; i++) {
             int index = i;
             mArms[index].onClick.AddListener(delegate () {
+                // 点击兵种自动显示出征的武将（由AI控制选择哪些武将）
                 mWeapons[mWeaponIndex].GetComponent<Image>().sprite = mSprite01[mWeaponIndex];
                 mWeaponText[mWeaponIndex].text = 1000000 + "";
                 mWeaponIndex = index;

@@ -40,6 +40,8 @@ public class Pathfinding {
     List<GameObject> mPathGameObjectCache = new List<GameObject>();
     int mPathGridsCacheIndex = 0;
 
+    bool mIsShowingPath = false;
+
     static Pathfinding msPathfinding = null;
 
     public static Pathfinding GetInstance() {
@@ -59,6 +61,8 @@ public class Pathfinding {
         // 所有出征的武将
         Dictionary<Coordinates, Wujiang> wujiangExpeditions = BattleGameManager.GetInstance().GetWujiangData().GetWujiangExpeditions();
         ClearNode();
+
+        // 1.查找可走路径点
         Coordinates current = MapManager.GetInstance().TerrainPositionToCorrdinate(wujiang.transform.position);
         Queue<Node> queue = new Queue<Node>();
         Node startNode = GetNode(current);
@@ -77,7 +81,7 @@ public class Pathfinding {
                         node.nodeCurrentCosted = newCost;
                         // 1.当前点的cost小于总cost
                         if (node.nodeCurrentCosted <= wujiang.GetWujiangPathfindingCost()) {
-                            // 2.不能移动到其他武将的点上
+                            // 2.不能移动到其他武将的点上，所以去掉这个点
                             if (wujiangExpeditions.ContainsKey(node.nodeCoordinates)) {
                                 Wujiang wujiangNode = wujiangExpeditions[node.nodeCoordinates];
                                 if (wujiangNode && wujiangNode != wujiang) {
@@ -92,7 +96,8 @@ public class Pathfinding {
                 }
             }
         }
-        // 显示可走路径的网格
+        // 2.显示可走路径点
+        mIsShowingPath = true;
         foreach (KeyValuePair<Coordinates, Node> node in mResult) {
             GameObject g = GetGridNode();
             g.SetActive(true);
@@ -108,6 +113,11 @@ public class Pathfinding {
         foreach (GameObject g in mPathGameObjectCache) {
             g.SetActive(false);
         }
+        mIsShowingPath = false;
+    }
+
+    public bool IsShowingPath() {
+        return mIsShowingPath;
     }
 
     private Node GetNode(Coordinates c) {

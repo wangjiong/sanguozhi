@@ -94,12 +94,16 @@ public class Wujiang : MonoBehaviour {
                 return;
         }
         // 防止移动过程中点击武将
+        if (Pathfinding.GetInstance().IsShowingPath()) {
+            return;
+        }
+        // 选中武将
         mSelected = !mSelected;
         Seclet(mSelected);
 
         if (mSelected) {
             ShowPath();
-            mWujiangState = WujiangState.WujiangState_Prepare_Move;
+            SetWujiangState(WujiangState.WujiangState_Prepare_Move);
             BattleGameManager.msIgnoreRaycast = true;
         }
     }
@@ -138,7 +142,7 @@ public class Wujiang : MonoBehaviour {
                     // 如果移动的目标点为都市、关口、港口，那么让武将进城
                     City city = BattleGameManager.GetInstance().GetCityData().GetCity(coordinates);
                     // 不能回当前的城池
-                    if (mWujiangState == WujiangState.WujiangState_Prepare_Expedition) {
+                    if (GetWujiangState() == WujiangState.WujiangState_Prepare_Expedition) {
                         if (city == mCity) {
                             return true;
                         }
@@ -238,7 +242,7 @@ public class Wujiang : MonoBehaviour {
     }
 
     public void Dead() {
-        mWujiangState = WujiangState.WujiangState_Dead;
+        SetWujiangState(WujiangState.WujiangState_Dead);
         Destroy(gameObject);
     }
 }
