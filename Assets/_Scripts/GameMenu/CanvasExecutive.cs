@@ -17,7 +17,6 @@ public class CanvasExecutive : MonoBehaviour {
     int mIndexClick = 0;
 
     int mSelectTotalCount = 3;
-    HashSet<int> mSelectItems = new HashSet<int>();
     HashSet<int> mSelectWujiangIds = new HashSet<int>();
 
     City mCity;
@@ -25,20 +24,25 @@ public class CanvasExecutive : MonoBehaviour {
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
-			WujiangBean[] wujiangs = new WujiangBean[3];
+            WujiangBean[] wujiangs = new WujiangBean[3];
             int i = 0;
-            foreach (int index in mSelectItems) {
+            List<WujiangBean> currentCityWujiangs = mCity.GetWujiangBeans();
+            foreach (int wujiangId in mSelectWujiangIds) {
                 if (i < 3) {
-                    wujiangs[i++] = mCity.GetWujiangBeans()[index];
+                    foreach (WujiangBean wujiangBean in currentCityWujiangs) {
+                        if (wujiangBean.id == wujiangId) {
+                            wujiangs[i++] = wujiangBean;
+                        }
+                    }
+                } else {
+                    break;
                 }
             }
             mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
-            mSelectItems.Clear();
             mSelectWujiangIds.Clear();
             this.gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
-            mSelectItems.Clear();
             mSelectWujiangIds.Clear();
             this.gameObject.SetActive(false);
         });
@@ -119,7 +123,7 @@ public class CanvasExecutive : MonoBehaviour {
     }
 
     public bool CanSelect() {
-        if (mSelectItems.Count >= mSelectTotalCount) {
+        if (mSelectWujiangIds.Count >= mSelectTotalCount) {
             return false;
         }
         return true;
@@ -135,11 +139,17 @@ public class CanvasExecutive : MonoBehaviour {
     public void SelectItem(bool isOn, int index) {
         WujiangBean general = mCity.GetWujiangBeans()[index];
         if (isOn) {
-            mSelectItems.Add(index);
             mSelectWujiangIds.Add(general.id);
         } else {
-            mSelectItems.Remove(index);
             mSelectWujiangIds.Remove(general.id);
+        }
+    }
+
+    public void SetGeneral(WujiangBean[] wujiangs) {
+        foreach (WujiangBean wujiangBean in wujiangs) {
+            if (wujiangBean != null) {
+                mSelectWujiangIds.Add(wujiangBean.id);
+            }
         }
     }
 }

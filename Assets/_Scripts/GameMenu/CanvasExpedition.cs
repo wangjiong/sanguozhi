@@ -126,8 +126,15 @@ public class CanvasExpedition : MonoBehaviour {
                 mWeapons[mWeaponIndex].GetComponent<Image>().sprite = mSprite02[mWeaponIndex];
                 mWeaponText[mWeaponIndex].text = 1000000 - mCurrentSoldier + "";
 
-				List<WujiangBean> temp = Strategy.GetExpeditionGenerals(mCity.GetWujiangBeans());
+                List<WujiangBean> temp = Strategy.GetExpeditionGenerals(mCity.GetWujiangBeans());
                 SetGeneral(temp[0], temp[1], temp[2]);
+
+                CanvasExecutive canvasExecutive = mCanvasExecutive.GetComponent<CanvasExecutive>();
+                WujiangBean[] wujiangs = new WujiangBean[3];
+                wujiangs[0] = temp[0];
+                wujiangs[1] = temp[1];
+                wujiangs[2] = temp[2];
+                canvasExecutive.SetGeneral(wujiangs);
             });
         }
         // 显示武将界面
