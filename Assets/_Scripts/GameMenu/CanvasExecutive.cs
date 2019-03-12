@@ -21,6 +21,10 @@ public class CanvasExecutive : MonoBehaviour {
 
     City mCity;
 
+    void OnEnable() {
+        //Debug.Log(TAG + "OnEnable");
+    }
+
     void Start() {
         mEnableBtn.GetComponent<Button>().onClick.AddListener(delegate () {
             // 出征武将
@@ -38,16 +42,17 @@ public class CanvasExecutive : MonoBehaviour {
                     break;
                 }
             }
-            mCanvasExpedition.SetGeneral(wujiangs[0], wujiangs[1], wujiangs[2]);
-            mSelectWujiangIds.Clear();
+            mCanvasExpedition.SetGeneral(wujiangs);
             this.gameObject.SetActive(false);
         });
         mCloseBtn.GetComponent<Button>().onClick.AddListener(delegate () {
-            mSelectWujiangIds.Clear();
             this.gameObject.SetActive(false);
         });
-        // 武将表格()
-        for (int i = 1; i < mButtons.Length; i++) {
+        // 武将表格(统帅、武力、智力、政治、魅力)
+        for (int i = 0; i < mButtons.Length; i++) {
+            if ( i==1 ) { // 1为武将，0为选中状态，2、3、4、5、6 ： 统帅、武力、智力、政治、魅力
+                continue;
+            }
             int index = i;
             mButtons[i].onClick.AddListener(delegate () {
                 if (mIndexClick == index) {
@@ -70,37 +75,62 @@ public class CanvasExecutive : MonoBehaviour {
         List<WujiangBean> currentCityWujiangs = mCity.GetWujiangBeans();
         if (revert) {
             switch (index) {
-                case 1:
-                    currentCityWujiangs.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
+                case 0:
+                    // 选中
+                    //int first = 0;
+                    //int count = mSelectWujiangIds.Count;
+                    //for (int i = 0; i < currentCityWujiangs.Count; i++) {
+                    //    if (mSelectWujiangIds.Contains(currentCityWujiangs[i].id)) {
+                    //        WujiangBean temp = currentCityWujiangs[first];
+                    //        currentCityWujiangs[first] = currentCityWujiangs[i];
+                    //        currentCityWujiangs[i] = temp;
+                    //        first++;
+                    //    }
+                    //}
                     break;
                 case 2:
-                    currentCityWujiangs.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从大到小排序
                     break;
                 case 3:
-                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从大到小排序
                     break;
                 case 4:
-                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从大到小排序
                     break;
                 case 5:
+                    currentCityWujiangs.Sort((b, a) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从大到小排序
+                    break;
+                case 6:
                     currentCityWujiangs.Sort((b, a) => int.Parse(b.meili) - int.Parse(a.meili)); // 从大到小排序
                     break;
             }
         } else {
             switch (index) {
-                case 1:
-                    currentCityWujiangs.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 从小到小排序
+                case 0:
+                    // 选中
+                    //int first = 0;
+                    //int count = mSelectWujiangIds.Count;
+                    //for (int i = 0; i < currentCityWujiangs.Count; i++) {
+                    //    if (mSelectWujiangIds.Contains(currentCityWujiangs[i].id)) {
+                    //        WujiangBean temp = currentCityWujiangs[first++];
+                    //        currentCityWujiangs[first++] = currentCityWujiangs[i];
+                    //        currentCityWujiangs[i] = temp;
+                    //    }
+                    //}
                     break;
                 case 2:
-                    currentCityWujiangs.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.tongshuai) - int.Parse(a.tongshuai)); // 选中
                     break;
                 case 3:
-                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.wuli) - int.Parse(a.wuli)); // 从小到小排序
                     break;
                 case 4:
-                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhili) - int.Parse(a.zhili)); // 从小到小排序
                     break;
                 case 5:
+                    currentCityWujiangs.Sort((a, b) => int.Parse(b.zhengzhi) - int.Parse(a.zhengzhi)); // 从小到小排序
+                    break;
+                case 6:
                     currentCityWujiangs.Sort((a, b) => int.Parse(b.meili) - int.Parse(a.meili)); // 从小到小排序
                     break;
             }
@@ -145,7 +175,12 @@ public class CanvasExecutive : MonoBehaviour {
         }
     }
 
-    public void SetGeneral(WujiangBean[] wujiangs) {
+    public void ClearSelectWujiang() {
+        mSelectWujiangIds.Clear();
+    }
+
+    public void SetSelectGeneral(WujiangBean[] wujiangs) {
+        ClearSelectWujiang();
         foreach (WujiangBean wujiangBean in wujiangs) {
             if (wujiangBean != null) {
                 mSelectWujiangIds.Add(wujiangBean.id);

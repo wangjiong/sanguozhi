@@ -22,7 +22,7 @@ public class ItemHorizontal3 : InfinityBaseItem {
     bool mIsSeclet = false;
 
     void OnEnable() {
-        Debug.Log("OnEnable");
+        //Debug.Log("OnEnable");
         if (!mCanvasExecutive) {
             mCanvasExecutive = GameObject.Find("Canvas General").GetComponent<CanvasExecutive>();
 
@@ -36,10 +36,6 @@ public class ItemHorizontal3 : InfinityBaseItem {
             mZhengzhi = transform.Find("Zhengzhi").GetComponentInChildren<Text>();
             mMeili = transform.Find("Meili").GetComponentInChildren<Text>();
 
-            //if () {
-            //    mSelectImage.SetActive(mIsSeclet);
-            //}
-
             mSelect.onClick.AddListener(delegate () {
                 if (mIsSeclet) {
                     // 之前已经选中那么现在不选中了
@@ -48,7 +44,7 @@ public class ItemHorizontal3 : InfinityBaseItem {
                     // 之前没有选中那么现在选中
                     if (mCanvasExecutive.CanSelect()) {
                         mIsSeclet = true;
-                    }else {
+                    } else {
                         return;
                     }
                 }
@@ -58,8 +54,12 @@ public class ItemHorizontal3 : InfinityBaseItem {
         }
     }
 
+    //void Start() {
+    //    Debug.Log("Start");
+    //}
+
     public override void Reload(InfinityScrollView _infinity, int _index) {
-        Debug.Log("Reload");
+        //Debug.Log("Reload");
         base.Reload(_infinity, _index);
         mIndex = _index;
 

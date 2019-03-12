@@ -74,7 +74,7 @@ public class BattleGameManager : MonoBehaviour {
                 Wujiang currentWujiang = Wujiang.GetCurrentWujiang();
                 if (currentWujiang != null) {
                     // 1.当前处于要攻击状态
-                    // 这个主要是因为...
+                    // 这个主要是因为防止刚刚点击武将，战斗菜单就显示出来了
                     if (currentWujiang.GetWujiangState() == WujiangState.WujiangState_Prepare_Attack) {
                         // 释放技能
                         mCanvasBattleMenu.MoveAndStartSkill(MapManager.GetInstance().TerrainPositionToCorrdinate(pointCubePosition));
@@ -86,7 +86,7 @@ public class BattleGameManager : MonoBehaviour {
                 }
                 // 2.点击城市
                 if (hit.collider.CompareTag("City")) {
-                    if (currentWujiang != null) {
+                    if (currentWujiang != null || Pathfinding.GetInstance().IsShowingPath()) {
                         return;
                     }
                     if (Input.GetMouseButtonUp(0)) {

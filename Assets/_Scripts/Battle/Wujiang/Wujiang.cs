@@ -186,7 +186,9 @@ public class Wujiang : MonoBehaviour {
                 if (city) {
                     // 1.回到城市
                     foreach (WujiangBean wujiangBean in mWujiangBeans) {
-                        city.GetWujiangBeans().Add(wujiangBean);
+                        if (wujiangBean!=null) {
+                            city.GetWujiangBeans().Add(wujiangBean);
+                        }
                     }
                     Destroy(gameObject);
                 } else {
