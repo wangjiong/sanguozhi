@@ -490,12 +490,17 @@ public class CanvasExpedition : MonoBehaviour {
     IEnumerator LoadImage(string url, Image image) {
 
 #if UNITY_IOS || UNITY_ANDROID
+#if UNITY_EDITOR
         url = "file:://" + url;
+#else
+
+#endif
+
 #else
         url = "file:://" + url;
 #endif
 
-        //Debug.Log(TAG + "url:" + url);
+        Debug.Log(TAG + "url:" + url);
         WWW www = new WWW(url);
         yield return www;
         if (!string.IsNullOrEmpty(www.error) || !www.isDone) {

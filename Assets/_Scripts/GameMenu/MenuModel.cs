@@ -40,6 +40,6 @@ public class MenuModel : MonoBehaviour {
     }
 
     public void StartGame() {
-        SceneManager.LoadScene("Game02");
+        SceneManager.LoadScene("Game");
     }
 }

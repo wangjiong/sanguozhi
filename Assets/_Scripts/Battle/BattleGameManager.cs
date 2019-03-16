@@ -127,7 +127,17 @@ public class BattleGameManager : MonoBehaviour {
 
     void LoadData() {
         // 1.加载地形数据
+#if UNITY_IOS || UNITY_ANDROID
+        // test
+        // 初始化地图
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < 200; j++) {
+                MapManager.GetInstance().GetMapDatas()[i, j] = (uint)TerrainType.TerrainType_Caodi;
+            }
+        }
+#else
         MapManager.GetInstance().LoadData();
+#endif
         // 2.加载城池数据
         mCityData = new CityData();
         mCityData.LoadData();
